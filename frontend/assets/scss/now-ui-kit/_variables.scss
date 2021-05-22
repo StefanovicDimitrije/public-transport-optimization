@@ -9,7 +9,7 @@ $border-thin:                1px !default;
 $border-thick:               2px !default;
 
 $white-color:                #FFFFFF !default;
-$white-bg:                   #FFFFFF !default;
+$white-bg:                   #e6e6e6 !default;
 $orange-bg:                  #f6963c !default;
 
 $smoke-bg:                   #F5F5F5 !default;
@@ -46,10 +46,10 @@ $default-color:              #888888 !default;
 $default-states-color:       lighten($default-color, 6%) !default;
 $default-color-opacity:      rgba(182, 182, 182, .6) !default;
 
-$primary-color:              #f96332 !default;
+$primary-color:              #f6963c !default;
 $primary-states-color:       lighten($primary-color, 6%) !default;
-$primary-color-opacity:      rgba(249, 99, 50, .3) !default;
-$primary-color-alert:        rgba(249, 99, 50, .8) !default;
+$primary-color-opacity:      rgba(246, 150, 60, .3) !default;
+$primary-color-alert:        rgba(246, 150, 60, .8) !default; 
 
 $success-color:              #18ce0f !default;
 $success-states-color:       lighten($success-color, 6%) !default;
