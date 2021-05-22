@@ -1,0 +1,34 @@
+{
+  "name": "javniprevoz",
+  "version": "0.0.0",
+  "private": true,
+  "scripts": {
+    "start": "node ./bin/www"
+  },
+  "dependencies": {
+    "bookshelf": "^1.2.0",
+    "cookie-parser": "~1.4.4",
+    "cors": "^2.8.5",
+    "debug": "~2.6.9",
+    "express": "~4.16.1",
+    "knex": "^0.21.19",
+    "morgan": "~1.9.1",
+    "nodemon": "^2.0.7",
+    "sqlite3": "^5.0.2"
+  },
+  "description": "web aplikacija za optimizacijo javnega prevoza",
+  "keywords": [
+    "node",
+    "projekt",
+    "praktikum",
+    "backend",
+    "frontend",
+    "feri"
+  ],
+  "contributors": [
+    "Olga Ivkovic",
+    "Ivan Sergejev",
+    "Dimitrije Stefanovic",
+    "Radovan Radic"
+  ]
+}
