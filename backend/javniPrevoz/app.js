@@ -7,6 +7,7 @@ const indexRouter = require('./api/routes/index');
 const testRouter = require('./api/routes/testDB'); // testing DB
 const newsRouter = require('./api/routes/newsDB'); //News
 const questionsRouter = require('./api/routes/questions'); //Questions
+const changesRouter = require('./api/routes/changesDB'); //Changes
 
 const app = express();
 
@@ -22,5 +23,6 @@ app.use('/', indexRouter);
 app.use('/test', testRouter); //testing DB
 app.use('/novice',newsRouter); //Novice
 app.use('/questions',questionsRouter); //Questions
+app.use('/changes', changesRouter); //Changes
 
 module.exports = app;
