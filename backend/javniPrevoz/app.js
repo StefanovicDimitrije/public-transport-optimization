@@ -6,6 +6,7 @@ const cors = require('cors');
 const indexRouter = require('./api/routes/index');
 const testRouter = require('./api/routes/testDB'); // testing DB
 const newsRouter = require('./api/routes/newsDB'); //News
+const questionsRouter = require('./api/routes/questions'); //Questions
 
 const app = express();
 
@@ -20,5 +21,6 @@ app.use(express.static(path.join(__dirname, '../../frontend'))); //needed for pi
 app.use('/', indexRouter);
 app.use('/test', testRouter); //testing DB
 app.use('/novice',newsRouter); //Novice
+app.use('/questions',questionsRouter); //Questions
 
 module.exports = app;
