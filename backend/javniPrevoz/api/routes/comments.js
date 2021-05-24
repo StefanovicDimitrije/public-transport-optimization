@@ -6,17 +6,17 @@ const knexfile = require('../../knexfile').development;
 const knex = require('knex')(knexfile);
 const bookshelf = require('bookshelf')(knex);
 
-const myQuestions = bookshelf.Model.extend({
-    tableName:'questions',
+const myComments = bookshelf.Model.extend({
+    tableName:'comments',
     idAttribute:'id'
 });
 
-/* GET questions table. */
+/* GET comments table. */
 
 router.get('/',async function(req, res, next) {           
   try{
-    const questions = await new myQuestions().fetchAll();
-    res.json(questions.toJSON());
+    const comments = await new myComments().fetchAll();
+    res.json(comments.toJSON());
   }
   catch(error) {
     res.status(500).json({status: "error", error:error});
@@ -25,8 +25,8 @@ router.get('/',async function(req, res, next) {
 
 router.post('/', async (req, res, next) => {
   try {
-  let question = req.body;
-  const add = await new myQuestions().save(question);
+  let comments = req.body;
+  const add = await new myComments().save(comments);
   res.json({ status: "added"});
   } catch (error) {
   res.status(500).json(error);

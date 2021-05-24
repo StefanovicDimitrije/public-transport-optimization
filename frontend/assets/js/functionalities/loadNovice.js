@@ -20,11 +20,11 @@ const loadAll = () => {                             //generates product table
                             <p class="card-text"><small class="text-muted">Posted: ${news[i].Date}</small></p>
                             <img class="card-img-bottom" src="../assets/img/${news[i].Cover}" alt="Card image cap">
                             <div class="form-group">
-                                <div class="col-md-12" id = "questionSection${i}">
+                                <div class="col-md-12" id = "commentSection${i}">
                                 <br>
-                                    <textarea class="form-control" placeholder="Give us your oppinion on this matter" id="questionTxt${i}" rows="3" id = "questionTxt${i}" style = "background-color: #fbfbfa"></textarea>
+                                    <textarea class="form-control" placeholder="Give us your oppinion on this matter" id="commentTxt${i}" rows="3" id = "commentTxt${i}" style = "background-color: #fbfbfa"></textarea>
                       
-                                    <button class="btn btn-danger" style= "background-color:#f6963c"onclick="addQuestion(${news[i].id}, ${i})">Comment</button>
+                                    <button class="btn btn-danger" style= "background-color:#f6963c"onclick="addComments(${news[i].id}, ${i})">Comment</button>
                                 </div>
                             </div>    
                             <div id = "commentSection"></div>
@@ -39,41 +39,39 @@ const loadAll = () => {                             //generates product table
             newsSection.appendChild(myCard);
             
             console.log(news[i].Cover);
-            loadComment(news[i].id);
+            loadComments(news[i].id);
         }
     });
 }
-const loadComment = (id) => {                            
-    fetch('http://localhost:3000/questions', {
+const loadComments = (id) => {                            
+    fetch('http://localhost:3000/comments', {
         method: 'GET'
     }).then((myReply) => {
         return myReply.json();
-    }).then((questions) => {
+    }).then((comments) => {
         
-        for (let i = 0; i < questions.length; i++) {
+        for (let i = 0; i < comments.length; i++) {
             
-            if(questions[i].idNovic == id)
+            if(comments[i].idNovic == id)
             {
-                var questionSection = document.getElementById("questionSection"+(id-1));
-                console.log(questions[i].idNovic);
+                var commentSection = document.getElementById("commentSection"+(id-1));
+                console.log(comments[i].idNovic);
                 var myCard2 = document.createElement("div");
                 myCard2.innerHTML =
                     `
                     <div class="card p-3 mt-2">
                 <div class="d-flex justify-content-between align-items-center">
                     <div class="user d-flex flex-row align-items-center"> <img src="https://i.imgur.com/ZSkeqnd.jpg" width="30" class="user-img rounded-circle mr-2">
-                    <small class="font-weight-bold text-primary" style = "font-size: 120%">@${questions[i].idUporabnik}:</small> <small class="font-weight-bold " style = "font-size: 100%">
-                    ${questions[i].vprasanje} </small></span> </div> <small>${questions[i].datum}</small>
+                    <small class="font-weight-bold text-primary" style = "font-size: 120%">@${comments[i].idUporabnik}:</small> <small class="font-weight-bold " style = "font-size: 100%">
+                    ${comments[i].vprasanje} </small></span> </div> <small>${comments[i].datum}</small>
                 </div>
                 <div class="action d-flex justify-content-between mt-2 align-items-center">
                     <div class="reply px-4"> <small>Remove</small> <span class="dots"></span> <small>Reply</small> <span class="dots"></span> <small>Translate</small> </div>
                     <div class="icons align-items-center"> <i class="fa fa-check-circle-o check-icon text-primary"></i> </div>
                 </div>
             </div>
-            
-                   
                 `;
-                questionSection.appendChild(myCard2);
+                commentSection.appendChild(myCard2);
             }
             
         }
@@ -81,7 +79,7 @@ const loadComment = (id) => {
     });
 }
 
-const addQuestion = (idNovic, inputfieldId) => {   
+const addComments = (idNovic, inputfieldId) => {   
             var today = new Date();
             var dd = today.getDate();
             var mm = today.getMonth()+1; 
@@ -97,18 +95,18 @@ const addQuestion = (idNovic, inputfieldId) => {
             } 
             today = yyyy+'-'+mm+'-'+dd;
 
-    let question = {
+    let comment = {
         
         "id": null,
         "idUporabnik": 2,
         "idNovic": idNovic,
-        "vprasanje": document.getElementById("questionTxt"+inputfieldId).value,
+        "vprasanje": document.getElementById("commentTxt"+inputfieldId).value,
         "datum": today
     }
-    console.log(question);
-    fetch('http://localhost:3000/questions/', {
+    console.log(comment);
+    fetch('http://localhost:3000/comments/', {
         method: 'POST',
-        body: JSON.stringify(question),
+        body: JSON.stringify(comment),
         headers: {
             'Content-Type': 'application/json'
         }
