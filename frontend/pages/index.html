@@ -58,8 +58,9 @@
       
         <div class="dropdown-menu" aria-labelledby="navbarDropdown" id="mainNavDrop">
           <a class="dropdown-header">Menu</a>
-          <a class="dropdown-item" href="#">Bus Lines</a>
-          <a class="dropdown-item" href="#">News Feed</a>
+          <a class="dropdown-item" href="lines.html">Bus Lines</a>
+          <a class="dropdown-item" href="changes.html">Important changes</a>
+          <a class="dropdown-item" href="newsFeed.html">News Feed</a>
           <div class="dropdown-divider"></div>
           <a class="dropdown-header">Profile</a>
           <a class="dropdown-item" href="#">View And Edit Profile</a>
@@ -71,7 +72,7 @@
       
       <div class="navbar-translate">
         
-        <a class="navbar-brand" rel="tooltip" data-placement="bottom" target="_blank">
+        <a class="navbar-brand" rel="tooltip" data-placement="bottom" href="index.html">
           Public transport optimization
         </a>
         
@@ -86,14 +87,41 @@
       <div class="collapse navbar-collapse justify-content-end" id="navigation" data-nav-image="../assets/img/blurred-image-1.jpg">
         <ul class="navbar-nav">
           <li class="nav-item">
-            <a class="nav-link active" href="#" data-toggle="tab">Login</a>
+            <a class="nav-link" href="#">Login</a>
             </li>
           <li class="nav-item">
-            <a class="nav-link active" href="#" data-toggle="tab">Register</a>
-            </li>  
-        </ul>
+            <a class="nav-link" href="#" data-toggle="tab">Register</a>
+          </li>
+          <ul class="navbar-nav d-lg-none">
+              <li class="nav-item">
+                  <a class="dropdown-header">Menu</a>
+              </li>
+              <li class="nav-item">
+                  <a class="nav-link" href="lines.html">Bus Lines</a>
+              </li>
+              <li class="nav-item">
+                  <a class="nav-link" href="changes.html">Important changes</a>
+              </li>
+              <li class="nav-item">
+                  <a class="nav-link" href="newsFeed.html">News Feed</a>
+              </li>
+          </ul>
+              <ul class="navbar-nav d-lg-none">
+                  <li class="nav-item">
+                      <a class="dropdown-header">Profile</a>
+                  </li>
+                  <li class="nav-item">
+                      <a class="nav-link" href="#" data-toggle="tab">View And Edit Profile</a>
+                  </li>
+                  <li class="nav-item">
+                      <a class="nav-link" href="#" data-toggle="tab">View Favorites</a>
+                  </li>
+                  <li class="nav-item">
+                      <a class="nav-link" href="#" data-toggle="tab">Extend Ticket</a>
+                  </li>
+            </ul>
+        </ul>  
       </div>
-    
     </div>  
   </nav>
   <!-- End Navbar -->
@@ -270,10 +298,7 @@
         </nav>
     
         <div class="copyright" id="copyright">
-          &copy;
-          <script>
-            document.getElementById('copyright').appendChild(document.createTextNode(new Date().getFullYear()))
-          </script>
+          &copy;2021
         </div>
 
       </div>
