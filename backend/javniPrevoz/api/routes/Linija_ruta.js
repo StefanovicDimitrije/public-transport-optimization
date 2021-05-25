@@ -1,8 +1,8 @@
 const e = require('express');
 var express = require('express');
-let linijaPostaja = require('../data/Linija-Postaja');
-let Linija= require('../data/Linije');
-let Postaja = require('../data/Postaje');
+let linijaPostaja = require('../../data/Linija-Postaja');
+let Linija= require('../../data/Linije');
+let Postaja = require('../../data/Postaje');
 var router = express.Router();
 
 

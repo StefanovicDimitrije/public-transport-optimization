@@ -10,7 +10,7 @@ const newsRouter = require('./api/routes/newsDB'); //News
 const commentsRouter = require('./api/routes/comments'); //Comments
 const changesRouter = require('./api/routes/changesDB'); //Changes
 const questionsRouter = require('./api/routes/questionsDB'); //Questions
-const linijaRouter = require('./Routes/Linija_ruta');
+const linijaRouter = require('./api/routes/Linija_ruta');
 
 const app = express();
 
