@@ -253,7 +253,7 @@
                   <i class="now-ui-icons users_circle-08"></i>
                 </span>
               </div>
-              <input type="text" class="form-control" placeholder="First Name..." id = "firstName">
+              <input type="text" class="form-control" placeholder="First Name..." id = "firstName" required>
             </div>
 
             <div class="input-group input-lg">
@@ -262,16 +262,17 @@
                   <i class="now-ui-icons ui-1_email-85"></i>
                 </span>
               </div>
-              <input type="text" class="form-control" placeholder="Email..." id = "emailAddress">
+              <input type="email" class="form-control" placeholder="Email..." id = "emailAddress" required>
             </div>
 
             <div class="textarea-container" >
-              <textarea id = "questionText" class="form-control" name="name" rows="4" cols="80" placeholder="Type a message..."></textarea>
+              <textarea id = "questionText" class="form-control" name="name" rows="4" cols="80" placeholder="Type a message..." required></textarea>
             </div>
 
-            <div class="send-button">
+            <div type="submit" class="send-button">
               <a href="#pablo" onclick="addQuestion()" class="btn btn-primary btn-round btn-block btn-lg">Send Message</a>
             </div>
+            <div id = "result"></div>
 
           </div>
         </div>
