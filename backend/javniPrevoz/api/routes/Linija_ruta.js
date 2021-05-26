@@ -50,7 +50,7 @@ router.post('/', async(req,res)=>{
                             if(postaja == PostajaNaziv.Naziv){
                                 let postajaID = PostajaNaziv.id;
                                 if(lp.Postaja == postajaID ){
-                                    return res.json({status:"obstajata",Linija_in_Postaja:lp})
+                                    return res.json({status:"obstajata",Linija_in_Postaja:lp,PostajaNaziv:PostajaNaziv,LinijaNaziv:LinijaNaziv})
                                 }else{
                                     return res.json({status:"Ne obstaja"})
                                 }
@@ -72,10 +72,12 @@ router.post('/', async(req,res)=>{
     }
     else if(linija !== "" && postaja ==="" ){
         let lpObj = [];
+        let linijaNaziv ;
         for(const lp of LS_JOSN){
             for(const LinijaNaziv of linijaJSON){
                 console.log(LinijaNaziv.Naziv)
                             if(linija == LinijaNaziv.Naziv){
+                                linijaNaziv = LinijaNaziv.Naziv;
                                 let linijaID = LinijaNaziv.id;
                                 if(lp.tk_id_line == linijaID ){
                                     lpObj.push(lp);
@@ -84,13 +86,15 @@ router.post('/', async(req,res)=>{
                         }
                      }
                     
-                    return res.json({status:"linija",Linija_in_Postaja: lpObj});
+                    return res.json({status:"linija",Linija_in_Postaja: lpObj,LinijaNaziv:linijaNaziv});
 
     }else if (linija === "" &&  postaja !== ""){
         let lpObj = [];
+        let postajaNaziv;
         for(const lp of LS_JOSN){
             for(const PostajaNaziv of postajaJSON){
                             if(postaja == PostajaNaziv.Naziv){
+                                postajaNaziv =  PostajaNaziv.Naziv;
                                 let postajaID = PostajaNaziv.id;
                                 if(lp.Postaja == postajaID ){
                                    
@@ -99,7 +103,7 @@ router.post('/', async(req,res)=>{
                             }
                         }
                     }
-                    return res.json({status:"postaja",Linija_in_Postaja: lpObj});
+                    return res.json({status:"postaja",Linija_in_Postaja: lpObj,PostajaNaziv:postajaNaziv});
     }
      res.json({status:"nedefinirano"});
 })

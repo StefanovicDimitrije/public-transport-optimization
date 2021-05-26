@@ -10,8 +10,9 @@ const newsRouter = require('./api/routes/newsDB'); //News
 const commentsRouter = require('./api/routes/comments'); //Comments
 const changesRouter = require('./api/routes/changesDB'); //Changes
 const questionsRouter = require('./api/routes/questionsDB'); //Questions
-const linijaRouter = require('./api/routes/Linija_ruta');
-
+const lineRouter = require('./api/routes/Lines');
+const linesPostRouter = require('./api/routes/Linija_ruta');
+const stationRouter = require('./api/routes/stations');
 const app = express();
 
 //:)
@@ -37,6 +38,8 @@ app.use('/novice',newsRouter); //Novice
 app.use('/comments',commentsRouter); //Comments
 app.use('/changes', changesRouter); //Changes
 app.use('/questions', questionsRouter); //questions
-app.use('/linije',linijaRouter);
+app.use('/lines',lineRouter);
+app.use('/stations',stationRouter);
+app.use('/linije',linesPostRouter);
 
 module.exports = app;

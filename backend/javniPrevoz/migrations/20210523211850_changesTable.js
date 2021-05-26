@@ -7,6 +7,8 @@ exports.up = function(knex) {
         table.string('changeTitle');
         table.string('more');
         table.date('time');
+        // idLinija_Postaja i idAdministrator
+        
     })
 };
 
