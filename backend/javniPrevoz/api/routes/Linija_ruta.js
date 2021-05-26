@@ -26,9 +26,11 @@ router.get('/', async(req,res)=>{
 router.post('/', async(req,res)=>{
 
     let linija_postaja =  req.body;
-    console.log(linija_postaja)
+    console.log(linija_postaja);
     linija = linija_postaja.Linija1;
+    console.log(linija);
     postaja = linija_postaja.Postaja1;
+    console.log(postaja);
 
 
     const LS = await new line_station().fetchAll();

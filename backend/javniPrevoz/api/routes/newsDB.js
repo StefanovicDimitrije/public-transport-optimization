@@ -6,20 +6,31 @@ const knexfile = require('../../knexfile').development;
 const knex = require('knex')(knexfile);
 const bookshelf = require('bookshelf')(knex);
 
-const myNovica = bookshelf.Model.extend({
-    tableName:'News',
-    idAttribute:'id'
+const myNews = bookshelf.Model.extend({
+  tableName: 'News',
+  idAttribute: 'id'
 });
 
-/* GET Novic table. */
+/* GET News table. */
 
-router.get('/',async function(req, res, next) {           
-  try{
-    const novice = await new myNovica().fetchAll();
+router.get('/', async function (req, res, next) {
+  try {
+    const novice = await new myNews().fetchAll();
     res.json(novice.toJSON());
   }
-  catch(error) {
-    res.status(500).json({status: "error", error:error});
+  catch (error) {
+    res.status(500).json({ status: "error", error: error });
+  }
+});
+/* Post new article. */
+router.post('/', async (req, res, next) => {
+
+  try {
+    let article = req.body;
+    const newNews = await new myNews().save(article);
+    res.json({ status: "added" });
+  } catch (erorr) {
+    res.status(500).json({ status: "error", error: error });
   }
 });
 

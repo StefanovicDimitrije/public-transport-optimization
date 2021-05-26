@@ -118,18 +118,3 @@ const addComments = (idNovic, inputfieldId) => {
         };
     })
 }
-
-
-/*<div class="col-md-6 text-center">
-                        <div class="card">
-                            <div class="card-body">
-                                <h4 class="card-title">Station was changed</h4>
-                                <a href="#">
-                                <div class="card-header mt-2">
-                                    Read more
-                                </div>
-                            </a>
-                            </div>
-
-                        </div>
-                    </div>*/
