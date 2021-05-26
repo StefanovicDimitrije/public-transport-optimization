@@ -25,7 +25,7 @@
 
 </head>
 
-<body onload="PridobiLinije()"  class="landing-page sidebar-collapse">
+<body   class="landing-page sidebar-collapse">
 
     <!-- Navbar -->
     <nav class="navbar navbar-expand-lg bg-primary fixed-top navbar-transparent " color-on-scroll="400">
@@ -126,56 +126,52 @@
         </div>
 
         <div class="row">
-          <div class="container">
+          <div class="col-md-4">
           
             <form  onsubmit="PretraziLinije(event)" method="POST"  name="prijava"  class="form-singin" style="width:50%; margin-left: 25%;"  >
           
               <div class="text-center" style="margin-top: 25%;">
-                <h1 class="h3 mb-3 font-weight-normal" >Isci linije</h1>
+                <h1 class="h3 mb-3 font-weight-normal" >Search bus lines</h1>
               </div>
           
               <div class="form-label-group">
-                  <label for="Linija">Linija</label>
-                  <input  name="Linija" id="Linija" class="form-control" placeholder="Linija" >
+                  <label for="Linija">Line</label>
+                  <input  name="Linija" id="Linija" class="form-control" placeholder="Line" >
               </div>
           
               <div class="form-label-group" >
-                  <label for="Postaja">Postaja</label>
-                  <input  id="Postaja" name="Postaja" class="form-control" placeholder="Postaja" >
+                  <label for="Postaja">Station</label>
+                  <input  id="Postaja" name="Postaja" class="form-control" placeholder="Station" >
               </div>
           
-              <input id="btn" style="margin-top:5% ;" class="btn btn-lg btn-primary btn-block" type="submit" value="Isci"  >
+              <input id="btn" style="margin-top:5% ;" class="btn btn-lg btn-primary btn-block" type="submit" value="Search"  >
                 
               </form>
           
-              <form  onsubmit="PridobiLinije()" method="GET"  name="prijava"  class="form-singin" style="width:50%; margin-left: 25%;"  >
-                <input id="btn" style="margin-top:5% ;" class="btn btn-lg btn-primary btn-block" type="submit" value="Vse postaje"  >
+              <form  onsubmit="PridobiLinije(event)" method="GET"  name="prijava"  class="form-singin" style="width:50%; margin-left: 25%;"  >
+                <input id="btn" style="margin-top:5% ;" class="btn btn-lg btn-primary btn-block" type="submit" value="All Lines"  >
+              </form>
+              <form  onsubmit="PridobiStanice(event)" method="GET"  name="prijava"  class="form-singin" style="width:50%; margin-left: 25%;"  >
+                <input id="btn" style="margin-top:5% ;" class="btn btn-lg btn-primary btn-block" type="submit" value="All Stations"  >
               </form>
        
           </div>
-        </div>
         
-        <div class="container">
+        
+        <div class="col-md-8">
 
-          <hr>
        
-          <div class="container">
-            
+          <hr/>
+           
             <table id="tabelaLinije" class="table ">
            
               <tbody id="tabelaLinije"></tbody>
-            
-            </table>
-           
-            <table id="tabelaLinijeGet" class="table ">
-           
-              <tbody id="tabelaLinijeGet"></tbody>
            
             </table>
        
           </div>         
         </div>
-
+      </div>
       </div>
 
       <footer class="footer footer-default">

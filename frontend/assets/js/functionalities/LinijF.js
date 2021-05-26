@@ -1,25 +1,22 @@
 const PridobiLinije =() =>{
-    fetch('http://localhost:3000/linije/',{
+    fetch('http://localhost:3000/lines/',{
        method: "GET"
 }).then((odgovor)=>{
     return odgovor.json();
 }).then((linije)=>{
-    let tabela = document.getElementById("tabelaLinijeGet");
+    let tabela = document.getElementById("tabelaLinije");
     tabela.innerHTML = `
-       <thead class="thead-dark">
-       <tr >
-       <th >Linija</th>
-       <th >Postaja</th>
-       <th >Cas</th>
-       <th >Dodaj</th>
+       <thead class="thead-orange">
+       <th >Line</th>
+       <th >Add</th>
    </tr>
               </thead>`;
+    console.log(linije)
      for(let i=0; i<linije.length;i++){
          let vrsta = tabela.insertRow();
-         for(const opis in linije[i]){
-                 let celija = vrsta.insertCell();
-                 celija.innerHTML = linije[i][opis];
-                  }
+                 let celija = vrsta.insertCell(-1);
+                 celija.innerHTML = `<button class="btn btn-primary btn-round">`+linije[i].Naziv+`</button> `;
+                  
                   let add = vrsta.insertCell();
                  add.innerHTML = `<button onclick='dodajLiniju(`+JSON.stringify(linije[i])+`)' class="btn btn-primary btn-icon btn-round"'><i class="now-ui-icons ui-2_favourite-28"></i></button>`; 
                 console.log(linije[i])
@@ -27,6 +24,33 @@ const PridobiLinije =() =>{
     
 });
 }
+
+const PridobiStanice =() =>{
+    fetch('http://localhost:3000/stations/',{
+       method: "GET"
+}).then((odgovor)=>{
+    return odgovor.json();
+}).then((linije)=>{
+    let tabela = document.getElementById("tabelaLinije");
+tabela.innerHTML = `
+       <thead class="thead-orange">
+       <th >Postaja</th>
+       <th >Dodaj</th>
+   </tr>
+              </thead>`;
+              for(let i=0; i<linije.length;i++){
+                let vrsta = tabela.insertRow();
+                        let celija = vrsta.insertCell(-1);
+                        celija.innerHTML = `<button class="btn btn-primary btn-round">`+linije[i].Naziv+`</button> `;
+                         
+                         let add = vrsta.insertCell();
+                        add.innerHTML = `<button onclick='dodajLiniju(`+JSON.stringify(linije[i])+`)' class="btn btn-primary btn-icon btn-round"'><i class="now-ui-icons ui-2_favourite-28"></i></button>`; 
+                       console.log(linije[i])
+                       }
+    
+});
+}
+
 
 const PretraziLinije = () =>{
 
