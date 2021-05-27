@@ -9,6 +9,6 @@ exports.up = function(knex) {
 };
 
 exports.down = function(knex) {
-    return knex.schema.droptable('location');
+    return knex.schema.dropTable('location');
 };
 ``
