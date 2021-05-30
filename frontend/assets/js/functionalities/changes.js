@@ -81,6 +81,8 @@ function makeCard(data){
 
 function startPage(){
 
+    startLogin();
+
     fetch('http://localhost:3000/changes/')
 	 .then((response) => {
         return response.json();

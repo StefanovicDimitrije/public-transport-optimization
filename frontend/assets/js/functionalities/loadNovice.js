@@ -1,4 +1,8 @@
-const loadAll = () => {                             //generates product table
+const loadAll = () => { 
+    
+    startLogin();
+
+    //generates product table
     fetch('http://localhost:3000/novice', {
         method: 'GET'
     }).then((myReply) => {

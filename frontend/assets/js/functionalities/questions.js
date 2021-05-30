@@ -144,6 +144,9 @@ const addQuestion = () => {
 }
 
 const loadQuestions = () => { 
+
+    startLogin();  
+
     document.getElementById("questionSection").innerHTML="";                           
     fetch('http://localhost:3000/questions', {
         method: 'GET'

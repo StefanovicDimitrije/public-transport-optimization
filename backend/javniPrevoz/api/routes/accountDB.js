@@ -36,19 +36,21 @@ router.post('/login/',async function(req, res, next) {
 
     const accounts = accountz.toJSON();
 
+    //console.log(accounts);
 
     let checkUser = accounts.find(element => element.mail === mail);
 
-    //console.log(checkUser);
+    console.log(checkUser);
 
+    if (checkUser != undefined){
     if ((checkUser.password == pass) && (checkUser != null)) {
       
         res.json({ status: "exists", user: checkUser});
         console.log('ok');
   
-      } else {
+      }} else {
   
-        res.json({ status: "noexists", user: checkUser.id});
+        res.json({ status: "noexists"});
         console.log('wrong');
   
       }

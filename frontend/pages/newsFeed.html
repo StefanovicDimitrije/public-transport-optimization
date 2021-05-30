@@ -46,11 +46,6 @@
             <a class="dropdown-item" href="lines.html">Bus Lines</a>
             <a class="dropdown-item" href="changes.html">Important changes</a>
             <a class="dropdown-item" href="newsFeed.html">News Feed</a>
-            <div class="dropdown-divider"></div>
-            <a class="dropdown-header">Profile</a>
-            <a class="dropdown-item" href="#">View And Edit Profile</a>
-            <a class="dropdown-item" href="#">View Favorites</a>
-            <a class="dropdown-item" href="#">Extend Ticket</a>
           </div>
         
         </div>
@@ -70,12 +65,15 @@
         </div>
        
         <div class="collapse navbar-collapse justify-content-end" id="navigation" data-nav-image="../assets/img/blurred-image-1.jpg">
-          <ul class="navbar-nav">
-            <li class="nav-item">
-              <a class="nav-link" href="#">Login</a>
+          <ul class="navbar-nav" id="visibleNavList">
+           <li class="nav-item">
+              <a class="nav-link" href="login.html" id="loginNav">Login</a>
               </li>
             <li class="nav-item">
-              <a class="nav-link" href="#" data-toggle="tab">Register</a>
+              <a class="nav-link" href="#" id="registerNav">Register</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#" onclick="logout()" id="logoutNavLink">Logout</a>
             </li>
             <ul class="navbar-nav d-lg-none">
                 <li class="nav-item">
@@ -91,7 +89,7 @@
                     <a class="nav-link" href="newsFeed.html">News Feed</a>
                 </li>
             </ul>
-                <ul class="navbar-nav d-lg-none">
+                <ul class="navbar-nav d-lg-none" id="invisibleNavList1">
                     <li class="nav-item">
                         <a class="dropdown-header">Profile</a>
                     </li>
@@ -176,9 +174,11 @@
         <!-- Control Center for Now Ui Kit: parallax effects, scripts for the example pages etc -->
         <script src="../assets/js/now-ui-kit.js?v=1.3.0" type="text/javascript"></script>
 
-
         <!-- MY FUNCTIONALITIES-->
         <script src="../assets/js/functionalities/loadNovice.js" type="text/javascript"></script>
-</body>
+        <script src="../assets/js/functionalities/login.js" type="text/javascript"></script>
+
+        
+      </body>
 
 </html>
