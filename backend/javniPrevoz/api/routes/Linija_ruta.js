@@ -19,6 +19,14 @@ const  station = bookshelf.Model.extend({
     tableName: 'Stations',
     idAttribute:'id'
 })
+const driverB1 = bookshelf.Model.extend({
+    tableName: 'Driver',
+    idAttribute: 'id'
+})
+const driverBusB1 = bookshelf.Model.extend({
+    tableName: 'Driver_Bus',
+    idAttribute: 'id'
+})
 router.get('/', async(req,res)=>{
     const ls = await new line_station().fetchAll()
     res.json(ls.toJSON())
@@ -26,74 +34,132 @@ router.get('/', async(req,res)=>{
 router.post('/', async(req,res)=>{
 
     let linija_postaja =  req.body;
-    console.log(linija_postaja);
+    
     linija = linija_postaja.Linija1;
-    console.log(linija);
+  
     postaja = linija_postaja.Postaja1;
-    console.log(postaja);
+ 
+    
 
-
+    const driverBusB = await new driverBusB1().fetchAll();
+    const driverB = await new driverB1().fetchAll();
+    driverBus = driverBusB.toJSON();
+    driver = driverB.toJSON();
     const LS = await new line_station().fetchAll();
     const lines = await new line().fetchAll();
     const stations = await new station().fetchAll();
     LS_JOSN = LS.toJSON();
     linijaJSON = lines.toJSON();    
     postajaJSON = stations.toJSON();
+
     JSON.stringify(linijaJSON);
-    JSON.stringify(postajaJSON)
+    JSON.stringify(postajaJSON);
+    JSON.stringify(driver);
+    JSON.stringify(driverBus);
+  
+
+    let objJSON = [];
+    let objJSON1 = [];
 
     if(linija !== "" && postaja !== ""){
         for(const lp of LS_JOSN){
             for(const LinijaNaziv of linijaJSON){
             if(linija == LinijaNaziv.Naziv){
                     let linijaId = LinijaNaziv.id;
-                    if(lp.Linija == linijaId){
+                    let linijaNaziv = LinijaNaziv.Naziv;
+                    if(lp.tk_id_line == linijaId){
                         for(const PostajaNaziv of postajaJSON){
                             if(postaja == PostajaNaziv.Naziv){
                                 let postajaID = PostajaNaziv.id;
-                                if(lp.Postaja == postajaID ){
-                                    return res.json({status:"obstajata",Linija_in_Postaja:lp,PostajaNaziv:PostajaNaziv,LinijaNaziv:LinijaNaziv})
-                                }else{
-                                    return res.json({status:"Ne obstaja"})
+                                for (const driverBus1 of driverBus){
+                                    if(driverBus1.id == lp.tk_id_bus_driver){
+                                        for(const driverNaziv of driver){
+                                            if(driverNaziv.id == driverBus1.tk_id_Driver){
+                                                if(lp.tk_id_station == postajaID ){
+                                                    objJSON1.push(lp,PostajaNaziv,LinijaNaziv,driverNaziv)
+                                                    objJSON.push(objJSON1)
+                                                   // return res.json({status:"obstajata",Linija_in_Postaja:lp,PostajaNaziv:PostajaNaziv,LinijaNaziv:LinijaNaziv,DriverNaziv:driverNaziv})
+                                                }else{
+                                                  //  return res.json({status:"Ne obstaja"})
+                                                }
+                                            }
+                                            
+                                        }
+                                        
+                                    }
+                                    
                                 }
+                                
                                
                             }
-                                return res.json({status:"Ne obstaja"})
+                               // return res.json({status:"Ne obstaja"})
                             
                         }
                     }else{
-                        return res.json({status:"Ne obstaja"})
+                        //return res.json({status:"Ne obstaja"})
                     }
                 }
            
-                return res.json({status:"Ne obstaja"})
+                //return res.json({status:"Ne obstaja"})
             
         }
         }
-
+        return res.json({status:"obstajata",obj:objJSON})
     }
     else if(linija !== "" && postaja ==="" ){
-        let lpObj = [];
+        let lpObj = []; 
+        let lpObj1 = [];
         let linijaNaziv ;
+        
         for(const lp of LS_JOSN){
             for(const LinijaNaziv of linijaJSON){
-                console.log(LinijaNaziv.Naziv)
-                            if(linija == LinijaNaziv.Naziv){
-                                linijaNaziv = LinijaNaziv.Naziv;
-                                let linijaID = LinijaNaziv.id;
-                                if(lp.tk_id_line == linijaID ){
-                                    lpObj.push(lp);
-                                }  
+                if(linija == LinijaNaziv.Naziv){
+                    let linijaId = LinijaNaziv.id;
+                     linijaNaziv = LinijaNaziv.Naziv;
+                    if(lp.tk_id_line == linijaId){
+                        for(const PostajaNaziv of postajaJSON){
+                            if(lp.tk_id_station == PostajaNaziv.id){
+                                console.log(PostajaNaziv)
+                                for (const driverBus1 of driverBus){ 
+                                    if(driverBus1.id == lp.tk_id_bus_driver){
+                                        for(const driverNaziv of driver){
+                                           
+                                            if(driverNaziv.id == driverBus1.tk_id_Driver){
+                                                    lpObj1.push(lp,PostajaNaziv,LinijaNaziv,driverNaziv);
+                                                    lpObj.push(lpObj1);
+                                                   // return res.json({status:"obstajata",Linija_in_Postaja:lp,PostajaNaziv:PostajaNaziv,LinijaNaziv:LinijaNaziv,DriverNaziv:driverNaziv})
+                                                }else{
+                                                  //  return res.json({status:"Ne obstaja"})
+                                                }
+                                                
+                                            }
+                                            
+                                        }
+                                       
+                                        
+                                    }
+                                    
+                                }
+                                break;
+                               
                             }
-                        }
-                     }
+                               // return res.json({status:"Ne obstaja"})
+                            
+                        
+                    }else{
+                        //return res.json({status:"Ne obstaja"})
+                    }
                     
-                    return res.json({status:"linija",Linija_in_Postaja: lpObj,LinijaNaziv:linijaNaziv});
+                    }
+                }
+            }
+         
+            return res.json({status:"linija",lp:lpObj});
 
     }else if (linija === "" &&  postaja !== ""){
         let lpObj = [];
-        let postajaNaziv;
-        for(const lp of LS_JOSN){
+        let lpObj1= [];
+       /* for(const lp of LS_JOSN){
             for(const PostajaNaziv of postajaJSON){
                             if(postaja == PostajaNaziv.Naziv){
                                 postajaNaziv =  PostajaNaziv.Naziv;
@@ -105,7 +171,51 @@ router.post('/', async(req,res)=>{
                             }
                         }
                     }
-                    return res.json({status:"postaja",Linija_in_Postaja: lpObj,PostajaNaziv:postajaNaziv});
+                    return res.json({status:"postaja",Linija_in_Postaja: lpObj,PostajaNaziv:postajaNaziv});*/
+                    for(const lp of LS_JOSN){
+                        for(const postajaNaziv of postajaJSON){
+                            if(postaja == postajaNaziv.Naziv){
+                                let postajaId = postajaNaziv.id;
+                                 PostajaNaziv = postajaNaziv.Naziv;
+                                if(lp.tk_id_station == postajaId){
+                                    for(const LinijaNaziv of linijaJSON){
+                                        if(lp.tk_id_line == LinijaNaziv.id){
+                                            console.log(PostajaNaziv)
+                                            for (const driverBus1 of driverBus){ 
+                                                if(driverBus1.id == lp.tk_id_bus_driver){
+                                                    for(const driverNaziv of driver){
+                                                       
+                                                        if(driverNaziv.id == driverBus1.tk_id_Driver){
+                                                                lpObj1.push(lp,postajaNaziv,LinijaNaziv,driverNaziv);
+                                                                lpObj.push(lpObj1);
+                                                               // return res.json({status:"obstajata",Linija_in_Postaja:lp,PostajaNaziv:PostajaNaziv,LinijaNaziv:LinijaNaziv,DriverNaziv:driverNaziv})
+                                                            }else{
+                                                              //  return res.json({status:"Ne obstaja"})
+                                                            }
+                                                            
+                                                        }
+                                                        
+                                                    }
+                                                   
+                                                    
+                                                }
+                                                
+                                            }
+                                            break;
+                                           
+                                        }
+                                           // return res.json({status:"Ne obstaja"})
+                                        
+                                    
+                                }else{
+                                    //return res.json({status:"Ne obstaja"})
+                                }
+                                
+                                }
+                            }
+                        }
+                     
+                        return res.json({status:"postaja",lp:lpObj});
     }
      res.json({status:"nedefinirano"});
 })

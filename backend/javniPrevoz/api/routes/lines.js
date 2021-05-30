@@ -1,5 +1,4 @@
 var express = require('express');
-
 var router = express.Router();
 const knexfile = require('../../knexfile').development;
 const knex = require('knex')(knexfile);
