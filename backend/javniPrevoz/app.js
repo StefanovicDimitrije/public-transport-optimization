@@ -13,6 +13,8 @@ const questionsRouter = require('./api/routes/questionsDB'); //Questions
 const lineRouter = require('./api/routes/lines');
 const linesPostRouter = require('./api/routes/Linija_ruta');
 const stationRouter = require('./api/routes/stations');
+const accountRouter = require('./api/routes/accountDB'); //Account data (login, register, display, edit)
+const loginRouter = require('./api/routes/loginDB'); //Holding the current logged in user info
 const app = express();
 
 //:)
@@ -41,5 +43,7 @@ app.use('/questions', questionsRouter); //questions
 app.use('/lines',lineRouter);
 app.use('/stations',stationRouter);
 app.use('/linije',linesPostRouter);
+app.use('/account', accountRouter); //Accounts
+app.use('/login', loginRouter);
 
 module.exports = app;
