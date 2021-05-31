@@ -12,6 +12,9 @@
 </div>*/
 
 const getDrivers=()=>{
+
+    startLogin();
+
     fetch('http://localhost:3000/review/',{
         method: "GET"
     }).then((res)=>{
@@ -30,7 +33,7 @@ const getDrivers=()=>{
             option.value = allDrivers[i].id;
             div.add(option,allDrivers[i].id) 
             console.log(option)
-            option.value = '';
+            
             option.focus();
             
         }

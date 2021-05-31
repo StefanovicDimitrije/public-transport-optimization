@@ -14,6 +14,7 @@ const lineRouter = require('./api/routes/lines');
 const linesPostRouter = require('./api/routes/Linija_ruta');
 const stationRouter = require('./api/routes/stations');
 const accountRouter = require('./api/routes/accountDB'); //Account data (login, register, display, edit)
+const reviewRouter = require('./api/routes/driverReview')
 const app = express();
 
 //:)
@@ -43,5 +44,6 @@ app.use('/lines',lineRouter);
 app.use('/stations',stationRouter);
 app.use('/linije',linesPostRouter);
 app.use('/account', accountRouter); //Accounts
+app.use('/review',reviewRouter)
 
 module.exports = app;
