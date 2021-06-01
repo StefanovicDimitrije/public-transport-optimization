@@ -6,6 +6,7 @@ exports.up = function(knex) {
         table.string('emailAddress');
         table.string('question');
         table.string('date');
+        table.string('likes');
     })
 };
 

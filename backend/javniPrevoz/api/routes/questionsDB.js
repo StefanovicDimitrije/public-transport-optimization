@@ -43,4 +43,17 @@ router.post('/', async (req, res, next) => {
     }
     });
 
+  
+router.put('/:id', async (req, res, next) => {
+  try {
+  const id = req.params.id;
+  const question = await new myQuestion().where('id', id).fetch();
+  question.
+  res.json(question.toJSON());
+  } catch (error) {
+  res.status(500).json(error);
+  }
+  });
+    
+
 module.exports = router;

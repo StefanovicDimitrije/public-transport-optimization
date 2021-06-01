@@ -124,7 +124,8 @@ const addQuestion = () => {
     "firstName": document.getElementById("firstName").value,
     "emailAddress": document.getElementById("emailAddress").value,
     "question": document.getElementById("questionText").value,
-    "date": today
+    "date": today,
+    "likes": 0
     }
     console.log(question);
     fetch('http://localhost:3000/questions/', {
@@ -143,10 +144,9 @@ const addQuestion = () => {
     })
 }
 
-const loadQuestions = () => { 
 
-    startLogin();  
 
+function loadQuestions(isMore) { 
     document.getElementById("questionSection").innerHTML="";                           
     fetch('http://localhost:3000/questions', {
         method: 'GET'
@@ -170,11 +170,46 @@ const loadQuestions = () => {
         `;
         questionsSection.appendChild(myCard2);
         }
-        let myForum = document.createElement("div");
         
-        for (let i = 0; i < questions.length; i++) {
-            let myCard = document.createElement("div");
-            myCard.innerHTML =
+        let myForum = document.createElement("div");
+        let questionLimit = 5;
+        if(questions.length <= questionLimit || isMore)
+        {
+          let myCard = document.createElement("div");
+          for (let i = 0; i < questions.length; i++) {
+              
+              myCard.innerHTML +=
+                  `
+                  <div class="card p-3 mt-2">
+                  <div class="d-flex justify-content-between align-items-center">
+                      <div class="user d-flex flex-row align-items-center"> <img src="../assets/img/default-avatar.png" width="30" class="user-img rounded-circle mr-2">
+                      <small class="font-weight-bold text-primary" style = "font-size: 120%">@${questions[i].firstName}:</small> <small class="font-weight-bold " style = "font-size: 100%">${questions[i].question} </small></span> </div> <small>${questions[i].date}</small>
+                  </div>
+                  <div class="action d-flex justify-content-between mt-2 align-items-center">
+                      <div class="reply px-4"> <small onclick = removeQuestion(${questions[i].id})>Remove</small> <span class="dots"></span> <small >Reply</small> <span class="dots"></span> <small onclick = "like(${questions[i].id}, ${questions[i].likes})">${questions[i].likes}`+ " " + `  <i class="now-ui-icons ui-2_like"></i></small> </div>
+                      <div class="icons align-items-center"> <i class="fa fa-check-circle-o check-icon text-primary"></i> </div>
+                  </div>
+              </div>
+              `;
+            
+          }
+          if(isMore)
+          {
+            myCard.innerHTML += `
+            <div type="submit" class="send-button">
+              <a onclick="loadQuestions(false)" class="btn btn-primary btn-block btn-lg" style = "color:white">See less</a>
+            </div>
+            `;
+            
+          }
+          questionsSection.appendChild(myCard);
+        }
+        else
+        {
+          let myCard = document.createElement("div");
+          for (let i = 0; i < questionLimit; i++) {
+            
+            myCard.innerHTML +=
                 `
                 <div class="card p-3 mt-2">
                 <div class="d-flex justify-content-between align-items-center">
@@ -182,13 +217,21 @@ const loadQuestions = () => {
                     <small class="font-weight-bold text-primary" style = "font-size: 120%">@${questions[i].firstName}:</small> <small class="font-weight-bold " style = "font-size: 100%">${questions[i].question} </small></span> </div> <small>${questions[i].date}</small>
                 </div>
                 <div class="action d-flex justify-content-between mt-2 align-items-center">
-                    <div class="reply px-4"> <small onclick = removeQuestion(${questions[i].id})>Remove</small> <span class="dots"></span> <small>Reply</small> <span class="dots"></span> <small>Translate</small> </div>
+                    <div class="reply px-4"> <small onclick = removeQuestion(${questions[i].id})>Remove</small> <span class="dots"></span> <small>Reply</small> <span class="dots"></span> <small onclick = "like(${questions[i].id}, ${questions[i].likes})">${questions[i].likes}`+ " " + `<i class="now-ui-icons ui-2_like"></i></small> </div>
                     <div class="icons align-items-center"> <i class="fa fa-check-circle-o check-icon text-primary"></i> </div>
                 </div>
             </div>
             `;
-           
-            questionsSection.appendChild(myCard);
+          questionsSection.appendChild(myCard);
+            
+        }
+        myCard.innerHTML += `
+          <div type="submit" class="send-button">
+            <a onclick="loadQuestions(true)" class="btn btn-primary btn-block btn-lg" style = "color:white">See ${questions.length-questionLimit} more</a>
+          </div>
+          `;
+          
+          
         }
     });
 }
@@ -230,3 +273,14 @@ function textIsValid(inputtx)
       else
         return 1;
     }   
+
+  function like(id, likes)
+  {
+    fetch('http://localhost:3000/questions/' + id, {
+      method: 'PUT'
+  }).then((myReply) => {
+      return myReply.json();
+  }).then((questions) => {
+    console.log(questions.id);
+  });
+}
