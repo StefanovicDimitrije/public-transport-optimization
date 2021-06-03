@@ -1,13 +1,22 @@
 var express = require('express');
-
 var router = express.Router();
-const knexfile = require('../../knexfile').development;
-const knex = require('knex')(knexfile);
+
+//DATABASE CONNECTIONS
+var knex = require('knex')({
+    client: 'mysql',
+    connection: {
+        host: '127.0.0.1',
+        user: 'root',
+        password: '',
+        database: 'javniprevoz'
+    }
+  });
+  
 const bookshelf = require('bookshelf')(knex);
 
 
 const  station = bookshelf.Model.extend({
-    tableName: 'Stations',
+    tableName: 'stations',
     idAttribute:'id'
 })
 

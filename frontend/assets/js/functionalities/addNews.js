@@ -8,10 +8,11 @@ const addNewArticle = () => {
     let coverImg = coverPath.replace('C:\\fakepath\\', '');
     let article = {                                     ///create object with selected values
         id: null,
-        Date: MyDateString,
-        Title: document.getElementById("articleTitle").value,
-        Text: document.getElementById("articleText").value,
-        Cover: coverImg
+        date: MyDateString,
+        author: 1, //CHANGE LATER
+        title: document.getElementById("articleTitle").value,
+        text: document.getElementById("articleText").value,
+        cover: coverImg
     }
     console.log(article);
     validation = validateForm();
@@ -34,7 +35,7 @@ const addNewArticle = () => {
             `;
             return -1;
     }
-    fetch('http://localhost:3000/novice/', {
+    fetch('http://localhost:3000/news/', {
         method: 'POST',
         body: JSON.stringify(article), // !!!!
         headers: {

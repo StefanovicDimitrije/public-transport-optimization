@@ -15,7 +15,7 @@ const PridobiLinije = () => {
         for (let i = 0; i < linije.length; i++) {
             let vrsta = tabela.insertRow();
             let celija = vrsta.insertCell(-1);
-            celija.innerHTML = `<button class="btn btn-primary btn-round">` + linije[i].Naziv + `</button> `;
+            celija.innerHTML = `<button class="btn btn-primary btn-round">` + linije[i].name + `</button> `;
 
             let add = vrsta.insertCell();
             add.innerHTML = `<button onclick='dodajLiniju(` + JSON.stringify(linije[i]) + `)' class="btn btn-primary btn-icon btn-round"'><i class="now-ui-icons ui-2_favourite-28"></i></button>`;
@@ -38,11 +38,11 @@ const PridobiStanice = () => {
        <th >Add</th>
    </tr>
               </thead>`;
-              console.log(linije)
+        console.log(linije)
         for (let i = 0; i < linije.length; i++) {
             let vrsta = tabela.insertRow();
             let celija = vrsta.insertCell(-1);
-            celija.innerHTML = `<button class="btn btn-primary btn-round">` + linije[i].Naziv + `</button> `;
+            celija.innerHTML = `<button class="btn btn-primary btn-round">` + linije[i].name + `</button> `;
 
             let add = vrsta.insertCell();
             add.innerHTML = `<button onclick='dodajLiniju(` + JSON.stringify(linije[i]) + `)' class="btn btn-primary btn-icon btn-round"'><i class="now-ui-icons ui-2_favourite-28"></i></button>`;
@@ -60,7 +60,7 @@ const PretraziLinije = () => {
         Linija1: document.forms[0].Linija.value,
         Postaja1: document.forms[0].Postaja.value,
     }
-    
+
     fetch('http://localhost:3000/linije/', {
         method: 'POST',
         body: JSON.stringify(iskanje),
@@ -70,7 +70,7 @@ const PretraziLinije = () => {
         }
 
     }).then((odgovor) => {
-        
+
         return odgovor.json();
     }).then((odgovorJSON) => {
         console.log(odgovorJSON);
@@ -87,39 +87,39 @@ const PretraziLinije = () => {
         <th> Driver</th>
     </tr>
                </thead>`;
-             linija = odgovorJSON.lp
+            linija = odgovorJSON.lp
             console.log(linija)
-           /* for (let i = 0; i < linija.length; i++) {
-                let vrsta = tabela.insertRow();
-                for (const opis in linija[i]) {
-                    let celija = vrsta.insertCell();
-                    celija.innerHTML = linija[i][opis];
-                    console.log(linija[i])
-                }
-            }*/
+            /* for (let i = 0; i < linija.length; i++) {
+                 let vrsta = tabela.insertRow();
+                 for (const opis in linija[i]) {
+                     let celija = vrsta.insertCell();
+                     celija.innerHTML = linija[i][opis];
+                     console.log(linija[i])
+                 }
+             }*/
             for (let i = 0; i < linija.length; i++) {
-                for(let j = 0; j < linija[i].length;i++){ 
-                l = linija[i];
-                let vrsta = tabela.insertRow(-1);
-                let naz = vrsta.insertCell(-1);
-                naz.innerHTML = `<button class="btn btn-primary btn-round">` + l[2].Naziv + `</button> `;
-                
-                let pos = vrsta.insertCell(-1);
-                pos.innerHTML = `<button class="btn btn-primary btn-round">` + l[1].Naziv + `</button> `;
+                for (let j = 0; j < linija[i].length; i++) {
+                    l = linija[i];
+                    let vrsta = tabela.insertRow(-1);
+                    let naz = vrsta.insertCell(-1);
+                    naz.innerHTML = `<button class="btn btn-primary btn-round">` + l[2].name + `</button> `;
 
-                let cas = vrsta.insertCell(-1);
-                cas.innerHTML = `<button class="btn btn-primary btn-round">` + l[0].time + `</button> `;
-                let dan = vrsta.insertCell(-1);
-                dan.innerHTML = `<button class="btn btn-primary btn-round">` + l[0].day + `</button> `;
+                    let pos = vrsta.insertCell(-1);
+                    pos.innerHTML = `<button class="btn btn-primary btn-round">` + l[1].name + `</button> `;
 
-                let dri = vrsta.insertCell(-1);
-                dri.innerHTML = `<button class="btn btn-primary btn-round">` + l[3].Ime +" "+ l[3].Priimek+ `</button> `;
+                    let cas = vrsta.insertCell(-1);
+                    cas.innerHTML = `<button class="btn btn-primary btn-round">` + l[0].time + `</button> `;
+                    let dan = vrsta.insertCell(-1);
+                    dan.innerHTML = `<button class="btn btn-primary btn-round">` + l[0].day + `</button> `;
 
-                let add = vrsta.insertCell();
-                add.innerHTML = `<button onclick='dodajLiniju(` + JSON.stringify(l[i]) + `)' class="btn btn-primary btn-icon btn-round"'><i class="now-ui-icons ui-2_favourite-28"></i></button>`;
-                console.log(l[i])
+                    let dri = vrsta.insertCell(-1);
+                    dri.innerHTML = `<button class="btn btn-primary btn-round">` + l[3].name + " " + l[3].surname + `</button> `;
+
+                    let add = vrsta.insertCell();
+                    add.innerHTML = `<button onclick='dodajLiniju(` + JSON.stringify(l[i]) + `)' class="btn btn-primary btn-icon btn-round"'><i class="now-ui-icons ui-2_favourite-28"></i></button>`;
+                    console.log(l[i])
+                }
             }
-        }
 
         } else if (odgovorJSON.status === "obstajata") {
             document.forms[0].reset();
@@ -134,22 +134,22 @@ const PretraziLinije = () => {
         <th> Driver</th>
     </tr>
                </thead>`;
-             linija = odgovorJSON.obj
+            linija = odgovorJSON.obj
             /*for (let i = 0; i < linija.length; i++) {
                 let vrsta = tabela.insertRow();
                     let celija = vrsta.insertCell();
                     celija.innerHTML = `<button class="btn btn-primary btn-round">` + linija[i].Naziv + `</button> `;
                     console.log(linija[i])
                 }*/
-                for (let i = 0; i < linija.length; i++) {
-                    for(let j = 0; j< linija[i].length;i++){ 
+            for (let i = 0; i < linija.length; i++) {
+                for (let j = 0; j < linija[i].length; i++) {
                     l = linija[i];
                     let vrsta = tabela.insertRow(-1);
                     let naz = vrsta.insertCell(-1);
-                    naz.innerHTML = `<button class="btn btn-primary btn-round">` + l[2].Naziv + `</button> `;
-                    
+                    naz.innerHTML = `<button class="btn btn-primary btn-round">` + l[2].name + `</button> `;
+
                     let pos = vrsta.insertCell(-1);
-                    pos.innerHTML = `<button class="btn btn-primary btn-round">` + l[1].Naziv + `</button> `;
+                    pos.innerHTML = `<button class="btn btn-primary btn-round">` + l[1].name + `</button> `;
 
                     let cas = vrsta.insertCell(-1);
                     cas.innerHTML = `<button class="btn btn-primary btn-round">` + l[0].time + `</button> `;
@@ -157,7 +157,7 @@ const PretraziLinije = () => {
                     dan.innerHTML = `<button class="btn btn-primary btn-round">` + l[0].day + `</button> `;
 
                     let dri = vrsta.insertCell(-1);
-                    dri.innerHTML = `<button class="btn btn-primary btn-round">` + l[3].Ime +" "+ l[3].Priimek+ `</button> `;
+                    dri.innerHTML = `<button class="btn btn-primary btn-round">` + l[3].name + " " + l[3].surname + `</button> `;
 
                     let add = vrsta.insertCell();
                     add.innerHTML = `<button onclick='dodajLiniju(` + JSON.stringify(l[i]) + `)' class="btn btn-primary btn-icon btn-round"'><i class="now-ui-icons ui-2_favourite-28"></i></button>`;
@@ -198,39 +198,39 @@ const PretraziLinije = () => {
                     }
                 }
 */
-linija = odgovorJSON.lp
-console.log(linija)
-/* for (let i = 0; i < linija.length; i++) {
-    let vrsta = tabela.insertRow();
-    for (const opis in linija[i]) {
-        let celija = vrsta.insertCell();
-        celija.innerHTML = linija[i][opis];
-        console.log(linija[i])
-    }
-}*/
-for (let i = 0; i < linija.length; i++) {
-    for(let j = 0; j < linija[i].length;i++){ 
-    l = linija[i];
-    let vrsta = tabela.insertRow(-1);
-    let naz = vrsta.insertCell(-1);
-    naz.innerHTML = `<button class="btn btn-primary btn-round">` + l[2].Naziv + `</button> `;
-    
-    let pos = vrsta.insertCell(-1);
-    pos.innerHTML = `<button class="btn btn-primary btn-round">` + l[1].Naziv + `</button> `;
+                linija = odgovorJSON.lp
+                console.log(linija)
+                /* for (let i = 0; i < linija.length; i++) {
+                    let vrsta = tabela.insertRow();
+                    for (const opis in linija[i]) {
+                        let celija = vrsta.insertCell();
+                        celija.innerHTML = linija[i][opis];
+                        console.log(linija[i])
+                    }
+                }*/
+                for (let i = 0; i < linija.length; i++) {
+                    for (let j = 0; j < linija[i].length; i++) {
+                        l = linija[i];
+                        let vrsta = tabela.insertRow(-1);
+                        let naz = vrsta.insertCell(-1);
+                        naz.innerHTML = `<button class="btn btn-primary btn-round">` + l[2].name + `</button> `;
 
-    let cas = vrsta.insertCell(-1);
-    cas.innerHTML = `<button class="btn btn-primary btn-round">` + l[0].time + `</button> `;
-    let dan = vrsta.insertCell(-1);
-    dan.innerHTML = `<button class="btn btn-primary btn-round">` + l[0].day + `</button> `;
+                        let pos = vrsta.insertCell(-1);
+                        pos.innerHTML = `<button class="btn btn-primary btn-round">` + l[1].name + `</button> `;
 
-    let dri = vrsta.insertCell(-1);
-    dri.innerHTML = `<button class="btn btn-primary btn-round">` + l[3].Ime +" "+ l[3].Priimek+ `</button> `;
+                        let cas = vrsta.insertCell(-1);
+                        cas.innerHTML = `<button class="btn btn-primary btn-round">` + l[0].time + `</button> `;
+                        let dan = vrsta.insertCell(-1);
+                        dan.innerHTML = `<button class="btn btn-primary btn-round">` + l[0].day + `</button> `;
 
-    let add = vrsta.insertCell();
-    add.innerHTML = `<button onclick='dodajLiniju(` + JSON.stringify(l[i]) + `)' class="btn btn-primary btn-icon btn-round"'><i class="now-ui-icons ui-2_favourite-28"></i></button>`;
-    console.log(l[i])
-}
-}
+                        let dri = vrsta.insertCell(-1);
+                        dri.innerHTML = `<button class="btn btn-primary btn-round">` + l[3].name + " " + l[3].surname + `</button> `;
+
+                        let add = vrsta.insertCell();
+                        add.innerHTML = `<button onclick='dodajLiniju(` + JSON.stringify(l[i]) + `)' class="btn btn-primary btn-icon btn-round"'><i class="now-ui-icons ui-2_favourite-28"></i></button>`;
+                        console.log(l[i])
+                    }
+                }
 
             } else {
                 alert('Linija ali postaja ne obstaja');

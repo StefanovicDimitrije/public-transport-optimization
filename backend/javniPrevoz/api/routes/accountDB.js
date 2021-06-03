@@ -3,19 +3,28 @@ const path = require('path');
 var router = express.Router();
 
 
-const knexfile = require('../../knexfile').development;
-const knex = require('knex')(knexfile);
-const bookshelf = require('bookshelf')(knex);
+//DATABASE CONNECTIONS
+var knex = require('knex')({
+    client: 'mysql',
+    connection: {
+        host: '127.0.0.1',
+        user: 'root',
+        password: '',
+        database: 'javniprevoz'
+    }
+  });
+  
+  const bookshelf = require('bookshelf')(knex);
 
 const myAccounts = bookshelf.Model.extend({
-    tableName:'accountTable',
+    tableName:'users',
     idAttribute:'id'
 });
 
 router.get('/',async function(req, res, next) {  
 
     try {
-        const accounts = await new accounts().fetchAll();
+        const accounts = await new myAccounts().fetchAll();
         res.json(accounts.toJSON());
     } catch (error) {
         res.status(500).json({status: "error", error:error});

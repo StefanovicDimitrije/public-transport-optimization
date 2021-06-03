@@ -1,30 +1,38 @@
 var express = require('express');
-//let linijaPostaja = require('../../data/Linija-Postaja');
-//let Linija= require('../../data/Linije');
-//let Postaja = require('../../data/Postaje');
 var router = express.Router();
-const knexfile = require('../../knexfile').development;
-const knex = require('knex')(knexfile);
+
+
+//DATABASE CONNECTIONS
+var knex = require('knex')({
+    client: 'mysql',
+    connection: {
+        host: '127.0.0.1',
+        user: 'root',
+        password: '',
+        database: 'javniprevoz'
+    }
+  });
+  
 const bookshelf = require('bookshelf')(knex);
 
 const  line_station = bookshelf.Model.extend({
-    tableName: 'Lines_Stations',
+    tableName: 'lines_stations',
     idAttribute:'id'
 })
 const  line = bookshelf.Model.extend({
-    tableName: 'Lines',
+    tableName: 'lines',
     idAttribute:'id'
 })
 const  station = bookshelf.Model.extend({
-    tableName: 'Stations',
+    tableName: 'stations',
     idAttribute:'id'
 })
 const driverB1 = bookshelf.Model.extend({
-    tableName: 'Driver',
+    tableName: 'drivers',
     idAttribute: 'id'
 })
 const driverBusB1 = bookshelf.Model.extend({
-    tableName: 'Driver_Bus',
+    tableName: 'drivers_buses',
     idAttribute: 'id'
 })
 router.get('/', async(req,res)=>{

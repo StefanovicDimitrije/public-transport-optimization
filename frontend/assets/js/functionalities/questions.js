@@ -121,8 +121,8 @@ const addQuestion = () => {
     let question = {
 
     "id": null,
-    "firstName": document.getElementById("firstName").value,
-    "emailAddress": document.getElementById("emailAddress").value,
+    "name": document.getElementById("firstName").value,
+    "mail": document.getElementById("emailAddress").value,
     "question": document.getElementById("questionText").value,
     "date": today,
     "likes": 0
@@ -183,7 +183,7 @@ function loadQuestions(isMore) {
                   <div class="card p-3 mt-2">
                   <div class="d-flex justify-content-between align-items-center">
                       <div class="user d-flex flex-row align-items-center"> <img src="../assets/img/default-avatar.png" width="30" class="user-img rounded-circle mr-2">
-                      <small class="font-weight-bold text-primary" style = "font-size: 120%">@${questions[i].firstName}:</small> <small class="font-weight-bold " style = "font-size: 100%">${questions[i].question} </small></span> </div> <small>${questions[i].date}</small>
+                      <small class="font-weight-bold text-primary" style = "font-size: 120%">@${questions[i].name}:</small> <small class="font-weight-bold " style = "font-size: 100%">${questions[i].question} </small></span> </div> <small>${questions[i].date}</small>
                   </div>
                   <div class="action d-flex justify-content-between mt-2 align-items-center">
                       <div class="reply px-4"> <small onclick = removeQuestion(${questions[i].id})>Remove</small> <span class="dots"></span> <small >Reply</small> <span class="dots"></span> <small onclick = "like(${questions[i].id}, ${questions[i].likes})">${questions[i].likes}`+ " " + `  <i class="now-ui-icons ui-2_like"></i></small> </div>
@@ -214,7 +214,7 @@ function loadQuestions(isMore) {
                 <div class="card p-3 mt-2">
                 <div class="d-flex justify-content-between align-items-center">
                     <div class="user d-flex flex-row align-items-center"> <img src="../assets/img/default-avatar.png" width="30" class="user-img rounded-circle mr-2">
-                    <small class="font-weight-bold text-primary" style = "font-size: 120%">@${questions[i].firstName}:</small> <small class="font-weight-bold " style = "font-size: 100%">${questions[i].question} </small></span> </div> <small>${questions[i].date}</small>
+                    <small class="font-weight-bold text-primary" style = "font-size: 120%">@${questions[i].name}:</small> <small class="font-weight-bold " style = "font-size: 100%">${questions[i].question} </small></span> </div> <small>${questions[i].date}</small>
                 </div>
                 <div class="action d-flex justify-content-between mt-2 align-items-center">
                     <div class="reply px-4"> <small onclick = removeQuestion(${questions[i].id})>Remove</small> <span class="dots"></span> <small>Reply</small> <span class="dots"></span> <small onclick = "like(${questions[i].id}, ${questions[i].likes})">${questions[i].likes}`+ " " + `<i class="now-ui-icons ui-2_like"></i></small> </div>

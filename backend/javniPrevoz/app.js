@@ -5,7 +5,6 @@ const cors = require('cors');
 var bodyParser = require('body-parser');
 
 const indexRouter = require('./api/routes/index');
-const testRouter = require('./api/routes/testDB'); // testing DB
 const newsRouter = require('./api/routes/newsDB'); //News
 const commentsRouter = require('./api/routes/comments'); //Comments
 const changesRouter = require('./api/routes/changesDB'); //Changes
@@ -35,8 +34,7 @@ app.use(express.json({
   }))
 
 app.use('/', indexRouter);
-app.use('/test', testRouter); //testing DB
-app.use('/novice',newsRouter); //Novice
+app.use('/news',newsRouter); //News
 app.use('/comments',commentsRouter); //Comments
 app.use('/changes', changesRouter); //Changes
 app.use('/questions', questionsRouter); //questions
@@ -44,6 +42,6 @@ app.use('/lines',lineRouter);
 app.use('/stations',stationRouter);
 app.use('/linije',linesPostRouter);
 app.use('/account', accountRouter); //Accounts
-app.use('/review',reviewRouter)
+app.use('/review',reviewRouter);
 
 module.exports = app;

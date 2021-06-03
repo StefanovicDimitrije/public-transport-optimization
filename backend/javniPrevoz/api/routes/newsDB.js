@@ -1,13 +1,22 @@
 const express = require('express');
 const path = require('path');
 var router = express.Router();
-// in case you need to use a db for your node part you need to include the following:
-const knexfile = require('../../knexfile').development;
-const knex = require('knex')(knexfile);
+
+//DATABASE CONNECTIONS
+var knex = require('knex')({
+  client: 'mysql',
+  connection: {
+      host: '127.0.0.1',
+      user: 'root',
+      password: '',
+      database: 'javniprevoz'
+  }
+});
+
 const bookshelf = require('bookshelf')(knex);
 
 const myNews = bookshelf.Model.extend({
-  tableName: 'News',
+  tableName: 'news',
   idAttribute: 'id'
 });
 

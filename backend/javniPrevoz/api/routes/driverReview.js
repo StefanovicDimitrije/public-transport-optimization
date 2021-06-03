@@ -1,14 +1,22 @@
 var express = require('express');
-//let linijaPostaja = require('../../data/Linija-Postaja');
-//let Linija= require('../../data/Linije');
-//let Postaja = require('../../data/Postaje');
 var router = express.Router();
-const knexfile = require('../../knexfile').development;
-const knex = require('knex')(knexfile);
+
+
+//DATABASE CONNECTIONS
+var knex = require('knex')({
+    client: 'mysql',
+    connection: {
+        host: '127.0.0.1',
+        user: 'root',
+        password: '',
+        database: 'javniprevoz'
+    }
+  });
+  
 const bookshelf = require('bookshelf')(knex);
 
 const drivers = bookshelf.Model.extend({
-    tableName:'Driver',
+    tableName:'drivers',
     idAttribute: 'id'
 })
 

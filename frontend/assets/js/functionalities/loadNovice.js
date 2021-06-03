@@ -1,9 +1,9 @@
 const loadAll = () => { 
     
-    startLogin();
+    //startLogin();
 
     //generates product table
-    fetch('http://localhost:3000/novice', {
+    fetch('http://localhost:3000/news', {
         method: 'GET'
     }).then((myReply) => {
         return myReply.json();
@@ -19,10 +19,10 @@ const loadAll = () => {
             <div class="col-md-12 text-center">
                     <div class="card">
                         <div class="card-body">
-                            <h4 class="card-title">${news[i].Title}</h4>
-                            <p class="card-text">${news[i].Text}</p>
-                            <p class="card-text"><small class="text-muted">Posted: ${news[i].Date}</small></p>
-                            <img class="card-img-bottom" src="../assets/img/${news[i].Cover}" alt="Card image cap">
+                            <h4 class="card-title">${news[i].title}</h4>
+                            <p class="card-text">${news[i].text}</p>
+                            <p class="card-text"><small class="text-muted">Posted: ${news[i].date}</small></p>
+                            <img class="card-img-bottom" src="../assets/img/${news[i].cover}" alt="Card image cap">
                             <div class="form-group">
                                 <div class="col-md-12" id = "commentSection${i}">
                                 <br>
@@ -42,7 +42,6 @@ const loadAll = () => {
            
             newsSection.appendChild(myCard);
             
-            console.log(news[i].Cover);
             loadComments(news[i].id);
         }
     });
@@ -56,18 +55,17 @@ const loadComments = (id) => {
         
         for (let i = 0; i < comments.length; i++) {
             
-            if(comments[i].idNovic == id)
+            if(comments[i].news_id == id)
             {
                 var commentSection = document.getElementById("commentSection"+(id-1));
-                console.log(comments[i].idNovic);
                 var myCard2 = document.createElement("div");
                 myCard2.innerHTML =
                     `
                     <div class="card p-3 mt-2">
                 <div class="d-flex justify-content-between align-items-center">
                     <div class="user d-flex flex-row align-items-center"> <img src="https://i.imgur.com/ZSkeqnd.jpg" width="30" class="user-img rounded-circle mr-2">
-                    <small class="font-weight-bold text-primary" style = "font-size: 120%">@${comments[i].idUporabnik}:</small> <small class="font-weight-bold " style = "font-size: 100%">
-                    ${comments[i].vprasanje} </small></span> </div> <small>${comments[i].datum}</small>
+                    <small class="font-weight-bold text-primary" style = "font-size: 120%">@${comments[i].user_id}:</small> <small class="font-weight-bold " style = "font-size: 100%">
+                    ${comments[i].comment} </small></span> </div> <small>${comments[i].date}</small>
                 </div>
                 <div class="action d-flex justify-content-between mt-2 align-items-center">
                     <div class="reply px-4"> <small>Remove</small> <span class="dots"></span> <small>Reply</small> <span class="dots"></span> <small>Translate</small> </div>
@@ -83,7 +81,7 @@ const loadComments = (id) => {
     });
 }
 
-const addComments = (idNovic, inputfieldId) => {   
+const addComments = (news_id, inputfieldId) => {   
             var today = new Date();
             var dd = today.getDate();
             var mm = today.getMonth()+1; 
@@ -102,12 +100,11 @@ const addComments = (idNovic, inputfieldId) => {
     let comment = {
         
         "id": null,
-        "idUporabnik": 2,
-        "idNovic": idNovic,
-        "vprasanje": document.getElementById("commentTxt"+inputfieldId).value,
-        "datum": today
+        "user_id": 2,
+        "news_id": news_id,
+        "comment": document.getElementById("commentTxt"+inputfieldId).value,
+        "date": today
     }
-    console.log(comment);
     fetch('http://localhost:3000/comments/', {
         method: 'POST',
         body: JSON.stringify(comment),

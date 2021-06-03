@@ -29,7 +29,7 @@ const getDrivers=()=>{
 
       
         for(let i = 0;i<allDrivers.length; i++){
-            const option = new Option(allDrivers[i].Ime);
+            const option = new Option(allDrivers[i].name);
             option.value = allDrivers[i].id;
             div.add(option,allDrivers[i].id) 
             console.log(option)
@@ -61,7 +61,7 @@ const getDrivers=()=>{
            <div id="ocena" class="card p-3 mt-2">
        <div class="d-flex justify-content-between align-items-center">
            <div class="user d-flex flex-row align-items-center"> <img src="https://i.imgur.com/ZSkeqnd.jpg" width="30" class="user-img rounded-circle mr-2">
-           <small class="font-weight-bold text-primary" style = "font-size: 120%">${allDrivers[i].Ime}  ${allDrivers[i].Priimek}</small> <small class="font-weight-bold " style = "font-size: 100%">
+           <small class="font-weight-bold text-primary" style = "font-size: 120%">${allDrivers[i].name}  ${allDrivers[i].surname}</small> <small class="font-weight-bold " style = "font-size: 100%">
             </small></span> </div> <div id="stars" >${Math.round(ocena)} ${star(Math.round(ocena))} </div>
        </div>
        <div class="action d-flex justify-content-between mt-2 align-items-center">
