@@ -68,7 +68,22 @@ router.post('/login/',async function(req, res, next) {
 
 router.post('/register/',async function(req, res, next) {  
 
-
+    try{
+        let newUser = {
+            name:req.body.name,
+            surname:req.body.surname,
+            username:req.body.username,
+            mail:req.body.mail,
+            birthdate:req.body.birthdate,
+            pfp:req.body.pfp,
+            password:req.body.password,
+            city:req.body.city
+        };
+        let user = await new myAccounts().save(newUser);
+        res.json(user.toJSON());
+    }catch (error) {
+        res.status(500).json({status: "error", error:error});
+    }
 
 });
 

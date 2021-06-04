@@ -29,6 +29,8 @@ app.set('json spaces', 2);
 app.use(express.urlencoded({ extended: false }));
 app.use(require("body-parser").json())
 
+app.use(express.urlencoded({extended:false}));   //KARAKATIC SAID WE HAVE TO ADD THIS DICTIONARY
+
 app.use(express.json({
     type: ['application/json', 'text/plain']
   }))
