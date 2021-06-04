@@ -68,7 +68,7 @@ function loadComments(id) {
                     ${comments[i].comment} </small></span> </div> <small>${fixDate(comments[i].date)}</small>
                 </div>
                 <div class="action d-flex justify-content-between mt-2 align-items-center">
-                    <div class="reply px-4"> <small>Remove</small> <span class="dots"></span> <small>Reply</small> <span class="dots"></span> <small>Translate</small> </div>
+                    <div class="reply px-4"> <small onclick = "removeComment(${comments[i].id})">Remove</small> <span class="dots"></span> <small>Reply</small> <span class="dots"></span> <small>Translate</small> </div>
                     <div class="icons align-items-center"> <i class="fa fa-check-circle-o check-icon text-primary"></i> </div>
                 </div>
             </div>
@@ -113,5 +113,17 @@ const addComments = (news_id, inputfieldId) => {
         return respond.json();
     }).then((respondJSON) => {
         loadAll();
+    })
+}
+const removeComment = (index) => {
+    fetch('http://localhost:3000/comments/' + index, {
+        method: 'DELETE'
+    }).then((response) => {
+        return response.json();
+    }).then((responseJSON) => {
+        if (responseJSON.status === "deleted") {
+
+            loadAll();
+        }
     })
 }
