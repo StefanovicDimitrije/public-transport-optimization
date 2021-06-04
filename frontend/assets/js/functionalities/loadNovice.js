@@ -1,7 +1,6 @@
-const loadAll = () => { 
-    
-    //startLogin();
+function loadAll() {
 
+    //startLogin();
     //generates product table
     fetch('http://localhost:3000/news', {
         method: 'GET'
@@ -9,6 +8,7 @@ const loadAll = () => {
         return myReply.json();
     }).then((news) => {
         let newsSection = document.getElementById("container");
+        newsSection.innerHTML = "";
 
         for (let i = 0; i < news.length; i++) {
             //newsSection.appendChild(myCard);
@@ -39,25 +39,25 @@ const loadAll = () => {
                 </div>
             </div>
             `;
-           
+
             newsSection.appendChild(myCard);
-            
+
             loadComments(news[i].id);
         }
     });
 }
-const loadComments = (id) => {                            
+
+function loadComments(id) {
     fetch('http://localhost:3000/comments', {
         method: 'GET'
     }).then((myReply) => {
         return myReply.json();
     }).then((comments) => {
-        
+
         for (let i = 0; i < comments.length; i++) {
-            
-            if(comments[i].news_id == id)
-            {
-                var commentSection = document.getElementById("commentSection"+(id-1));
+
+            if (comments[i].news_id == id) {
+                var commentSection = document.getElementById("commentSection" + (id - 1));
                 var myCard2 = document.createElement("div");
                 myCard2.innerHTML =
                     `
@@ -65,7 +65,7 @@ const loadComments = (id) => {
                 <div class="d-flex justify-content-between align-items-center">
                     <div class="user d-flex flex-row align-items-center"> <img src="https://i.imgur.com/ZSkeqnd.jpg" width="30" class="user-img rounded-circle mr-2">
                     <small class="font-weight-bold text-primary" style = "font-size: 120%">@${comments[i].user_id}:</small> <small class="font-weight-bold " style = "font-size: 100%">
-                    ${comments[i].comment} </small></span> </div> <small>${comments[i].date}</small>
+                    ${comments[i].comment} </small></span> </div> <small>${fixDate(comments[i].date)}</small>
                 </div>
                 <div class="action d-flex justify-content-between mt-2 align-items-center">
                     <div class="reply px-4"> <small>Remove</small> <span class="dots"></span> <small>Reply</small> <span class="dots"></span> <small>Translate</small> </div>
@@ -75,34 +75,32 @@ const loadComments = (id) => {
                 `;
                 commentSection.appendChild(myCard2);
             }
-            
+
         }
-    
+
     });
 }
 
-const addComments = (news_id, inputfieldId) => {   
-            var today = new Date();
-            var dd = today.getDate();
-            var mm = today.getMonth()+1; 
-            var yyyy = today.getFullYear();
-            if(dd<10) 
-            {
-                dd='0'+dd;
-            } 
+const addComments = (news_id, inputfieldId) => {
+    var today = new Date();
+    var dd = today.getDate();
+    var mm = today.getMonth() + 1;
+    var yyyy = today.getFullYear();
+    if (dd < 10) {
+        dd = '0' + dd;
+    }
 
-            if(mm<10) 
-            {
-                mm='0'+mm;
-            } 
-            today = yyyy+'-'+mm+'-'+dd;
+    if (mm < 10) {
+        mm = '0' + mm;
+    }
+    today = yyyy + '-' + mm + '-' + dd;
 
     let comment = {
-        
+
         "id": null,
         "user_id": 2,
         "news_id": news_id,
-        "comment": document.getElementById("commentTxt"+inputfieldId).value,
+        "comment": document.getElementById("commentTxt" + inputfieldId).value,
         "date": today
     }
     fetch('http://localhost:3000/comments/', {
@@ -114,8 +112,6 @@ const addComments = (news_id, inputfieldId) => {
     }).then((respond) => {
         return respond.json();
     }).then((respondJSON) => {
-        if (respondJSON.status != "added") {
-            loadAll();
-        };
+        loadAll();
     })
 }
