@@ -14,6 +14,7 @@ const linesPostRouter = require('./api/routes/Linija_ruta');
 const stationRouter = require('./api/routes/stations');
 const accountRouter = require('./api/routes/accountDB'); //Account data (login, register, display, edit)
 const reviewRouter = require('./api/routes/driverReview')
+const questionsReplyRouter = require('./api/routes/questionReply')
 const app = express();
 
 //:)
@@ -29,21 +30,22 @@ app.set('json spaces', 2);
 app.use(express.urlencoded({ extended: false }));
 app.use(require("body-parser").json())
 
-app.use(express.urlencoded({extended:false}));   //KARAKATIC SAID WE HAVE TO ADD THIS DICTIONARY
+app.use(express.urlencoded({ extended: false })); //KARAKATIC SAID WE HAVE TO ADD THIS DICTIONARY
 
 app.use(express.json({
     type: ['application/json', 'text/plain']
-  }))
+}))
 
 app.use('/', indexRouter);
-app.use('/news',newsRouter); //News
-app.use('/comments',commentsRouter); //Comments
+app.use('/news', newsRouter); //News
+app.use('/comments', commentsRouter); //Comments
 app.use('/changes', changesRouter); //Changes
 app.use('/questions', questionsRouter); //questions
-app.use('/lines',lineRouter);
-app.use('/stations',stationRouter);
-app.use('/linije',linesPostRouter);
+app.use('/lines', lineRouter);
+app.use('/stations', stationRouter);
+app.use('/linije', linesPostRouter);
 app.use('/account', accountRouter); //Accounts
-app.use('/review',reviewRouter);
+app.use('/review', reviewRouter);
+app.use('/questionsReply', questionsReplyRouter);
 
 module.exports = app;
