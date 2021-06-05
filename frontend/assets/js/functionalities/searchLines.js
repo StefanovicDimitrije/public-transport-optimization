@@ -18,8 +18,7 @@ const PridobiLinije = () => {
             celija.innerHTML = `<button class="btn btn-primary btn-round">` + linije[i].name + `</button> `;
 
             let add = vrsta.insertCell();
-            add.innerHTML = `<button onclick='dodajLiniju(` + JSON.stringify(linije[i]) + `)' class="btn btn-primary btn-icon btn-round"'><i class="now-ui-icons ui-2_favourite-28"></i></button>`;
-            console.log(linije[i])
+            add.innerHTML = `<button class="btn btn-primary btn-icon btn-round fav" id="fav${linije[i].id}" onclick='addFavourites(` + JSON.stringify(linije[i].id) + `)'><i class="now-ui-icons ui-2_favourite-28"></i></button>`;
         }
 
     });
@@ -238,5 +237,33 @@ const PretraziLinije = () => {
 
             }
         }
+    })
+}
+
+const addFavourites = (id) => {
+    let favourite = {                                     ///create object with selected values
+        id: null,
+        tk_id_lines: id,
+        tk_id_users: 3
+    }
+    console.log(favourite);
+    fetch('http://localhost:3000/favourites/', {
+        method: 'POST',
+        body: JSON.stringify(favourite), // !!!!
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    }).then((favouriteReply) => {
+        return favouriteReply.json();
+    }).then((favouriteReplyJSON) => {
+        if (favouriteReplyJSON.status === "added") {   
+            console.log('yay');                  //successfull output
+            console.log(document.getElementById("fav"+id));
+            document.getElementById("fav"+id).innerHTML=`<i class="material-icons style="background-color:white">favorite</i>`
+
+        }
+        else {                                                      //unsuccessfull output
+            console.log('nay');
+        };
     })
 }

@@ -27,7 +27,7 @@ async function fillDatabase() {
     await knex.schema.dropTableIfExists('questions').catch((err) => { console.log(err); throw err });
     await knex.schema.dropTableIfExists('driverReview').catch((err) => { console.log(err); throw err });
     await knex.schema.dropTableIfExists('questionReply').catch((err) => { console.log(err); throw err });
-
+    await knex.schema.dropTableIfExists('favourites').catch((err) => { console.log(err); throw err });
 
     //ACCOUNTTABLE TABLE
     await knex.schema.createTable('users', (table) => {
@@ -166,6 +166,13 @@ async function fillDatabase() {
         }).then(() => console.log("questionReply database created"))
         .catch((err) => { console.log(err); throw err });
 
+    //FAVOURITES TABLE
+    await knex.schema.createTable('favourites', (table) => {
+        table.increments('id').primary();
+        table.integer('tk_id_lines').references('id').inTable('lines');
+        table.integer('tk_id_users').references('id').inTable('users');
+    }).then(() => console.log("favourites database created"))
+        .catch((err) => { console.log(err); throw err });
     //INITIAL VALUES FOR TABLES    
 
     const users = [{
@@ -323,6 +330,25 @@ async function fillDatabase() {
         }
     ]
 
+    const favourites = [
+        {
+            tk_id_lines:1,
+            tk_id_users:1
+        },
+        {
+            tk_id_lines:2,
+            tk_id_users:1
+        },
+        {
+            tk_id_lines:3,
+            tk_id_users:1
+        },
+        {
+            tk_id_lines:1,
+            tk_id_users:2
+        }
+    ]
+
     //FILL TABLES WITH INITAL VALUES
     await knex('users').insert(users).then(() => console.log("users inserted")).catch((err) => { console.log(err); throw err });
     await knex('buses').insert(buses).then(() => console.log("buses inserted")).catch((err) => { console.log(err); throw err });
@@ -335,6 +361,7 @@ async function fillDatabase() {
     await knex('news').insert(news).then(() => console.log("news inserted")).catch((err) => { console.log(err); throw err });
     await knex('changes').insert(changes).then(() => console.log("changes inserted")).catch((err) => { console.log(err); throw err });
     await knex('driverReview').insert(drivers_Reviews).then(() => console.log("driverReview inserted")).catch((err) => { console.log(err); throw err });
+    await knex('favourites').insert(favourites).then(() => console.log("favourites inserted")).catch((err) => {console.log(err); throw err});
     knex.destroy();
 
 }

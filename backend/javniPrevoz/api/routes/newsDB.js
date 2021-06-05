@@ -19,12 +19,13 @@ const myNews = bookshelf.Model.extend({
   tableName: 'news',
   idAttribute: 'id'
 });
-
 /* GET News table. */
 
 router.get('/', async function (req, res, next) {
   try {
+    console.log("Evo me 1!");
     const novice = await new myNews().fetchAll();
+    console.log("Evo me!");
     res.json(novice.toJSON());
   }
   catch (error) {

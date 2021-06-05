@@ -2,7 +2,10 @@ const express = require('express');
 const path = require('path');
 var router = express.Router();
 
+const bcrypt = require('bcryptjs');   //for hashing passwords
 
+//const fileUpload=require('express-fileupload');
+//app.use(fileUpload);
 //DATABASE CONNECTIONS
 var knex = require('knex')({
     client: 'mysql',
@@ -66,21 +69,23 @@ router.post('/login/',async function(req, res, next) {
 
 });
 
-router.post('/register/',async function(req, res, next) {  
+router.post('/register',async function(req, res, next) {  
 
     try{
+        //let profilePicture = Buffer.from(req.files.pfp.data);
         let newUser = {
             name:req.body.name,
             surname:req.body.surname,
             username:req.body.username,
             mail:req.body.mail,
             birthdate:req.body.birthdate,
-            pfp:req.body.pfp,
+            pfp:req.body.pfp, //profilePicture
             password:req.body.password,
             city:req.body.city
         };
+        newUser.password = bcrypt.hashSync(newUser.password,12);
         let user = await new myAccounts().save(newUser);
-        res.json(user.toJSON());
+        res.json({ status: "added" });
     }catch (error) {
         res.status(500).json({status: "error", error:error});
     }
