@@ -89,14 +89,14 @@ const PretraziLinije = () => {
                </thead>`;
             linija = odgovorJSON.lp
             console.log(linija)
-            /* for (let i = 0; i < linija.length; i++) {
-                 let vrsta = tabela.insertRow();
-                 for (const opis in linija[i]) {
-                     let celija = vrsta.insertCell();
-                     celija.innerHTML = linija[i][opis];
-                     console.log(linija[i])
-                 }
-             }*/
+                /* for (let i = 0; i < linija.length; i++) {
+                     let vrsta = tabela.insertRow();
+                     for (const opis in linija[i]) {
+                         let celija = vrsta.insertCell();
+                         celija.innerHTML = linija[i][opis];
+                         console.log(linija[i])
+                     }
+                 }*/
             for (let i = 0; i < linija.length; i++) {
                 for (let j = 0; j < linija[i].length; i++) {
                     l = linija[i];
@@ -135,12 +135,12 @@ const PretraziLinije = () => {
     </tr>
                </thead>`;
             linija = odgovorJSON.obj
-            /*for (let i = 0; i < linija.length; i++) {
-                let vrsta = tabela.insertRow();
-                    let celija = vrsta.insertCell();
-                    celija.innerHTML = `<button class="btn btn-primary btn-round">` + linija[i].Naziv + `</button> `;
-                    console.log(linija[i])
-                }*/
+                /*for (let i = 0; i < linija.length; i++) {
+                    let vrsta = tabela.insertRow();
+                        let celija = vrsta.insertCell();
+                        celija.innerHTML = `<button class="btn btn-primary btn-round">` + linija[i].Naziv + `</button> `;
+                        console.log(linija[i])
+                    }*/
             for (let i = 0; i < linija.length; i++) {
                 for (let j = 0; j < linija[i].length; i++) {
                     l = linija[i];
@@ -163,16 +163,17 @@ const PretraziLinije = () => {
                     add.innerHTML = `<button onclick='dodajLiniju(` + JSON.stringify(l[i]) + `)' class="btn btn-primary btn-icon btn-round"'><i class="now-ui-icons ui-2_favourite-28"></i></button>`;
                     console.log(l[i])
                 }
-            }/*
-            for (let i = 0; i < linije.length; i++) {
-                let vrsta = tabela.insertRow();
-                let celija = vrsta.insertCell(-1);
-                celija.innerHTML = `<button class="btn btn-primary btn-round">` + linije[i].Naziv + `</button> `;
-    
-                let add = vrsta.insertCell();
-                add.innerHTML = `<button onclick='dodajLiniju(` + JSON.stringify(linije[i]) + `)' class="btn btn-primary btn-icon btn-round"'><i class="now-ui-icons ui-2_favourite-28"></i></button>`;
-                console.log(linije[i])
-            }*/
+            }
+            /*
+                        for (let i = 0; i < linije.length; i++) {
+                            let vrsta = tabela.insertRow();
+                            let celija = vrsta.insertCell(-1);
+                            celija.innerHTML = `<button class="btn btn-primary btn-round">` + linije[i].Naziv + `</button> `;
+                
+                            let add = vrsta.insertCell();
+                            add.innerHTML = `<button onclick='dodajLiniju(` + JSON.stringify(linije[i]) + `)' class="btn btn-primary btn-icon btn-round"'><i class="now-ui-icons ui-2_favourite-28"></i></button>`;
+                            console.log(linije[i])
+                        }*/
 
         } else {
             if (odgovorJSON.status === "postaja") {
@@ -200,14 +201,14 @@ const PretraziLinije = () => {
 */
                 linija = odgovorJSON.lp
                 console.log(linija)
-                /* for (let i = 0; i < linija.length; i++) {
-                    let vrsta = tabela.insertRow();
-                    for (const opis in linija[i]) {
-                        let celija = vrsta.insertCell();
-                        celija.innerHTML = linija[i][opis];
-                        console.log(linija[i])
-                    }
-                }*/
+                    /* for (let i = 0; i < linija.length; i++) {
+                        let vrsta = tabela.insertRow();
+                        for (const opis in linija[i]) {
+                            let celija = vrsta.insertCell();
+                            celija.innerHTML = linija[i][opis];
+                            console.log(linija[i])
+                        }
+                    }*/
                 for (let i = 0; i < linija.length; i++) {
                     for (let j = 0; j < linija[i].length; i++) {
                         l = linija[i];

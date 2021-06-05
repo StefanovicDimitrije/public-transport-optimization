@@ -20,307 +20,300 @@
 
 <head>
 
-  <meta charset="utf-8" />
-  
-  <link rel="icon" type="image/png" href="../assets/img/icontrans.png">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-  
-  <title>
-    Public Transport
-  </title>
-  
-  <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, shrink-to-fit=no' name='viewport' />
-  
-  <!--     Fonts and icons     -->
-  <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700,200" rel="stylesheet" />
-  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
-  
-  <!-- CSS Files -->
-  <link href="../assets/css/bootstrap.min.css" rel="stylesheet" />
-  <link href="../assets/css/now-ui-kit.css?v=1.3.0" rel="stylesheet" />
-  <link href="../assets/css/comments.css" rel="stylesheet" />
+    <meta charset="utf-8" />
+
+    <link rel="icon" type="image/png" href="../assets/img/icontrans.png">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+
+    <title>
+        Public Transport
+    </title>
+
+    <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, shrink-to-fit=no' name='viewport' />
+
+    <!--     Fonts and icons     -->
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700,200" rel="stylesheet" />
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+
+    <!-- CSS Files -->
+    <link href="../assets/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="../assets/css/now-ui-kit.css?v=1.3.0" rel="stylesheet" />
+    <link href="../assets/css/comments.css" rel="stylesheet" />
 
 </head>
 
 <body class="landing-page sidebar-collapse" onload="loadQuestions()">
 
-  <!-- Navbar -->
-  <nav class="navbar navbar-expand-lg bg-primary fixed-top navbar-transparent " color-on-scroll="400">
-    <div class="container">
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg bg-primary fixed-top navbar-transparent " color-on-scroll="400">
+        <div class="container">
 
-      <div class="dropdown button-dropdown" data-toggle="collapse">
-      
-        <a href="#pablo" class="dropdown-toggle" id="navbarDropdown" data-toggle="dropdown">
-          <span class="button-bar"></span>
-          <span class="button-bar"></span>
-          <span class="button-bar"></span>
-        </a>
-      
-        <div class="dropdown-menu" aria-labelledby="navbarDropdown" id="mainNavDrop">
-          <a class="dropdown-header">Menu</a>
-          <a class="dropdown-item" href="lines.html">Bus Lines</a>
-          <a class="dropdown-item" href="changes.html">Important changes</a>
-          <a class="dropdown-item" href="newsFeed.html">News Feed</a>
-        </div>
-      
-      </div>
-      
-      <div class="navbar-translate">
-        
-        <a class="navbar-brand" rel="tooltip" data-placement="bottom" href="index.html">
+            <div class="dropdown button-dropdown" data-toggle="collapse">
+
+                <a href="#pablo" class="dropdown-toggle" id="navbarDropdown" data-toggle="dropdown">
+                    <span class="button-bar"></span>
+                    <span class="button-bar"></span>
+                    <span class="button-bar"></span>
+                </a>
+
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown" id="mainNavDrop">
+                    <a class="dropdown-header">Menu</a>
+                    <a class="dropdown-item" href="lines.html">Bus Lines</a>
+                    <a class="dropdown-item" href="changes.html">Important changes</a>
+                    <a class="dropdown-item" href="newsFeed.html">News Feed</a>
+                </div>
+
+            </div>
+
+            <div class="navbar-translate">
+
+                <a class="navbar-brand" rel="tooltip" data-placement="bottom" href="index.html">
           Public transport optimization
         </a>
-        
-        <button class="navbar-toggler navbar-toggler" type="button" data-toggle="collapse" data-target="#navigation" aria-controls="navigation-index" aria-expanded="false" aria-label="Toggle navigation">
+
+                <button class="navbar-toggler navbar-toggler" type="button" data-toggle="collapse" data-target="#navigation" aria-controls="navigation-index" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-bar top-bar"></span>
           <span class="navbar-toggler-bar middle-bar"></span>
           <span class="navbar-toggler-bar bottom-bar"></span>
         </button>
-     
-      </div>
-     
-      <div class="collapse navbar-collapse justify-content-end" id="navigation" data-nav-image="../assets/img/blurred-image-1.jpg">
-        <ul class="navbar-nav" id="visibleNavList">
-         <li class="nav-item">
-            <a class="nav-link" href="login.html" id="loginNav">Login</a>
-            </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#" id="registerNav">Register</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#" onclick="logout()" id="logoutNavLink">Logout</a>
-          </li>
-          <ul class="navbar-nav d-lg-none">
-              <li class="nav-item">
-                  <a class="dropdown-header">Menu</a>
-              </li>
-              <li class="nav-item">
-                  <a class="nav-link" href="lines.html">Bus Lines</a>
-              </li>
-              <li class="nav-item">
-                  <a class="nav-link" href="changes.html">Important changes</a>
-              </li>
-              <li class="nav-item">
-                  <a class="nav-link" href="newsFeed.html">News Feed</a>
-              </li>
-          </ul>
-              <ul class="navbar-nav d-lg-none" id="invisibleNavList1">
-                  <li class="nav-item">
-                      <a class="dropdown-header">Profile</a>
-                  </li>
-                  <li class="nav-item">
-                      <a class="nav-link" href="#" data-toggle="tab">View And Edit Profile</a>
-                  </li>
-                  <li class="nav-item">
-                      <a class="nav-link" href="#" data-toggle="tab">View Favorites</a>
-                  </li>
-                  <li class="nav-item">
-                      <a class="nav-link" href="#" data-toggle="tab">Extend Ticket</a>
-                  </li>
-            </ul>
-        </ul>  
-      </div>
-    </div>  
-  </nav>
-  <!-- End Navbar -->
 
-  <div class="wrapper">
-    
-    <div class="page-header page-header-small">
+            </div>
 
-      <div class="page-header-image" data-parallax="true" style="background-image: url('../assets/img/bg9.jpg');">
-      </div>
-
-      <div class="content-center">
-        <div class="container">
-          <div class="text-center">
-            <img src="../assets/img/logosmall1.jpg" class="rounded-circle img-fluid img-raised">
-          </div>
-          <h2 class="title">Public Transport</h2>
+            <div class="collapse navbar-collapse justify-content-end" id="navigation" data-nav-image="../assets/img/blurred-image-1.jpg">
+                <ul class="navbar-nav" id="visibleNavList">
+                    <li class="nav-item">
+                        <a class="nav-link" href="login.html" id="loginNav">Login</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#" id="registerNav">Register</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#" onclick="logout()" id="logoutNavLink">Logout</a>
+                    </li>
+                    <ul class="navbar-nav d-lg-none">
+                        <li class="nav-item">
+                            <a class="dropdown-header">Menu</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="lines.html">Bus Lines</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="changes.html">Important changes</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="newsFeed.html">News Feed</a>
+                        </li>
+                    </ul>
+                    <ul class="navbar-nav d-lg-none" id="invisibleNavList1">
+                        <li class="nav-item">
+                            <a class="dropdown-header">Profile</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#" data-toggle="tab">View And Edit Profile</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#" data-toggle="tab">View Favorites</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#" data-toggle="tab">Extend Ticket</a>
+                        </li>
+                    </ul>
+                </ul>
+            </div>
         </div>
-      </div>
-    </div>
+    </nav>
+    <!-- End Navbar -->
 
-    <div class="section section-about-us">
-      <div class="container">
-        <div class="row">
-          <div class="col-md-8 ml-auto mr-auto text-center">
-            <h2 class="title">Welcome to the home page <br> Of the newest project aimed <br> To better everyday life</h2>
-          </div>
+    <div class="wrapper">
+
+        <div class="page-header page-header-small">
+
+            <div class="page-header-image" data-parallax="true" style="background-image: url('../assets/img/bg9.jpg');">
+            </div>
+
+            <div class="content-center">
+                <div class="container">
+                    <div class="text-center">
+                        <img src="../assets/img/logosmall1.jpg" class="rounded-circle img-fluid img-raised">
+                    </div>
+                    <h2 class="title">Public Transport</h2>
+                </div>
+            </div>
         </div>
-        <div class="separator separator-primary"></div>
-        <div class="section-story-overview">
-          <div class="row">
-            <div class="col-md-6">
-              <div class="image-container image-left" style="background-image: url('../assets/img/login.jpg')">
-                <!-- First image on the left side -->
-              </div> <br>
-              <h3>Lorem ipsum dolor sit amet, <br>  consectetur adipisicing elit, <br> sed do eiusmod</h3>
-              <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-              tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-              quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-              consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-              cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-              proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-              </p>
+
+        <div class="section section-about-us">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-8 ml-auto mr-auto text-center">
+                        <h2 class="title">Welcome to the home page <br> Of the newest project aimed <br> To better everyday life</h2>
+                    </div>
+                </div>
+                <div class="separator separator-primary"></div>
+                <div class="section-story-overview">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="image-container image-left" style="background-image: url('../assets/img/login.jpg')">
+                                <!-- First image on the left side -->
+                            </div> <br>
+                            <h3>Lorem ipsum dolor sit amet, <br> consectetur adipisicing elit, <br> sed do eiusmod</h3>
+                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+                                Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+                            </p>
+                        </div>
+                        <div class="col-md-5">
+                            <!-- First image on the right side, above the article -->
+                            <div class="image-container image-right" style="background-image: url('../assets/img/bg1.jpg')"></div>
+                            <h3>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt</h3>
+                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+                                Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+                            </p>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <div class="col-md-5">
-              <!-- First image on the right side, above the article -->
-              <div class="image-container image-right" style="background-image: url('../assets/img/bg1.jpg')"></div>
-              <h3>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt</h3>
-              <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-              tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-              quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-              consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-              cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-              proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-              </p>
-            </div>
-          </div>
         </div>
-      </div>
-    </div>
 
 
-    <div class="section section-team text-center">
-      <div class="container">
-        <h2 class="title">Our Team</h2>
+        <div class="section section-team text-center">
+            <div class="container">
+                <h2 class="title">Our Team</h2>
 
-        <div class="team">
-          <div class="row">
+                <div class="team">
+                    <div class="row">
 
-            <div class="col-md-3">
-              <div class="team-player">
-                <img src="../assets/img/default-avatar.png" alt="Thumbnail Image" class="rounded-circle img-fluid img-raised">
-                <h4 class="title">Ivan Sergejev</h4>
-                <p class="category text-primary">CEO</p>
-                <p class="description">Can be contacted at ivan.sergejev@student.um.si
-                  <a href="#">Links</a> for further info.</p>
-              </div>
+                        <div class="col-md-3">
+                            <div class="team-player">
+                                <img src="../assets/img/default-avatar.png" alt="Thumbnail Image" class="rounded-circle img-fluid img-raised">
+                                <h4 class="title">Ivan Sergejev</h4>
+                                <p class="category text-primary">CEO</p>
+                                <p class="description">Can be contacted at ivan.sergejev@student.um.si
+                                    <a href="#">Links</a> for further info.</p>
+                            </div>
+                        </div>
+
+                        <div class="col-md-3">
+                            <div class="team-player">
+                                <img src="../assets/img/default-avatar.png" alt="Thumbnail Image" class="rounded-circle img-fluid img-raised">
+                                <h4 class="title">Olga Ivkovic</h4>
+                                <p class="category text-primary">Back-end Developer</p>
+                                <p class="description">Can be contacted at olga.ivkovic@student.um.si
+                                    <a href="#">Links</a> for for further info.</p>
+                            </div>
+                        </div>
+
+                        <div class="col-md-3">
+                            <div class="team-player">
+                                <img src="../assets/img/default-avatar.png" alt="Thumbnail Image" class="rounded-circle img-fluid img-raised">
+                                <h4 class="title">Radovan Radic</h4>
+                                <p class="category text-primary">Finance manager</p>
+                                <p class="description">Can be contacted at radovan.radic@student.um.si
+                                    <a href="#">Links</a> for for further info.</p>
+                            </div>
+                        </div>
+
+                        <div class="col-md-3">
+                            <div class="team-player">
+                                <img src="../assets/img/default-avatar.png" alt="Thumbnail Image" class="rounded-circle img-fluid img-raised">
+                                <h4 class="title">Dimitrije Stefanovic</h4>
+                                <p class="category text-primary">Field operations manager</p>
+                                <p class="description">Can be contacted at dimitrije.stefanovic@student.um.si
+                                    <a href="#">Links</a> for for further info.</p>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
             </div>
-
-            <div class="col-md-3">
-              <div class="team-player">
-                <img src="../assets/img/default-avatar.png" alt="Thumbnail Image" class="rounded-circle img-fluid img-raised">
-                <h4 class="title">Olga Ivkovic</h4>
-                <p class="category text-primary">Back-end Developer</p>
-                <p class="description">Can be contacted at olga.ivkovic@student.um.si
-                  <a href="#">Links</a> for for further info.</p>
-              </div>
-            </div>
-
-            <div class="col-md-3">
-              <div class="team-player">
-                <img src="../assets/img/default-avatar.png" alt="Thumbnail Image" class="rounded-circle img-fluid img-raised">
-                <h4 class="title">Radovan Radic</h4>
-                <p class="category text-primary">Finance manager</p>
-                <p class="description">Can be contacted at radovan.radic@student.um.si
-                  <a href="#">Links</a> for for further info.</p>
-              </div>
-            </div>
-
-            <div class="col-md-3">
-              <div class="team-player">
-                <img src="../assets/img/default-avatar.png" alt="Thumbnail Image" class="rounded-circle img-fluid img-raised">
-                <h4 class="title">Dimitrije Stefanovic</h4>
-                <p class="category text-primary">Field operations manager</p>
-                <p class="description">Can be contacted at dimitrije.stefanovic@student.um.si
-                <a href="#">Links</a> for for further info.</p>
-              </div>
-            </div>
-
-          </div>
         </div>
-      </div>
-    </div>
 
-    <div class="section section-contact-us text-center">
-      <h2 class="title">Popular questions<br></h2>
-      <div class="container">
-        <div id="questionSection"></div>
-        <h2 class="title">Have any questions <br> you'd like to ask us?</h2>
-        <p class="description">Your opinion is very important to us.</p>
-        
-        <div class="row">
-        
-          <div class="col-lg-6 text-center col-md-8 ml-auto mr-auto">
+        <div class="section section-contact-us text-center">
+            <h2 class="title">Popular questions<br></h2>
+            <div class="container">
+                <div id="questionSection"></div>
+                <h2 class="title">Have any questions <br> you'd like to ask us?</h2>
+                <p class="description">Your opinion is very important to us.</p>
 
-            <div class="input-group input-lg">
-              <div class="input-group-prepend">
-                <span class="input-group-text">
+                <div class="row">
+
+                    <div class="col-lg-6 text-center col-md-8 ml-auto mr-auto">
+
+                        <div class="input-group input-lg">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text">
                   <i class="now-ui-icons users_circle-08"></i>
                 </span>
-              </div>
-              <input type="text" class="form-control" placeholder="First Name..." id = "firstName" required>
-            </div>
+                            </div>
+                            <input type="text" class="form-control" placeholder="First Name..." id="firstName" required>
+                        </div>
 
-            <div class="input-group input-lg">
-              <div class="input-group-prepend">
-                <span class="input-group-text">
+                        <div class="input-group input-lg">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text">
                   <i class="now-ui-icons ui-1_email-85"></i>
                 </span>
-              </div>
-              <input type="email" class="form-control" placeholder="Email..." id = "emailAddress" required>
-            </div>
+                            </div>
+                            <input type="email" class="form-control" placeholder="Email..." id="emailAddress" required>
+                        </div>
 
-            <div class="textarea-container" >
-              <textarea id = "questionText" class="form-control" name="name" rows="4" cols="80" placeholder="Type a message..." required></textarea>
-            </div>
+                        <div class="textarea-container">
+                            <textarea id="questionText" class="form-control" name="name" rows="4" cols="80" placeholder="Type a message..." required></textarea>
+                        </div>
 
-            <div type="submit" class="send-button">
-              <a href="#pablo" onclick="addQuestion()" class="btn btn-primary btn-round btn-block btn-lg">Send Message</a>
-            </div>
-            <div id = "result"></div>
+                        <div type="submit" class="send-button">
+                            <a href="#pablo" onclick="addQuestion()" class="btn btn-primary btn-round btn-block btn-lg">Send Message</a>
+                        </div>
+                        <div id="result"></div>
 
-          </div>
+                    </div>
+                </div>
+
+            </div>
         </div>
 
-      </div>
-    </div>
+        <footer class="footer footer-default">
+            <div class=" container ">
 
-    <footer class="footer footer-default">
-      <div class=" container ">
-        
-        <nav>
-          <ul>
-            <li>
-              <a href="#">
+                <nav>
+                    <ul>
+                        <li>
+                            <a href="#">
                 About Us
               </a>
-            </li>
-            <li>
-              <a href="#">
+                        </li>
+                        <li>
+                            <a href="#">
                 How to contact us
               </a>
-            </li>
-          </ul>
-        </nav>
-    
-        <div class="copyright" id="copyright">
-          &copy;2021
-        </div>
+                        </li>
+                    </ul>
+                </nav>
 
-      </div>
-    </footer>
-  </div>
-  <!--   Core JS Files   -->
-  <script src="../assets/js/core/jquery.min.js" type="text/javascript"></script>
-  <script src="../assets/js/core/popper.min.js" type="text/javascript"></script>
-  <script src="../assets/js/core/bootstrap.min.js" type="text/javascript"></script>
-  <!--  Plugin for Switches, full documentation here: http://www.jque.re/plugins/version3/bootstrap.switch/ -->
-  <script src="../assets/js/plugins/bootstrap-switch.js"></script>
-  <!--  Plugin for the Sliders, full documentation here: http://refreshless.com/nouislider/ -->
-  <script src="../assets/js/plugins/nouislider.min.js" type="text/javascript"></script>
-  <!--  Plugin for the DatePicker, full documentation here: https://github.com/uxsolutions/bootstrap-datepicker -->
-  <script src="../assets/js/plugins/bootstrap-datepicker.js" type="text/javascript"></script>
-  <!--  Google Maps Plugin    -->
-  <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_KEY_HERE"></script>
-  <!-- Control Center for Now Ui Kit: parallax effects, scripts for the example pages etc -->
-  <script src="../assets/js/now-ui-kit.js?v=1.3.0" type="text/javascript"></script>
+                <div class="copyright" id="copyright">
+                    &copy;2021
+                </div>
 
-  <!-- JS functionalities -->
-  <script src="../assets/js/functionalities/questions.js" type="text/javascript"></script>
-  <script src="../assets/js/functionalities/login.js" type="text/javascript"></script>
+            </div>
+        </footer>
+    </div>
+    <!--   Core JS Files   -->
+    <script src="../assets/js/core/jquery.min.js" type="text/javascript"></script>
+    <script src="../assets/js/core/popper.min.js" type="text/javascript"></script>
+    <script src="../assets/js/core/bootstrap.min.js" type="text/javascript"></script>
+    <!--  Plugin for Switches, full documentation here: http://www.jque.re/plugins/version3/bootstrap.switch/ -->
+    <script src="../assets/js/plugins/bootstrap-switch.js"></script>
+    <!--  Plugin for the Sliders, full documentation here: http://refreshless.com/nouislider/ -->
+    <script src="../assets/js/plugins/nouislider.min.js" type="text/javascript"></script>
+    <!--  Plugin for the DatePicker, full documentation here: https://github.com/uxsolutions/bootstrap-datepicker -->
+    <script src="../assets/js/plugins/bootstrap-datepicker.js" type="text/javascript"></script>
+    <!--  Google Maps Plugin    -->
+    <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_KEY_HERE"></script>
+    <!-- Control Center for Now Ui Kit: parallax effects, scripts for the example pages etc -->
+    <script src="../assets/js/now-ui-kit.js?v=1.3.0" type="text/javascript"></script>
+
+    <!-- JS functionalities -->
+    <script src="../assets/js/functionalities/questions.js" type="text/javascript"></script>
+    <script src="../assets/js/functionalities/login.js" type="text/javascript"></script>
+    <script src="../assets/js/functionalities/fixes.js" type="text/javascript"></script>
 
 </body>
 
