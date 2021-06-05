@@ -6,7 +6,7 @@ body {
     border: none;
     box-shadow: 5px 6px 6px 2px #e9ecef;
     border-radius: 4px;
-    font-size: 1.2em
+    font-size: 110%
 }
 
 .dots {
@@ -23,7 +23,6 @@ body {
     padding-right: 9px;
     padding-left: 16px;
     box-shadow: 5px 6px 6px 2px #e9ecef;
-    
 }
 
 .user-img {
@@ -64,4 +63,7 @@ body {
     color: green;
     cursor: pointer
 }
-.js .accordion:nth-child(n+1) { display: none }
+
+.js .accordion:nth-child(n+1) {
+    display: none
+}
