@@ -1,6 +1,7 @@
 function loadAll() {
 
-    //startLogin();
+    startLogin();
+    
     //generates product table
     fetch('http://localhost:3000/news', {
         method: 'GET'

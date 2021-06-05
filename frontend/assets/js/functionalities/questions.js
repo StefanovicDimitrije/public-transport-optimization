@@ -126,6 +126,9 @@ const addQuestion = () => {
 
 
 function loadQuestions(isMore) {
+
+    startLogin();
+
     document.getElementById("questionSection").innerHTML = "";
     fetch('http://localhost:3000/questions', {
         method: 'GET'

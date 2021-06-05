@@ -82,7 +82,7 @@ function makeCard(data) {
 
 function startPage() {
 
-    //startLogin();
+    startLogin();
 
     fetch('http://localhost:3000/changes/', {
         method: 'GET'

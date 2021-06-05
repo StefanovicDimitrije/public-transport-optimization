@@ -58,14 +58,14 @@ function logout(){
 
     localStorage.setItem("user", JSON.stringify({}));
 
-    location.reload();
+    window.location.href="../pages/index.html"
 
 }
 
 function startLogin(){
 
-    let user = JSON.parse(localStorage.getItem("user"));
-    console.log(user);
+    let user = JSON.parse(localStorage.getItem("user")) || {};
+    //console.log(user);
     
     if (Object.keys(user).length){
         logged();
