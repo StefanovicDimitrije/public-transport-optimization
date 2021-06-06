@@ -16,6 +16,7 @@ const accountRouter = require('./api/routes/accountDB'); //Account data (login, 
 const reviewRouter = require('./api/routes/driverReview')
 const questionsReplyRouter = require('./api/routes/questionReply');
 const favouritesRouter = require('./api/routes/favourites');
+const lineDescriptionRouter = require('./api/routes/lineDescription');
 const app = express();
 
 //:)
@@ -49,4 +50,8 @@ app.use('/account', accountRouter); //Accounts
 app.use('/review', reviewRouter);
 app.use('/questionsReply', questionsReplyRouter);
 app.use('/favourites',favouritesRouter);
+app.use('/description',lineDescriptionRouter);
+
+
+
 module.exports = app;
