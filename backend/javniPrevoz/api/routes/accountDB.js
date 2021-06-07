@@ -67,11 +67,30 @@ router.post('/register',async function(req, res, next) {
 
     try{
         //let profilePicture = Buffer.from(req.files.pfp.data);
+        let email = req.body.mail;
+        let profileUsername = req.body.username;
+        let existingUsers = await new myAccounts().fetchAll();
+        let checkUser = existingUsers.toJSON();
+        
+        for (let i=0; i < checkUser.length;i++)
+        {
+            if (checkUser[i]["mail"] === email)
+            {
+                console.log("Existing email");
+                res.json({ status: "existing email" });
+                return;
+            } else if (checkUser[i]["username"] === profileUsername)
+            {
+                console.log("Existing username");
+                res.json({ status: "existing username" });
+                return;
+            }
+        }
         let newUser = {
             name:req.body.name,
             surname:req.body.surname,
-            username:req.body.username,
-            mail:req.body.mail,
+            username:profileUsername,
+            mail:email,
             birthdate:req.body.birthdate,
             pfp:req.body.pfp, //profilePicture
             password:req.body.password,

@@ -39,7 +39,7 @@ async function fillDatabase() {
             table.string('username');
             table.string('mail');
             table.date('birthdate');
-            table.string('pfp');
+            table.string('pfp'); //table.binary('pfp');
             table.string('password');
             table.string('city');
         }).then(() => console.log("users database created"))
