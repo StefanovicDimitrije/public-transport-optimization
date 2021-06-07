@@ -37,35 +37,29 @@ router.get('/',async function(req, res, next) {
 
 router.post('/login/',async function(req, res, next) {  
 
-    let user = req.body;
+    try {
 
-    let mail = user.mail;
-    let pass = user.pass;
-    
-    const accountz = await new myAccounts().fetchAll();
+        let mail = req.body.mail;
+        let pass = req.body.pass;
+        
+        let checkUser0 = await new myAccounts().where('mail',mail).fetch();
+        let checkUser = checkUser0.toJSON();
 
-    console.log(user);
+        let checkPass = bcrypt.compareSync(pass, checkUser.password);
 
-    const accounts = accountz.toJSON();
+        if(checkPass){
 
-    //console.log(accounts);
+            res.json({ status: "exists", user: checkUser});
 
-    let checkUser = accounts.find(element => element.mail === mail);
+        } 
+        else{
+            res.json({ status: "noexists"});
+        }
 
-    console.log(checkUser);
-
-    if (checkUser != undefined){
-    if ((checkUser.password == pass) && (checkUser != null)) {
-      
-        res.json({ status: "exists", user: checkUser});
-        console.log('ok');
-  
-      }} else {
-  
-        res.json({ status: "noexists"});
-        console.log('wrong');
-  
-      }
+    } 
+    catch (error){
+        res.status(500).json({status: "error", error:error});
+    }
 
 });
 
@@ -92,9 +86,26 @@ router.post('/register',async function(req, res, next) {
 
 });
 
-router.put('/edit/',async function(req, res, next) {  
+router.put('/editProfile/',async function(req, res, next) {  
+
+    try{
+        let editedUser = {
+            name:req.body.name,
+            surname:req.body.surname,
+            username:req.body.username,
+
+            birthdate:req.body.birthdate,
+            pfp:req.body.pfp, //profilePicture
+
+            city:req.body.city
+        };
+        
 
 
+        res.json({ status: "edited", user: editedUser });
+    }catch (error) {
+        res.status(500).json({status: "error", error:error});
+    }
 
 });
 

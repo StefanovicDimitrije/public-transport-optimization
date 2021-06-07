@@ -1,5 +1,4 @@
-//const { response } = require("../../../../backend/javniPrevoz/app");
-var user= JSON.parse(localStorage.getItem('user')) || {};
+var user= JSON.parse(sessionStorage.getItem('user')) || {};
 
 function emailIsValid (email) {
     return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)
@@ -20,54 +19,54 @@ function login(){
 
     if (emailIsValid(user.mail) && (user.pass != "") ){
 
-    fetch('http://localhost:3000/account/login/', {
-        method:'POST',
-        body: JSON.stringify(user)
-    }).then((response) => {
-        return response.json();
-    }).then((responseJSON) => {
-        if (responseJSON.status === "exists") {
+        fetch('http://localhost:3000/account/login/', {
+            method:'POST',
+            body: JSON.stringify(user)
+        }).then((response) => {
+            return response.json();
+        }).then((responseJSON) => {
+            if (responseJSON.status === "exists") { //If everything went fine
 
-            alert.setAttribute("class","alert alert-success");
-            alert.innerHTML = "Succesful log-in!"
+                alert.setAttribute("class","alert alert-success"); //Display 'correct!'
+                alert.innerHTML = "Succesful log-in!"
 
-            localStorage.setItem("user", JSON.stringify(responseJSON.user));
+                sessionStorage.setItem("user", JSON.stringify(responseJSON.user)); //Set session storage for the user currently logged in
 
-            /*fetch('http://localhost:3000/login',{
-                method: 'POST',
-                body: JSON.stringify(responseJSON.user)
-            })*/
-
-            setTimeout(function () {
-                window.location.href="../pages/index.html"
-            },500);
+                setTimeout(function () {  //After a half of a second return the user to the index page
+                    window.location.href="../pages/index.html"
+                },500);
+                
+            }
             
-        }
-        
-        if(responseJSON.status != "exists"){
+            if(responseJSON.status != "exists"){ //If the login was unsuccessfull
 
-            alert.setAttribute("class","alert alert-danger");
-            alert.innerHTML = "You have entered incorrect data"
+                alert.setAttribute("class","alert alert-danger");
+                alert.innerHTML = "You have entered incorrect log-in info"
 
-        }
-    })
+            }
+        })
+    }
+
+    else{   //If validation failed
+
+        alert.setAttribute("class","alert alert-danger");
+        alert.innerHTML = "Please enter your log-in info properly"
     }
 }
 
 function logout(){
 
-    localStorage.setItem("user", JSON.stringify({}));
+    sessionStorage.clear();
+    //sessionStorage.setItem("user", JSON.stringify({}));
 
     window.location.href="../pages/index.html"
 
 }
 
 function startLogin(){
-
-    let user = JSON.parse(localStorage.getItem("user")) || {};
-    //console.log(user);
-    
+ 
     if (Object.keys(user).length){
+    //if (user != null){
         logged();
     } else{
         notLogged()
@@ -77,7 +76,7 @@ function startLogin(){
 
 function notLogged(){
 
-    document.getElementById("logoutNavLink").setAttribute("class","nav-link d-none");
+    document.getElementById("logoutNavLink").setAttribute("class","nav-link d-none disabled");
     
     document.getElementById("logoutNavLink").innerHTML = "Logout1";
 
@@ -120,16 +119,11 @@ function logged(){
     dropdownMenu.appendChild(favorites);
     dropdownMenu.appendChild(ticket);
 
-    document.getElementById("loginNav").setAttribute("class","nav-link d-none")
-    document.getElementById("registerNav").setAttribute("class","nav-link d-none")
+    document.getElementById("loginNav").setAttribute("class","nav-link d-none disabled")
+    document.getElementById("registerNav").setAttribute("class","nav-link d-none disabled")
 
     document.getElementById("logoutNavLink").setAttribute("class","nav-link")
 
     document.getElementById("invisibleNavList1").setAttribute("class","navbar-nav d-lg-none")
 
 }
-
-/**
- * 
- * 
- */

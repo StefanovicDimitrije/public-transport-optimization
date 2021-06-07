@@ -8,6 +8,8 @@ var knex = require('knex')({
     }
 });
 
+const bcrypt = require('bcryptjs');
+
 //CHANGE ADMIN TO USER
 
 async function fillDatabase() {
@@ -182,7 +184,7 @@ async function fillDatabase() {
             mail: "petar.peric@student.um.si",
             birthdate: '2021-02-26',
             pfp: "../assets/img/default-avatar.png",
-            password: "user",
+            password: bcrypt.hashSync('user',12),
             city: "Ljubljana"
         },
         {
@@ -192,7 +194,7 @@ async function fillDatabase() {
             mail: "admin@gmail.com",
             birthdate: '2021-02-26',
             pfp: "../assets/img/default-avatar.png",
-            password: "admin",
+            password: bcrypt.hashSync('admin',12),
             city: "Maribor"
         }
     ]
