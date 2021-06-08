@@ -15,7 +15,7 @@ const PridobiLinije = () => {
         for (let i = 0; i < linije.length; i++) {
             let vrsta = tabela.insertRow();
             let celija = vrsta.insertCell(-1);
-            celija.innerHTML = `<button class="btn btn-primary btn-round" onclick='lineDescription(`+ JSON.stringify(linije[i]) +`) '>` + linije[i].name + `</button> `;
+            celija.innerHTML = `<button class="btn btn-primary btn-round" onclick='lineDescription(` + JSON.stringify(linije[i]) + `) '>` + linije[i].name + `</button> `;
             console.log(linije[i])
             let add = vrsta.insertCell();
             add.innerHTML = `<button class="btn btn-primary btn-icon btn-round fav" id="fav${linije[i].id}" onclick='addFavourites(` + JSON.stringify(linije[i].id) + `)'><i class="now-ui-icons ui-2_favourite-28"></i></button>`;
@@ -88,21 +88,21 @@ const PretraziLinije = () => {
                </thead>`;
             linija = odgovorJSON.lp
             console.log(linija)
-                /* for (let i = 0; i < linija.length; i++) {
-                     let vrsta = tabela.insertRow();
-                     for (const opis in linija[i]) {
-                         let celija = vrsta.insertCell();
-                         celija.innerHTML = linija[i][opis];
-                         console.log(linija[i])
-                     }
-                 }*/
-               
+            /* for (let i = 0; i < linija.length; i++) {
+                 let vrsta = tabela.insertRow();
+                 for (const opis in linija[i]) {
+                     let celija = vrsta.insertCell();
+                     celija.innerHTML = linija[i][opis];
+                     console.log(linija[i])
+                 }
+             }*/
+
             for (let i = 0; i < linija.length; i++) {
                 for (let j = 0; j < linija[i].length; i++) {
                     l = linija[i];
                     let vrsta = tabela.insertRow(-1);
                     let naz = vrsta.insertCell(-1);
-                    naz.innerHTML = `<button class="btn btn-primary btn-round" onclick="lineDescription(`+l[1]+`)">` + l[2].name + `</button> `;
+                    naz.innerHTML = `<button class="btn btn-primary btn-round" onclick="lineDescription(` + l[1] + `)">` + l[2].name + `</button> `;
 
                     let pos = vrsta.insertCell(-1);
                     pos.innerHTML = `<button class="btn btn-primary btn-round">` + l[1].name + `</button> `;
@@ -135,18 +135,18 @@ const PretraziLinije = () => {
     </tr>
                </thead>`;
             linija = odgovorJSON.obj
-                /*for (let i = 0; i < linija.length; i++) {
-                    let vrsta = tabela.insertRow();
-                        let celija = vrsta.insertCell();
-                        celija.innerHTML = `<button class="btn btn-primary btn-round">` + linija[i].Naziv + `</button> `;
-                        console.log(linija[i])
-                    }*/
+            /*for (let i = 0; i < linija.length; i++) {
+                let vrsta = tabela.insertRow();
+                    let celija = vrsta.insertCell();
+                    celija.innerHTML = `<button class="btn btn-primary btn-round">` + linija[i].Naziv + `</button> `;
+                    console.log(linija[i])
+                }*/
             for (let i = 0; i < linija.length; i++) {
                 for (let j = 0; j < linija[i].length; i++) {
                     l = linija[i];
                     let vrsta = tabela.insertRow(-1);
                     let naz = vrsta.insertCell(-1);
-                    naz.innerHTML = `<button class="btn btn-primary btn-round" onclick="lineDescription(`+l[1]+`)">` + l[2].name + `</button> `;
+                    naz.innerHTML = `<button class="btn btn-primary btn-round" onclick="lineDescription(` + l[1] + `)">` + l[2].name + `</button> `;
 
                     let pos = vrsta.insertCell(-1);
                     pos.innerHTML = `<button class="btn btn-primary btn-round">` + l[1].name + `</button> `;
@@ -201,21 +201,21 @@ const PretraziLinije = () => {
 */
                 linija = odgovorJSON.lp
                 console.log(linija)
-                    /* for (let i = 0; i < linija.length; i++) {
-                        let vrsta = tabela.insertRow();
-                        for (const opis in linija[i]) {
-                            let celija = vrsta.insertCell();
-                            celija.innerHTML = linija[i][opis];
-                            console.log(linija[i])
-                        }
-                    }*/
+                /* for (let i = 0; i < linija.length; i++) {
+                    let vrsta = tabela.insertRow();
+                    for (const opis in linija[i]) {
+                        let celija = vrsta.insertCell();
+                        celija.innerHTML = linija[i][opis];
+                        console.log(linija[i])
+                    }
+                }*/
                 for (let i = 0; i < linija.length; i++) {
                     for (let j = 0; j < linija[i].length; i++) {
                         l = linija[i];
                         let vrsta = tabela.insertRow(-1);
                         let naz = vrsta.insertCell(-1);
-                        naz.innerHTML = `<button class="btn btn-primary btn-round" onclick='lineDescription(`+l[1]+`)'>` + l[2].name + `</button> `;
-                        
+                        naz.innerHTML = `<button class="btn btn-primary btn-round" onclick='lineDescription(` + l[1] + `)'>` + l[2].name + `</button> `;
+
                         let pos = vrsta.insertCell(-1);
                         pos.innerHTML = `<button class="btn btn-primary btn-round">` + l[1].name + `</button> `;
 
@@ -241,67 +241,91 @@ const PretraziLinije = () => {
     })
 }
 const addFavourites = (id) => {
-    let favourite = {                                     ///create object with selected values
-        id: null,
-        tk_id_lines: id,
-        tk_id_users: 3
-    }
-    fetch('http://localhost:3000/favourites/', {
-        method: 'POST',
-        body: JSON.stringify(favourite), // !!!!
-        headers: {
-            'Content-Type': 'application/json'
+    if (document.getElementById("fav" + id).innerHTML === `<i class="now-ui-icons ui-2_favourite-28"></i>`) {
+        let favourite = {                                     ///create object with selected values
+            id: null,
+            tk_id_lines: id,
+            tk_id_users: 2
         }
-    }).then((favouriteReply) => {
-        return favouriteReply.json();
-    }).then((favouriteReplyJSON) => {
-        if (favouriteReplyJSON.status === "added") {  
-            document.getElementById("fav"+id).innerHTML=`<i class="material-icons style="background-color:white">favorite</i>`
+        fetch('http://localhost:3000/favourites/', {
+            method: 'POST',
+            body: JSON.stringify(favourite), // !!!!
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        }).then((favouriteReply) => {
+            return favouriteReply.json();
+        }).then((favouriteReplyJSON) => {
+            if (favouriteReplyJSON.status === "added") {
+                document.getElementById("fav" + id).innerHTML = `<i class="material-icons style="background-color:white">favorite</i>`;
 
-        }
-        else {                                                      //unsuccessfull output
-            console.log('error');
+            }
+            else {                                                      //unsuccessfull output
+                console.log('error');
+            };
+        })
+    } else
+    {
+        let user =2;
+        let mybody = {
+            tk_id_lines:id,
+            tk_id_users:user
         };
-    })
+        fetch('http://localhost:3000/favourites/'+id + '/' + user, {
+            method: 'DELETE',
+            body: JSON.stringify(mybody), // !!!!
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        }).then((favouriteReply) => {
+            return favouriteReply.json();
+        }).then((favouriteReplyJSON) => {
+            if (favouriteReplyJSON.status === "deleted") {
+                document.getElementById("fav" + id).innerHTML = `<i class="now-ui-icons ui-2_favourite-28"></i>`;
+
+            }
+            else {                                                      //unsuccessfull output
+                console.log('error');
+            };
+        })
+    }
 }
 
 
 function loadFavourites(id) {
-    
-    fetch('http://localhost:3000/favourites/'+id, {
+
+    fetch('http://localhost:3000/favourites/' + id, {
         method: 'GET'
     }).then((myReply) => {
         return myReply.json();
     }).then((favourites) => {
-        console.log(favourites);
-        for (let i=0;i<favourites.length;i++)
-        {
-            document.getElementById("fav"+favourites[i].tk_id_lines).innerHTML=`<i class="material-icons style="background-color:white">favorite</i>`
+        for (let i = 0; i < favourites.length; i++) {
+            document.getElementById("fav" + favourites[i].tk_id_lines).innerHTML = `<i class="material-icons style="background-color:white">favorite</i>`
         }
     });
 }
 
 
-const lineDescription = (lineDes) =>{
-    let line  = {
+const lineDescription = (lineDes) => {
+    let line = {
         id: lineDes.id,
         name: lineDes.name
     }
-   
-   
+
+
     console.log(line)
-    fetch('http://localhost:3000/description/',{
+    fetch('http://localhost:3000/description/', {
         method: 'POST',
         body: JSON.stringify(line),
         Headers: {
             'Accept': 'application/json',
             'Content-Type': 'application/json'
         }
-    }).then((descriptionLine) =>{
+    }).then((descriptionLine) => {
         console.log(descriptionLine)
         return descriptionLine.json()
-    }).then((descriptionLineJSON) =>{
-        localStorage.setItem("line",JSON.stringify(line))
-       window.location.href="linesDescription.html" 
+    }).then((descriptionLineJSON) => {
+        localStorage.setItem("line", JSON.stringify(line))
+        window.location.href = "linesDescription.html"
     })
 }
