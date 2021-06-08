@@ -69,23 +69,36 @@ router.post('/register',async function(req, res, next) {
         //let profilePicture = Buffer.from(req.files.pfp.data);
         let email = req.body.mail;
         let profileUsername = req.body.username;
+        
         let existingUsers = await new myAccounts().fetchAll();
         let checkUser = existingUsers.toJSON();
-        
-        for (let i=0; i < checkUser.length;i++)
-        {
-            if (checkUser[i]["mail"] === email)
+            
+            for (let i=0; i < checkUser.length;i++)
             {
-                console.log("Existing email");
-                res.json({ status: "existing email" });
-                return;
-            } else if (checkUser[i]["username"] === profileUsername)
-            {
-                console.log("Existing username");
-                res.json({ status: "existing username" });
-                return;
+                if (checkUser[i]["mail"] === email)
+                {
+                    return Promise.resolve('mail');
+                } else if (checkUser[i]["username"] === username)
+                {
+                    return Promise.resolve('username');
+                }
             }
+        
+        if (checkMailUserExists == 'mail'){
+
+            console.log("Existing email");
+            res.json({ status: "existing email" });
+            return;
+
         }
+        else if (checkMailUserExists == 'username'){
+
+            console.log("Existing username");
+            res.json({ status: "existing username" });
+            return;
+
+        }
+
         let newUser = {
             name:req.body.name,
             surname:req.body.surname,
@@ -108,24 +121,109 @@ router.post('/register',async function(req, res, next) {
 router.put('/editProfile/',async function(req, res, next) {  
 
     try{
-        let editedUser = {
-            name:req.body.name,
-            surname:req.body.surname,
-            username:req.body.username,
-
-            birthdate:req.body.birthdate,
-            pfp:req.body.pfp, //profilePicture
-
-            city:req.body.city
-        };
+        var editedUser = req.body.editedUser; console.log(editedUser);
         
+        let id = editedUser.id; 
 
+        let oldPassword = req.body.oldPassword;
+
+        const oldUser0 = await new myAccounts().where('id',id).fetch();
+
+        const oldUser = oldUser0.toJSON();
+
+        console.log(oldUser);
+
+        if( (editedUser.mail != oldUser.mail) || (editedUser.username != oldUser.username) )
+        {
+            let existingUsers = await new myAccounts().fetchAll();   
+            let checkUser = existingUsers.toJSON();
+            console.log(checkUser);
+
+                for (let i=0; i < checkUser.length;i++)
+                {
+                    if ((checkUser[i]["mail"] === editedUser.mail) && (checkUser[i]["id"] != editedUser.id))
+                    {
+                        var checkMailUserExists = 'mail';
+                    } else if ((checkUser[i]["username"] === editedUser.username)&& (checkUser[i]["id"] != editedUser.id))
+                    {
+                        var checkMailUserExists = 'username';
+                    }
+                }
+        } else{
+            var checkMailUserExists = 'ok';
+        }
+        
+        if(!(bcrypt.compareSync(oldPassword,oldUser.password))){
+
+            console.log("Wrong password");
+            res.json({ status: "Wrong password", message: "Wrong password" });
+            return;
+
+        } else if (checkMailUserExists == 'mail'){
+
+            console.log("Existing email");
+            res.json({ status: "Existing email", message: "There is already an account made with that email" });
+            return;
+
+        }
+        else if (checkMailUserExists == 'username'){
+
+            console.log("Existing username");
+            res.json({ status: "Existing username", message: "That username is already in use!" });
+            return;
+
+        }
+        console.log(editedUser.password);
+        if (editedUser.password == ''){
+            editedUser.password = oldUser.password;
+        }else{
+            editedUser.password = bcrypt.hashSync(editedUser.password,12);
+        }
+
+        console.log(editedUser.password);
+
+        await oldUser0.save(editedUser);   //Jer je oldUser0 knex objekat, oldUser se koristi samo sto se tice informacija
 
         res.json({ status: "edited", user: editedUser });
+    
     }catch (error) {
         res.status(500).json({status: "error", error:error});
     }
 
 });
+
+router.post('/oneUser/',async function(req, res, next) { 
+
+    try {
+    
+        let id = req.body.id;
+
+        const user = await new myAccounts().where('id',id).fetch();
+
+        res.json({ status: "returned", user: user.toJSON() });
+    }
+    catch(error){
+        res.status(500).json({status: "error", error:error});
+    }
+
+});
+
+/*async function checkMailUserExists(email,username){
+
+    let existingUsers = await new myAccounts().fetchAll();
+    let checkUser = existingUsers.toJSON();
+        
+        for (let i=0; i < checkUser.length;i++)
+        {
+            if (checkUser[i]["mail"] === email)
+            {
+                return Promise.resolve('mail');
+            } else if (checkUser[i]["username"] === username)
+            {
+                return Promise.resolve('username');
+            }
+        }
+
+}*/
 
 module.exports = router;

@@ -1,6 +1,3 @@
-//const { response } = require("../../../../backend/javniPrevoz/app");
-//var user= JSON.parse(sessionStorage.getItem('user')) || {};
-
 function displayProfile(data){
     
     document.title = `Profile: ${data.username}`
@@ -20,9 +17,7 @@ function displayProfile(data){
 
 function startPage(){
 
-    var user= JSON.parse(sessionStorage.getItem('user')) || {};
-
-    console.log(user);
+    var userId = JSON.parse(sessionStorage.getItem('user')) || {};
 
     bg = ["bg1.jpg","bg3.jpg","bg4.jpg","bg6.jpg","bg9.jpg"];
 
@@ -30,34 +25,63 @@ function startPage(){
 
     document.getElementById("background").setAttribute("style",`background-image:url('../assets/img/${bg[rndbg]}');`);
 
-    displayProfile(user);
+    fetch('http://localhost:3000/account/oneUser/', {
+            method:'POST',
+            body: JSON.stringify(userId)
+        }).then((response) => {
+            return response.json();
+        }).then((responseJSON) => {
+            
+            if(responseJSON.status == "returned")
+                {
+                    displayProfile(responseJSON.user);
+
+                }
+            else{
+                console.log(responseJSON.error);
+                return;
+            } 
+        })
 
 }
 
 function startEdit(){
 
-    var user= JSON.parse(sessionStorage.getItem('user')) || {};
+    var userId= JSON.parse(sessionStorage.getItem('user')) || {};
+  
+    fetch('http://localhost:3000/account/oneUser/', {
+            method:'POST',
+            body: JSON.stringify(userId)
+        }).then((response) => {
+            return response.json();
+        }).then((responseJSON) => {
+            
+            if(responseJSON.status == "returned")
+                {
+                    document.title = `Edit: ${responseJSON.user.username}`
 
-    console.log(user);    
+                    document.getElementById("nameTitle").innerHTML = responseJSON.user.username;
 
-    document.title = `Edit: ${user.username}`
+                    document.getElementById("name").setAttribute("value",responseJSON.user.name);
+                    document.getElementById("surname").setAttribute("value",responseJSON.user.surname);
+                    document.getElementById("username").setAttribute("value",responseJSON.user.username);
+                    document.getElementById("city").setAttribute("value",responseJSON.user.city);
+                    document.getElementById("mail").setAttribute("value",responseJSON.user.mail);
 
-    document.getElementById("nameTitle").innerHTML = user.username;
+                    let date = responseJSON.user.birthdate;
+                    
+                    let month = date.substring(8, 10);
+                    let day = date.substring(5, 7);
+                    let year = date.substring(0, 4); 
+                    
+                    let myDate = day + "/" + month + "/" + year;
 
-    document.getElementById("name").setAttribute("value",user.name);
-    document.getElementById("surname").setAttribute("value",user.surname);
-    document.getElementById("username").setAttribute("value",user.username);
-    document.getElementById("city").setAttribute("value",user.city);
-
-    let date = user.birthdate;
-    
-    let month = date.substring(8, 10);
-    let day = date.substring(5, 7);
-    let year = date.substring(0, 4); 
-    
-    let myDate = day + "/" + month + "/" + year;
-
-    document.getElementById("birthdate").setAttribute("value",myDate);
+                    document.getElementById("birthdate").setAttribute("value",myDate);
+                }
+            else{
+                console.log(responseJSON.error);
+                return;
+            } 
+        })
     
 }
-

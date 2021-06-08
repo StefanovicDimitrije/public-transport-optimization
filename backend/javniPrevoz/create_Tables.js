@@ -42,6 +42,7 @@ async function fillDatabase() {
             table.string('pfp'); //table.binary('pfp');
             table.string('password');
             table.string('city');
+            table.boolean('admin');
         }).then(() => console.log("users database created"))
         .catch((err) => { console.log(err); throw err });
 
@@ -185,7 +186,8 @@ async function fillDatabase() {
             birthdate: '2021-02-26',
             pfp: "../assets/img/default-avatar.png",
             password: bcrypt.hashSync('user',12),
-            city: "Ljubljana"
+            city: "Ljubljana",
+            admin: false
         },
         {
             name: "Mika",
@@ -195,7 +197,8 @@ async function fillDatabase() {
             birthdate: '2021-02-26',
             pfp: "../assets/img/default-avatar.png",
             password: bcrypt.hashSync('admin',12),
-            city: "Maribor"
+            city: "Maribor",
+            admin: true
         }
     ]
     const buses = [

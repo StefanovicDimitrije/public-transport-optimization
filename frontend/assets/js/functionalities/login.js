@@ -1,4 +1,4 @@
-var user= JSON.parse(sessionStorage.getItem('user')) || {};
+//var user= JSON.parse(sessionStorage.getItem('user')) || {};
 
 function emailIsValid (email) {
     return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)
@@ -30,7 +30,16 @@ function login(){
                 alert.setAttribute("class","alert alert-success"); //Display 'correct!'
                 alert.innerHTML = "Succesful log-in!"
 
-                sessionStorage.setItem("user", JSON.stringify(responseJSON.user)); //Set session storage for the user currently logged in
+                console.log(responseJSON);
+                
+                let userId = {
+                    id:responseJSON.user.id,
+                    admin: responseJSON.user.admin
+                }
+
+                //Just id save in session
+                
+                sessionStorage.setItem("user", JSON.stringify(userId)); //Set session storage for the user currently logged in
 
                 setTimeout(function () {  //After a half of a second return the user to the index page
                     window.location.href="../pages/index.html"
@@ -56,8 +65,7 @@ function login(){
 
 function logout(){
 
-    sessionStorage.clear();
-    //sessionStorage.setItem("user", JSON.stringify({}));
+    sessionStorage.setItem("user", JSON.stringify({id:0, admin: 0}));
 
     window.location.href="../pages/index.html"
 
@@ -65,8 +73,7 @@ function logout(){
 
 function startLogin(){
  
-    if (Object.keys(user).length){
-    //if (user != null){
+    if (JSON.parse(sessionStorage.getItem('user')).id != 0){
         logged();
     } else{
         notLogged()

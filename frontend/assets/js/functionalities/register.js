@@ -175,23 +175,28 @@ function editProfile(){
     let pfpPicture = pfpPath.replace('C:\\fakepath\\', '');
 
     let user = {                                     ///create object with selected values
-        id: null,
+        id: JSON.parse(sessionStorage.getItem('user')).id,
         name: document.getElementById("name").value,
         surname: document.getElementById("surname").value,
         username: document.getElementById("username").value,
         mail: document.getElementById("mail").value,
         birthdate: myDate,
         pfp: pfpPicture,
-        password: document.getElementById("password").value,
-        city: document.getElementById("city").value
+        password: document.getElementById("newPassword").value,
+        city: document.getElementById("city").value,
+        admin: JSON.parse(sessionStorage.getItem('user')).admin
     }
-    console.log(user);
-   
+    
+    let data = {
+      editedUser : user,
+      oldPassword: document.getElementById("oldPassword").value
+    }
+
     if (validateEditForm()){
 
         fetch('http://localhost:3000/account/editProfile/', {
             method: 'PUT',
-            body: JSON.stringify(user), // !!!!
+            body: JSON.stringify(data), // !!!!
             headers: {
                 'Content-Type': 'application/json'
                 }
@@ -199,30 +204,43 @@ function editProfile(){
             return response.json();
         }).then((responseJSON) => {
 
-            if (responseJSON.status === "edited") {
-
+          switch(responseJSON.status) {
+            case "edited":
+                
                 alert.setAttribute("class","alert alert-success"); //Display 'correct!'
                 alert.innerHTML = "Profile edited successfuly!"
-
-                sessionStorage.setItem("user",JSON.stringify(responseJSON.user))
-
+              
                 setTimeout(function () {  //After a half of a second return the user to the index page
-                    window.location.href="../pages/index.html"
+                  window.location.href="../pages/index.html"
                 },500);
 
-            }
-
-            if (responseJSON.status === "wrong") {
+              break;
+            case "Wrong password":
 
                 alert.setAttribute("class","alert alert-danger");
                 alert.innerHTML = responseJSON.message;
 
-            }
+              break;
+            case "Existing username":
 
-            if (responseJSON.status === "error") {
+              alert.setAttribute("class","alert alert-danger");
+              alert.innerHTML = responseJSON.message;
+
+              break;
+            case "Existing email":
+
                 alert.setAttribute("class","alert alert-danger");
-                alert.innerHTML = "Server error, please try again!"
-            }
+                alert.innerHTML = responseJSON.message;
+  
+              break;
+            case "error":
+
+              alert.setAttribute("class","alert alert-danger");
+              alert.innerHTML = "Server error, please try again!"
+              console.log(responseJSON.error);
+  
+              break;
+          } 
 
         })
 
