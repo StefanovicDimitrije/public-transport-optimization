@@ -6,10 +6,10 @@ var router = express.Router();
 var knex = require('knex')({
   client: 'mysql',
   connection: {
-      host: '127.0.0.1',
-      user: 'root',
-      password: '',
-      database: 'javniprevoz'
+    host: '127.0.0.1',
+    user: 'root',
+    password: '',
+    database: 'javniprevoz'
   }
 });
 
@@ -35,7 +35,7 @@ router.get('/:id', async (req, res) => {
 
   try {
     let id = req.params.id;
-    let favourites = await new myFavourites().where('tk_id_users',id).fetchAll();
+    let favourites = await new myFavourites().where('tk_id_users', id).fetchAll();
     res.json(favourites.toJSON());
   } catch (erorr) {
     res.status(500).json({ status: "error", error: error });
@@ -44,13 +44,24 @@ router.get('/:id', async (req, res) => {
 /* Post new favourite. */
 router.post('/', async (req, res, next) => {
 
-    try {
-      let favourite = req.body;
-      const newFavourite = await new myFavourites().save(favourite);
-      res.json({ status: "added" });
-    } catch (erorr) {
-      res.status(500).json({ status: "error", error: error });
-    }
-  });
+  try {
+    let favourite = req.body;
+    const newFavourite = await new myFavourites().save(favourite);
+    res.json({ status: "added" });
+  } catch (erorr) {
+    res.status(500).json({ status: "error", error: error });
+  }
+});
+
+router.delete('/:id/:user', async (req, res, next) => {
+  try {
+    let id = req.params.id;
+    let user = req.params.user;
+    await new myFavourites().where('tk_id_users', user).where('tk_id_lines',id).destroy();
+    res.json({ status: "deleted" });
+  } catch (error) {
+    res.status(500).json(error);
+  }
+});
 
 module.exports = router;
