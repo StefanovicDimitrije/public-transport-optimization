@@ -246,7 +246,6 @@ const addFavourites = (id) => {
         tk_id_lines: id,
         tk_id_users: 3
     }
-    console.log(favourite);
     fetch('http://localhost:3000/favourites/', {
         method: 'POST',
         body: JSON.stringify(favourite), // !!!!
@@ -256,18 +255,31 @@ const addFavourites = (id) => {
     }).then((favouriteReply) => {
         return favouriteReply.json();
     }).then((favouriteReplyJSON) => {
-        if (favouriteReplyJSON.status === "added") {   
-            console.log('yay');                  //successfull output
-            console.log(document.getElementById("fav"+id));
+        if (favouriteReplyJSON.status === "added") {  
             document.getElementById("fav"+id).innerHTML=`<i class="material-icons style="background-color:white">favorite</i>`
 
         }
         else {                                                      //unsuccessfull output
-            console.log('nay');
+            console.log('error');
         };
     })
 }
 
+
+function loadFavourites(id) {
+    
+    fetch('http://localhost:3000/favourites/'+id, {
+        method: 'GET'
+    }).then((myReply) => {
+        return myReply.json();
+    }).then((favourites) => {
+        console.log(favourites);
+        for (let i=0;i<favourites.length;i++)
+        {
+            document.getElementById("fav"+favourites[i].tk_id_lines).innerHTML=`<i class="material-icons style="background-color:white">favorite</i>`
+        }
+    });
+}
 
 
 const lineDescription = (lineDes) =>{
