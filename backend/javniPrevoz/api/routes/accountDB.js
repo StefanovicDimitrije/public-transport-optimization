@@ -53,7 +53,7 @@ router.get('/:id', async function(req, res, next) {
 router.get('/admin', async function(req, res, next) {
 
     try {
-        const accounts = await new myAccounts().where('admin', 1).fetchAll();
+        const accounts = await new myAccounts().where('admin', 1).where('admin', 1).fetchAll();
         res.json(accounts.toJSON());
     } catch (error) {
         res.status(500).json({ status: "error", error: error });

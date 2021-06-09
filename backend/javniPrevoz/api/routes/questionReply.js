@@ -48,6 +48,15 @@ router.get('/:id', async function(req, res, next) {
         res.status(500).json({ status: "error", error: error });
     }
 });
+router.get('/getUser/:tk_user_id', async function(req, res, next) {
+    try {
+        let tk_user_id = req.params.tk_user_id;
+        const user = await new myUsers().where('id', tk_user_id).where('admin', 1).fetch();
+        res.json(user.toJSON());
+    } catch (error) {
+        res.status(500).json({ status: "error", error: error });
+    }
+});
 
 router.post('/', async(req, res, next) => {
     try {

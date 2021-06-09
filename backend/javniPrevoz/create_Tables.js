@@ -171,10 +171,10 @@ async function fillDatabase() {
 
     //FAVOURITES TABLE
     await knex.schema.createTable('favourites', (table) => {
-        table.increments('id').primary();
-        table.integer('tk_id_lines').references('id').inTable('lines');
-        table.integer('tk_id_users').references('id').inTable('users');
-    }).then(() => console.log("favourites database created"))
+            table.increments('id').primary();
+            table.integer('tk_id_lines').references('id').inTable('lines');
+            table.integer('tk_id_users').references('id').inTable('users');
+        }).then(() => console.log("favourites database created"))
         .catch((err) => { console.log(err); throw err });
     //INITIAL VALUES FOR TABLES    
 
@@ -185,7 +185,7 @@ async function fillDatabase() {
             mail: "petar.peric@student.um.si",
             birthdate: '2021-02-26',
             pfp: "../assets/img/default-avatar.png",
-            password: bcrypt.hashSync('user',12),
+            password: bcrypt.hashSync('user', 12),
             city: "Ljubljana",
             admin: false
         },
@@ -196,7 +196,18 @@ async function fillDatabase() {
             mail: "admin@gmail.com",
             birthdate: '2021-02-26',
             pfp: "../assets/img/default-avatar.png",
-            password: bcrypt.hashSync('admin',12),
+            password: bcrypt.hashSync('admin', 12),
+            city: "Maribor",
+            admin: true
+        },
+        {
+            name: "Ivan",
+            surname: "Miric",
+            username: "@Ivan",
+            mail: "admin@gmail.com",
+            birthdate: '2021-02-26',
+            pfp: "../assets/img/default-avatar.png",
+            password: bcrypt.hashSync('admin123', 12),
             city: "Maribor",
             admin: true
         }
@@ -335,22 +346,21 @@ async function fillDatabase() {
         }
     ]
 
-    const favourites = [
-        {
-            tk_id_lines:1,
-            tk_id_users:1
+    const favourites = [{
+            tk_id_lines: 1,
+            tk_id_users: 1
         },
         {
-            tk_id_lines:2,
-            tk_id_users:1
+            tk_id_lines: 2,
+            tk_id_users: 1
         },
         {
-            tk_id_lines:3,
-            tk_id_users:1
+            tk_id_lines: 3,
+            tk_id_users: 1
         },
         {
-            tk_id_lines:1,
-            tk_id_users:2
+            tk_id_lines: 1,
+            tk_id_users: 2
         }
     ]
 
@@ -366,7 +376,7 @@ async function fillDatabase() {
     await knex('news').insert(news).then(() => console.log("news inserted")).catch((err) => { console.log(err); throw err });
     await knex('changes').insert(changes).then(() => console.log("changes inserted")).catch((err) => { console.log(err); throw err });
     await knex('driverReview').insert(drivers_Reviews).then(() => console.log("driverReview inserted")).catch((err) => { console.log(err); throw err });
-    await knex('favourites').insert(favourites).then(() => console.log("favourites inserted")).catch((err) => {console.log(err); throw err});
+    await knex('favourites').insert(favourites).then(() => console.log("favourites inserted")).catch((err) => { console.log(err); throw err });
     knex.destroy();
 
 }
