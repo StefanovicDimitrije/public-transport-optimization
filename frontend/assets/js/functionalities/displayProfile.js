@@ -8,7 +8,16 @@ function displayProfile(data){
     document.getElementById("surname").innerHTML = data.surname;
     document.getElementById("username").innerHTML = data.username;
 
-    document.getElementById("birthdate").innerHTML = data.birthdate;
+    let date = data.birthdate;
+                    
+    let month = date.substring(8, 10);
+    let day = date.substring(5, 7);
+    let year = date.substring(0, 4); 
+                    
+    let myDate = day + "/" + month + "/" + year;
+
+    document.getElementById("birthdate").innerHTML = myDate;
+
     document.getElementById("email").innerHTML = data.mail;
     document.getElementById("city").innerHTML = data.city;
 
@@ -25,9 +34,8 @@ function startPage(){
 
     document.getElementById("background").setAttribute("style",`background-image:url('../assets/img/${bg[rndbg]}');`);
 
-    fetch('http://localhost:3000/account/oneUser/', {
-            method:'POST',
-            body: JSON.stringify(userId)
+    fetch('http://localhost:3000/account/'+ userId.id, {
+            method:'GET'
         }).then((response) => {
             return response.json();
         }).then((responseJSON) => {
@@ -49,9 +57,8 @@ function startEdit(){
 
     var userId= JSON.parse(sessionStorage.getItem('user')) || {};
   
-    fetch('http://localhost:3000/account/oneUser/', {
-            method:'POST',
-            body: JSON.stringify(userId)
+    fetch('http://localhost:3000/account/' + userId.id, {
+            method:'GET'
         }).then((response) => {
             return response.json();
         }).then((responseJSON) => {

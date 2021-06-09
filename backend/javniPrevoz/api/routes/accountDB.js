@@ -35,6 +35,22 @@ router.get('/',async function(req, res, next) {
 
 });
 
+router.get('/:id',async function(req, res, next) { 
+
+    try {
+    
+        let id = req.params.id;
+
+        const user = await new myAccounts().where('id',id).fetch();
+
+        res.json({ status: "returned", user: user.toJSON() });
+    }
+    catch(error){
+        res.status(500).json({status: "error", error:error});
+    }
+
+});
+
 router.post('/login/',async function(req, res, next) {  
 
     try {
@@ -121,8 +137,10 @@ router.post('/register',async function(req, res, next) {
 router.put('/editProfile/',async function(req, res, next) {  
 
     try{
-        var editedUser = req.body.editedUser; console.log(editedUser);
-        
+        var editedUser = req.body.editedUser; 
+
+        editedUser.birthdate = new Date (editedUser.birthdate + "T22:00:00.000Z");
+
         let id = editedUser.id; 
 
         let oldPassword = req.body.oldPassword;
@@ -131,13 +149,10 @@ router.put('/editProfile/',async function(req, res, next) {
 
         const oldUser = oldUser0.toJSON();
 
-        console.log(oldUser);
-
         if( (editedUser.mail != oldUser.mail) || (editedUser.username != oldUser.username) )
         {
             let existingUsers = await new myAccounts().fetchAll();   
             let checkUser = existingUsers.toJSON();
-            console.log(checkUser);
 
                 for (let i=0; i < checkUser.length;i++)
                 {

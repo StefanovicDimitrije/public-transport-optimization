@@ -1,4 +1,4 @@
-//var user= JSON.parse(sessionStorage.getItem('user')) || {};
+var user= JSON.parse(sessionStorage.getItem('user')) || {};
 
 function emailIsValid (email) {
     return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)
@@ -66,17 +66,18 @@ function login(){
 function logout(){
 
     sessionStorage.setItem("user", JSON.stringify({id:0, admin: 0}));
+    //sessionStorage.clear();
 
     window.location.href="../pages/index.html"
 
 }
 
 function startLogin(){
- 
-    if (JSON.parse(sessionStorage.getItem('user')).id != 0){
-        logged();
-    } else{
+    
+    if ((user= JSON.parse(sessionStorage.getItem('user')) || {}).id == 0 || !(Object.keys(user).length)){
         notLogged()
+    } else{
+        logged();
     }
 
 }

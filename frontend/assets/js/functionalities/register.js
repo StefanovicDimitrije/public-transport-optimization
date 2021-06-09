@@ -1,11 +1,11 @@
 const register = () => {
     let date =document.getElementById("birthdate").value;
-    console.log(date);
+    //console.log(date);
     let month = date.substring(0, 2);
     let day = date.substring(3, 5);
     let year = date.substring(6, 10); //10/28/2002
     let myDate = year + "-" + month + "-" + day;
-    console.log(myDate);
+    //console.log(myDate);
     let pfpPath = document.getElementById("pfp").value;
     let pfpPicture = pfpPath.replace('C:\\fakepath\\', '');
     let user = {                                     ///create object with selected values
@@ -256,25 +256,36 @@ function editProfile(){
 }
 
 function validateEditForm() {                               //simple form validation
-    const name = document.getElementById("name").value;
-    const surname = document.getElementById("surname").value;
-    const username = document.getElementById("username").value;
-    const city = document.getElementById("city").value;
-
-    if (name == "") {
-        alert("Name field must not be empty!");
-        return false;
-    } else if (surname == "") {
-        alert("Surname field must not be empty!");
-        return false;
-    } else if (username == "") {
-        alert("Username field must not be empty!");
-        return false;
-    }else if (city == "") {
-        alert("City field must not be empty!");
-        return false;
-    } 
-     else {
-        return true;
-    }
+  const name = document.getElementById("name").value;
+  const surname = document.getElementById("surname").value;
+  const username = document.getElementById("username").value;
+  const mail = document.getElementById("mail").value;
+  const city = document.getElementById("city").value;
+  const password = document.getElementById("oldPassword").value;
+  if (name == "") {
+      alert("Name field must not be empty!");
+      return false;
+  } else if (surname == "") {
+      alert("Surname field must not be empty!");
+      return false;
+  } else if (username == "") {
+      alert("Username field must not be empty!");
+      return false;
+  }else if (mail == "") {
+      alert("mail field must not be empty!");
+      return false;
+  }else if (city == "") {
+      alert("City field must not be empty!");
+      return false;
+  }else if (password == "") {
+      alert("Please enter your old password!");
+      return false;
+  } else if(!emailIsValid(mail))
+  {
+      alert("Email adress is not in the profer format!");
+      return false;
+  }
+   else {
+      return true;
+  }
 }

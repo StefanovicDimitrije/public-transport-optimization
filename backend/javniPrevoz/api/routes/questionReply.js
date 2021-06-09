@@ -43,6 +43,7 @@ router.get('/:id', async function(req, res, next) {
     try {
         let id = req.params.id;
         const questionReply = await new myQuestionReply().where('tk_id_question', id).fetchAll();
+        //const user = await new myUsers().where('id',id.)
         res.json(questionReply.toJSON());
     } catch (error) {
         res.status(500).json({ status: "error", error: error });

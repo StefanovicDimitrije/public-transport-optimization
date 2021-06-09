@@ -123,11 +123,7 @@ const addQuestion = () => {
     })
 }
 
-
-
 function loadQuestions(isMore) {
-
-    startLogin();
 
     document.getElementById("questionSection").innerHTML = "";
     fetch('http://localhost:3000/questions', {
@@ -157,6 +153,8 @@ function loadQuestions(isMore) {
             let myCard = document.createElement("div");
             for (let i = 0; i < questions.length; i++) {
 
+                //
+
                 myCard.innerHTML +=
                     `
                   <div class="card p-3 mt-2">
@@ -165,7 +163,7 @@ function loadQuestions(isMore) {
                       <small class="font-weight-bold text-primary" style = "font-size: 120%">@${questions[i].name}:</small> <small class="font-weight-bold " style = "font-size: 100%">${questions[i].question} </small></span> </div> <small>${fixDate(questions[i].date)}</small>
                   </div>
                   <div class="action d-flex justify-content-between mt-2 align-items-center">
-                      <div class="reply px-4"> <small onclick = removeQuestion(${questions[i].id})>Remove</small> <span class="dots"></span> <small onclick="reply(${questions[i].id})">Reply</small> <span class="dots"></span> <small onclick = "like(${questions[i].id}, ${questions[i].likes})">${questions[i].likes}` + " " + `  <i class="now-ui-icons ui-2_like"></i></small> </div>
+                      <div class="reply px-4"> <small id="removeBtn${questions[i].id}" onclick = removeQuestion(${questions[i].id})>Remove</small> <span class="dots"></span> <small id="replyBtn${questions[i].id}" onclick="reply(${questions[i].id})">Reply</small> <span class="dots"></span> <small id="likeBtn${questions[i].id}" onclick = "like(${questions[i].id}, ${questions[i].likes})">${questions[i].likes}` + " " + `  <i class="now-ui-icons ui-2_like"></i></small> </div>
                       <div class="icons align-items-center"> <i class="fa fa-check-circle-o check-icon text-primary"></i> </div>
                   </div>
                   <div id="replySectionArea${questions[i].id}"></div>
@@ -197,7 +195,7 @@ function loadQuestions(isMore) {
                     <small class="font-weight-bold text-primary" style = "font-size: 120%">@${questions[i].name}:</small> <small class="font-weight-bold " style = "font-size: 100%">${questions[i].question} </small></span> </div> <small>${fixDate(questions[i].date)}</small>
                 </div>
                 <div class="action d-flex justify-content-between mt-2 align-items-center">
-                    <div class="reply px-4"> <small onclick = removeQuestion(${questions[i].id})>Remove</small> <span class="dots"></span> <small onclick="reply(${questions[i].id})">Reply</small> <span class="dots"></span> <small onclick = "like(${questions[i].id}, ${questions[i].likes})">${questions[i].likes}` + " " + `<i class="now-ui-icons ui-2_like"></i></small> </div>
+                    <div class="reply px-4"> <small id="removeBtn${questions[i].id}" onclick = "removeQuestion(${questions[i].id})" >Remove</small> <span class="dots"></span> <small onclick="reply(${questions[i].id})" id = 'replyBtn${questions[i].id}'>Reply</small> <span class="dots"></span> <small onclick = "like(${questions[i].id}, ${questions[i].likes})">${questions[i].likes}` + " " + `<i class="now-ui-icons ui-2_like" id = 'likeBtn${questions[i].id}'></i></small> </div>
                     <div class="icons align-items-center"> <i class="fa fa-check-circle-o check-icon text-primary"></i> </div>
                 </div>
                 <div id="replySectionArea${questions[i].id}"></div>
@@ -218,15 +216,38 @@ function loadQuestions(isMore) {
             questionsSection.appendChild(myCard);
 
         }
-    });
+    }).then(() => adminBtns());
+
+}
+
+function adminBtns(){
+
+    //For the remove buttons, their id all starts with 'removeBtn'
+    if((user= JSON.parse(sessionStorage.getItem('user')) || {}).admin != 1 || !(Object.keys(user).length)){
+
+        $( "[class^='dots']" ).hide();
+
+        $( "[id^='removeBtn']" ).hide();
+        $( "[id^='removeBtn']" ).attr('onclick','');
+
+        $( "[id^='replyBtn']" ).hide();
+        $( "[id^='replyBtn']" ).attr('onclick','');
+
+        //$( "[id^='likeBtn']" ).hide();
+        $( "[id^='likeBtn']" ).attr('onclick','');
+    
+    }
 }
 
 function loadReplies(id) {
-    fetch('http://localhost:3000/questionsReply/' + id, {
+    fetch('http://localhost:3000/questionsReply/' + id +"/"+ JSON.parse(sessionStorage.getItem('user')).id, {
         method: 'GET',
     }).then((myReply) => {
         return myReply.json();
     }).then((reply) => {
+
+        //OVDEIVAN
+
         let replySection = document.getElementById("replySection" + id);
         for (var i = 0; i < reply.length; i++) {
             let myCard = document.createElement("div");
@@ -238,7 +259,7 @@ function loadReplies(id) {
                     <small class="font-weight-bold text-primary" style = "font-size: 100%">@${reply[i].tk_id_user}:</small> <small class="font-weight-bold " style = "font-size: 80%">${reply[i].reply} </small></span> </div> <small>${fixDate(reply[i].date)}</small>
                 </div>
                 <div class="action d-flex justify-content-between mt-2 align-items-center" style = "font-size: 90%">
-                    <div class="reply px-4"> <small onclick = removeQuestionReply(${reply[i].id})>Remove</small> <span class="dots"></span> </span> <small onclick = "like(${reply[i].id}, ${reply[i].likes})">${reply[i].likes}` + " " + `<i class="now-ui-icons ui-2_like"></i></small> </div>
+                    <div class="reply px-4"> <small id="removeBtn${reply[i].id}" onclick = removeQuestionReply(${reply[i].id})>Remove</small> <span class="dots"></span> </span> <small onclick = "like(${reply[i].id}, ${reply[i].likes})">${reply[i].likes}` + " " + `<i class="now-ui-icons ui-2_like"></i></small> </div>
                     <div class="icons align-items-center"> <i class="fa fa-check-circle-o check-icon text-primary"></i> </div>
                 </div>
                 <div id="question${reply[i].id}">
@@ -246,7 +267,8 @@ function loadReplies(id) {
             `;
             replySection.appendChild(myCard);
         }
-    })
+    }).then(() => adminBtns());
+
 }
 
 
@@ -340,12 +362,13 @@ function reply(id) {
         <br>
             <textarea class="form-control" placeholder="Reply to a question" id="replyText${id}" rows="3" style = "background-color: #fbfbfa"></textarea>
 
-            <button class="btn btn-danger" style= "background-color:#f6963c"onclick="addReply(${id})">Reply</button>
+            <button id="replyBtn${id}" class="btn btn-danger" style= "background-color:#f6963c"onclick="addReply(${id})">Reply</button>
         </div>
     </div>   
           `;
     replySection.appendChild(myCard);
 
+    //adminBtns();
 
 }
 
@@ -355,7 +378,7 @@ function addReply(id) {
 
         "id": null,
         "tk_id_question": id,
-        "tk_id_user": 1,
+        "tk_id_user": JSON.parse(sessionStorage.getItem('user')).id,
         "reply": document.getElementById("replyText" + id).value,
         "date": getTodaysDate(),
         "likes": 0
