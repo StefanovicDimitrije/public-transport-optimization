@@ -245,7 +245,7 @@ const addFavourites = (id) => {
         let favourite = {                                     ///create object with selected values
             id: null,
             tk_id_lines: id,
-            tk_id_users: 2
+            tk_id_users: JSON.parse(sessionStorage.getItem('user')).id
         }
         fetch('http://localhost:3000/favourites/', {
             method: 'POST',
@@ -266,7 +266,7 @@ const addFavourites = (id) => {
         })
     } else
     {
-        let user =2;
+        let user =JSON.parse(sessionStorage.getItem('user')).id;
         let mybody = {
             tk_id_lines:id,
             tk_id_users:user
@@ -292,9 +292,9 @@ const addFavourites = (id) => {
 }
 
 
-function loadFavourites(id) {
-
-    fetch('http://localhost:3000/favourites/' + id, {
+function loadFavourites() {
+    let user = JSON.parse(sessionStorage.getItem('user')).id;
+    fetch('http://localhost:3000/favourites/' + user, {
         method: 'GET'
     }).then((myReply) => {
         return myReply.json();
