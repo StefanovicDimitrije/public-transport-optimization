@@ -11,7 +11,7 @@ const PridobiLinije = () => {
        <th >Add</th>
    </tr>
               </thead>`;
-        console.log(linije)
+   //     console.log(linije)
         for (let i = 0; i < linije.length; i++) {
             let vrsta = tabela.insertRow();
             let celija = vrsta.insertCell(-1);
@@ -21,7 +21,7 @@ const PridobiLinije = () => {
             add.innerHTML = `<button class="btn btn-primary btn-icon btn-round fav" id="fav${linije[i].id}" onclick='addFavourites(` + JSON.stringify(linije[i].id) + `)'><i class="now-ui-icons ui-2_favourite-28"></i></button>`;
         }
 
-    }).then(()=>loadFavourites());
+    });
 }
 
 const PridobiStanice = () => {
@@ -72,7 +72,7 @@ const PretraziLinije = () => {
 
         return odgovor.json();
     }).then((odgovorJSON) => {
-        console.log(odgovorJSON);
+        
         if (odgovorJSON.status === "linija") {
             document.forms[0].reset();
             let tabela = document.getElementById("tabelaLinije");
@@ -87,7 +87,7 @@ const PretraziLinije = () => {
     </tr>
                </thead>`;
             linija = odgovorJSON.lp
-            console.log(linija)
+            
             /* for (let i = 0; i < linija.length; i++) {
                  let vrsta = tabela.insertRow();
                  for (const opis in linija[i]) {
@@ -103,7 +103,7 @@ const PretraziLinije = () => {
                     let vrsta = tabela.insertRow(-1);
                     let naz = vrsta.insertCell(-1);
                     naz.innerHTML = `<button class="btn btn-primary btn-round" onclick="lineDescription(` + l[1] + `)">` + l[2].name + `</button> `;
-
+                    console.log(l)
                     let pos = vrsta.insertCell(-1);
                     pos.innerHTML = `<button class="btn btn-primary btn-round">` + l[1].name + `</button> `;
 
@@ -117,7 +117,7 @@ const PretraziLinije = () => {
 
                     let add = vrsta.insertCell();
                     add.innerHTML = `<button onclick='dodajLiniju(` + JSON.stringify(l[i]) + `)' class="btn btn-primary btn-icon btn-round"'><i class="now-ui-icons ui-2_favourite-28"></i></button>`;
-                    console.log(l[i])
+                   
                 }
             }
 
@@ -147,7 +147,7 @@ const PretraziLinije = () => {
                     let vrsta = tabela.insertRow(-1);
                     let naz = vrsta.insertCell(-1);
                     naz.innerHTML = `<button class="btn btn-primary btn-round" onclick="lineDescription(` + l[1] + `)">` + l[2].name + `</button> `;
-
+                    console.log(l[1])
                     let pos = vrsta.insertCell(-1);
                     pos.innerHTML = `<button class="btn btn-primary btn-round">` + l[1].name + `</button> `;
 
@@ -200,7 +200,7 @@ const PretraziLinije = () => {
                 }
 */
                 linija = odgovorJSON.lp
-                console.log(linija)
+               
                 /* for (let i = 0; i < linija.length; i++) {
                     let vrsta = tabela.insertRow();
                     for (const opis in linija[i]) {
@@ -215,7 +215,7 @@ const PretraziLinije = () => {
                         let vrsta = tabela.insertRow(-1);
                         let naz = vrsta.insertCell(-1);
                         naz.innerHTML = `<button class="btn btn-primary btn-round" onclick='lineDescription(` + l[1] + `)'>` + l[2].name + `</button> `;
-
+                        console.log(l[1])
                         let pos = vrsta.insertCell(-1);
                         pos.innerHTML = `<button class="btn btn-primary btn-round">` + l[1].name + `</button> `;
 
@@ -229,7 +229,7 @@ const PretraziLinije = () => {
 
                         let add = vrsta.insertCell();
                         add.innerHTML = `<button onclick='dodajLiniju(` + JSON.stringify(l[i]) + `)' class="btn btn-primary btn-icon btn-round"'><i class="now-ui-icons ui-2_favourite-28"></i></button>`;
-                        console.log(l[i])
+                        
                     }
                 }
 
@@ -245,7 +245,7 @@ const addFavourites = (id) => {
         let favourite = {                                     ///create object with selected values
             id: null,
             tk_id_lines: id,
-            tk_id_users: JSON.parse(sessionStorage.getItem('user')).id
+            tk_id_users: 2
         }
         fetch('http://localhost:3000/favourites/', {
             method: 'POST',
@@ -266,7 +266,7 @@ const addFavourites = (id) => {
         })
     } else
     {
-        let user =JSON.parse(sessionStorage.getItem('user')).id;
+        let user =2;
         let mybody = {
             tk_id_lines:id,
             tk_id_users:user
@@ -291,51 +291,10 @@ const addFavourites = (id) => {
     }
 }
 
-function viewFavourites(){
 
-    let user = JSON.parse(sessionStorage.getItem('user')).id;
-    fetch('http://localhost:3000/favourites/' + user, {
-        method: 'GET'
-    }).then((myReply) => {
-        return myReply.json();
-    }).then((favourites) => {
-        
-        fetch('http://localhost:3000/lines/', {
-        method: "GET"
-            }).then((odgovor) => {
-                return odgovor.json();
-            }).then((linije) => {
+function loadFavourites(id) {
 
-                let tabela = document.getElementById("tabelaLinije");
-                tabela.innerHTML = `
-                    <thead class="thead-orange">
-                        <th >Line</th>
-                        <th >Add</th>
-                    </tr>
-                    </thead>`;
-                console.log(linije)
-                for (let i = 0; i < favourites.length; i++) {
-
-                    let j = linije.findIndex(x => x.id === favourites[i].tk_id_lines);
-
-                    let vrsta = tabela.insertRow();
-                    let celija = vrsta.insertCell(-1);
-                    celija.innerHTML = `<button class="btn btn-primary btn-round" onclick='lineDescription(` + JSON.stringify(linije[j]) + `) '>` + linije[j].name + `</button> `;
-                    console.log(linije[i])
-                    let add = vrsta.insertCell();
-                    add.innerHTML = `<button class="btn btn-primary btn-icon btn-round fav" id="fav${linije[j].id}" onclick='addFavourites(` + JSON.stringify(linije[j].id) + `)'><i class="now-ui-icons ui-2_favourite-28"></i></button>`;
-                
-                }
-
-            }).then(()=>loadFavourites());
-
-    });
-
-}
-
-function loadFavourites() {
-    let user = JSON.parse(sessionStorage.getItem('user')).id;
-    fetch('http://localhost:3000/favourites/' + user, {
+    fetch('http://localhost:3000/favourites/' + id, {
         method: 'GET'
     }).then((myReply) => {
         return myReply.json();

@@ -17,7 +17,9 @@ const reviewRouter = require('./api/routes/driverReview')
 const questionsReplyRouter = require('./api/routes/questionReply');
 const favouritesRouter = require('./api/routes/favourites');
 const lineDescriptionRouter = require('./api/routes/lineDescription');
+const lineEditRouter = require('./api/routes/lineEdit.js')
 const app = express();
+
 
 //:)
 //midware
@@ -51,7 +53,7 @@ app.use('/review', reviewRouter);
 app.use('/questionsReply', questionsReplyRouter);
 app.use('/favourites',favouritesRouter);
 app.use('/description',lineDescriptionRouter);
-
+app.use('/lineEdit',lineEditRouter);
 
 
 module.exports = app;
