@@ -20,13 +20,26 @@ const myComments = bookshelf.Model.extend({
     tableName: 'comments',
     idAttribute: 'id'
 });
-
+const myUsers = bookshelf.Model.extend({
+    tableName: 'users',
+    idAttribute: 'id'
+});
 /* GET comments table. */
 
 router.get('/', async function(req, res, next) {
     try {
         const comments = await new myComments().fetchAll();
         res.json(comments.toJSON());
+    } catch (error) {
+        res.status(500).json({ status: "error", error: error });
+    }
+});
+
+router.get('/getUser/:tk_user_id', async function(req, res, next) {
+    try {
+        let tk_user_id = req.params.tk_user_id;
+        const user = await new myUsers().where('id', tk_user_id).fetch();
+        res.json(user.toJSON());
     } catch (error) {
         res.status(500).json({ status: "error", error: error });
     }

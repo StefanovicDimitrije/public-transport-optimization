@@ -204,7 +204,7 @@ async function fillDatabase() {
             name: "Ivan",
             surname: "Miric",
             username: "@Ivan",
-            mail: "admin@gmail.com",
+            mail: "ivan@gmail.com",
             birthdate: '2021-02-26',
             pfp: "../assets/img/default-avatar.png",
             password: bcrypt.hashSync('admin123', 12),
