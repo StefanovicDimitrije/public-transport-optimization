@@ -65,8 +65,8 @@ function login(){
 
 function logout(){
 
-    sessionStorage.setItem("user", JSON.stringify({id:0, admin: 0}));
-    //sessionStorage.clear();
+    //sessionStorage.setItem("user", JSON.stringify({id:0, admin: 0}));
+    sessionStorage.clear();
 
     window.location.href="../pages/index.html"
 
@@ -74,6 +74,9 @@ function logout(){
 
 function startLogin(){
     
+    document.getElementById("adminNews").setAttribute("class","nav-link d-none");
+    document.getElementById("adminTicket").setAttribute("class","nav-link d-none");
+
     if ((user= JSON.parse(sessionStorage.getItem('user')) || {}).id == 0 || !(Object.keys(user).length)){
         notLogged()
     } else{
@@ -91,8 +94,7 @@ function notLogged(){
     document.getElementById("loginNav").setAttribute("class","nav-link");
     document.getElementById("registerNav").setAttribute("class","nav-link");
     
-    document.getElementById("invisibleNavList1").setAttribute("class","navbar-nav d-none");
-
+    document.getElementById("invisibleNavList1").setAttribute("class","navbar-nav d-none");    
 }
 
 function logged(){
@@ -113,12 +115,12 @@ function logged(){
 
     let favorites = document.createElement("a");
     favorites.setAttribute("class","dropdown-item");
-    favorites.setAttribute("href","#");
+    favorites.setAttribute("href","viewFav.html");
     favorites.innerHTML ="View Favorites";
 
     let ticket = document.createElement("a");
     ticket.setAttribute("class","dropdown-item");
-    ticket.setAttribute("href","#");
+    ticket.setAttribute("href","extendTicket.html");
     ticket.innerHTML ="Extend Ticket";
 
     dropdownMenu.appendChild(divider);
@@ -132,6 +134,47 @@ function logged(){
 
     document.getElementById("logoutNavLink").setAttribute("class","nav-link")
 
-    document.getElementById("invisibleNavList1").setAttribute("class","navbar-nav d-lg-none")
+    document.getElementById("invisibleNavList1").setAttribute("class","navbar-nav d-lg-none");
+
+    if ((user= JSON.parse(sessionStorage.getItem('user'))).admin == 1){
+
+        let navItem = document.createElement("li");
+        navItem.className = 'nav-item';
+
+        let navLink = document.createElement("a");
+        navLink.className = 'nav-link';
+        navLink.setAttribute('data-toggle','tab');
+        navLink.innerHTML = 'Admin';
+
+        navItem.appendChild(navLink);
+
+        document.getElementById('visibleNavList').prepend(navItem);
+
+        let divider1 = document.createElement("div");
+        divider1.setAttribute("class","dropdown-divider");
+
+        let header1 = document.createElement("div");
+        header1.setAttribute("class","dropdown-header");
+        header1.innerHTML ="Admin";
+
+        let addNews = document.createElement("a");
+        addNews.setAttribute("class","dropdown-item");
+        addNews.setAttribute("href","addNews.html");
+        addNews.innerHTML ="Add news";
+
+        let ticket1 = document.createElement("a");
+        ticket1.setAttribute("class","dropdown-item");
+        ticket1.setAttribute("href","#");
+        ticket1.innerHTML ="Review tickets";
+
+        dropdownMenu.appendChild(divider1);
+        dropdownMenu.appendChild(header1);
+        dropdownMenu.appendChild(addNews);
+        dropdownMenu.appendChild(ticket1);
+
+        document.getElementById("adminNews").setAttribute("class","nav-link d-lg-none");
+        document.getElementById("adminTicket").setAttribute("class","nav-link d-lg-none");
+        
+    }
 
 }

@@ -17,7 +17,8 @@ const register = () => {
         birthdate: myDate,
         pfp: pfpPicture,
         password: document.getElementById("password").value,
-        city: document.getElementById("city").value
+        city: document.getElementById("city").value,
+        admin: 0
     }
     console.log(user);
     validation = validateForm();
@@ -65,6 +66,10 @@ const register = () => {
                         </div>
                     </div>
             `;
+
+          setTimeout(function () {  //After a half of a second return the user to the index page
+              window.location.href="../pages/login.html"
+          },500);
 
         }
         else if (userReplyJSON.status === "existing email") {                                                      //unsuccessfull output

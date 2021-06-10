@@ -50,17 +50,6 @@ router.get('/:id', async function(req, res, next) {
 
 });
 
-router.get('/admin', async function(req, res, next) {
-
-    try {
-        const accounts = await new myAccounts().where('admin', 1).where('admin', 1).fetchAll();
-        res.json(accounts.toJSON());
-    } catch (error) {
-        res.status(500).json({ status: "error", error: error });
-    }
-
-});
-
 router.post('/login/', async function(req, res, next) {
 
     try {
@@ -96,27 +85,21 @@ router.post('/register', async function(req, res, next) {
 
         let existingUsers = await new myAccounts().fetchAll();
         let checkUser = existingUsers.toJSON();
+        console.log(req.body);
 
-        for (let i = 0; i < checkUser.length; i++) {
-            if (checkUser[i]["mail"] === email) {
-                return Promise.resolve('mail');
-            } else if (checkUser[i]["username"] === username) {
-                return Promise.resolve('username');
+        for (let i=0; i < checkUser.length;i++)
+        {
+            if (checkUser[i]["mail"] === email)
+            {
+                console.log("Existing email");
+                res.json({ status: "Existing email" });
+                return;
+            } else if (checkUser[i]["username"] === profileUsername)
+            {
+                console.log("Existing username");
+                res.json({ status: "Existing username" });
+                return;
             }
-        }
-
-        if (checkMailUserExists == 'mail') {
-
-            console.log("Existing email");
-            res.json({ status: "existing email" });
-            return;
-
-        } else if (checkMailUserExists == 'username') {
-
-            console.log("Existing username");
-            res.json({ status: "existing username" });
-            return;
-
         }
 
         let newUser = {
@@ -127,7 +110,8 @@ router.post('/register', async function(req, res, next) {
             birthdate: req.body.birthdate,
             pfp: req.body.pfp, //profilePicture
             password: req.body.password,
-            city: req.body.city
+            city: req.body.city,
+            admin:req.body.admin
         };
         newUser.password = bcrypt.hashSync(newUser.password, 12);
         let user = await new myAccounts().save(newUser);
