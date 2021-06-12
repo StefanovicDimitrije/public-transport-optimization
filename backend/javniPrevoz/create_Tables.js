@@ -51,7 +51,7 @@ async function fillDatabase() {
             table.increments('id').primary();
             table.string('brand');
             table.string('registration_no');
-            table.integer('seat_no');
+            table.integer('serialNo');
         }).then(() => console.log("Buses database created"))
         .catch((err) => { console.log(err); throw err });
 
@@ -66,7 +66,6 @@ async function fillDatabase() {
             table.increments('id').primary();
             table.string('street');
             table.string('city');
-            table.integer('Gps');
         }).then(() => console.log("Location database created"))
         .catch((err) => { console.log(err); throw err });
     //STATIONS TABLE
@@ -213,32 +212,35 @@ async function fillDatabase() {
         }
     ]
     const buses = [
-        { brand: 'Man', registration_no: 'MB-786-515', seat_no: 30 },
-        { brand: 'Iveco', registration_no: 'MB-587-221', seat_no: 50 },
-        { brand: 'Iveco', registration_no: 'MB-648-305', seat_no: 25 }
+        { brand: 'Man', registration_no: 'MB-786-515', serialNo: 30 },
+        { brand: 'Iveco', registration_no: 'MB-587-221', serialNo: 50 },
+        { brand: 'Iveco', registration_no: 'MB-648-305', serialNo: 25 },
+        { brand: 'Man', registration_no: 'MB-696-588', serialNo: 89 },
+        { brand: 'Iveco', registration_no: 'MB-700-200', serialNo: 150 },
+        { brand: 'Iveco', registration_no: 'MB-600-300', serialNo: 725 },
+        { brand: 'Man', registration_no: 'MB-744-599', serialNo: 308 },
+        { brand: 'Iveco', registration_no: 'MB-544-221', serialNo: 507 },
+        { brand: 'Volvo', registration_no: 'MB-765-315', serialNo: 254 }
     ]
     const drivers = [
-        { name: 'Janez', surname: 'Novak', emso: 2541, phone_no: '069-259-286' },
-        { name: 'Francek', surname: 'Presern', emso: 5811, phone_no: '069-242-485' },
-        { name: 'Radovan', surname: 'Radic', emso: 1505, phone_no: '069-417-253' }
+        { name: 'Janez', surname: 'Novak', emso: 254132, phone_no: '069-259-286' },
+        { name: 'Francek', surname: 'Pavlic', emso: 581211, phone_no: '069-242-485' },
+        { name: 'Marko', surname: 'Spasic', emso: 252141, phone_no: '069-259-782' },
+        { name: 'Pavle', surname: 'Mitrovic', emso: 512811, phone_no: '069-242-599' },
+        { name: 'Jure', surname: 'Skoc', emso: 153205, phone_no: '069-487-253' }
     ]
     const lines = [
-        { name: '12' },
+        { name: '12'},
         { name: '93' },
         { name: '75' },
         { name: '4' },
-        { name: '7' },
-        { name: '15' },
-        { name: '39' },
-        { name: '87' },
-        { name: '3' },
-        { name: '20' }
+        { name: '7' }
     ]
 
     const locations = [
         { street: 'Ulica Pariške komune ', city: 'Maribor' },
-        { street: 'Koresova ulica 6', city: 'Maribor' },
-        { street: 'Borova Vas 4', city: 'Maribor' }, // gps 46°33'07.0"N 15°37'41.8"E
+        { street: 'Koresova ulica 6', city: 'Maribor'  },
+        { street: 'Na poljah', city: 'Maribor'  }, // gps 46°33'07.0"N 15°37'41.8"E
         { street: 'Ulica heroja Šercerja', city: 'Maribor' },
         { street: 'Ruška cesta', city: 'Maribor' },
         { street: 'Cesta proletarskih brigad', city: 'Maribor' }, // 46.541471, 15.639593
@@ -247,10 +249,10 @@ async function fillDatabase() {
         { street: 'Ulica heroja Šercerja', city: 'Maribor' }, //46.549582, 15.621599
         { street: 'Ulica heroja Šercerja', city: 'Maribor' }, //46.554024, 15.624081
         { street: 'Partizanska cesta 12', city: 'Maribor' }, //46.560394, 15.652069
-        { street: 'Titova cesta', city: 'Maribor' }, // 46.558505, 15.651080
+        { street: 'Titova cesta', city: 'Maribor'}, // 46.558505, 15.651080
         { street: 'Pobreška cesta 18', city: 'Maribor' },
         { street: 'Pobreška cesta', city: 'Maribor' }, //46.554646, 15.659039
-        { street: 'Zrkovska cesta', city: 'Maribor' }, //46.555155, 15.665236
+        { street: 'Zrkovska cesta', city: 'Maribor' },//46.555155, 15.665236
         { street: 'Turnerjeva ulica 29-23', city: 'Maribor' },
         { street: 'Gosposvetska cesta 57-49', city: 'Maribor' },
         { street: 'Prežihova ulica 12', city: 'Maribor' },
@@ -261,13 +263,13 @@ async function fillDatabase() {
     const stations = [
         { name: 'Pariške komune', tk_id_location: 1 },
         { name: 'Koresova 1', tk_id_location: 2 },
-        { name: 'Borova Vas 4', tk_id_location: 3 },
+        { name: 'Na poljah 2', tk_id_location: 3 },
         { name: 'Heroja Šercerja 3', tk_id_location: 4 },
         { name: 'Ruška 5', tk_id_location: 5 },
         { name: 'Cesta proletarskih brigad 54', tk_id_location: 6 },
         { name: 'Cesta proletarskih brigad 62', tk_id_location: 7 },
         { name: '1-Qlandia', tk_id_location: 8 },
-        { name: 'Meljska cesta 44', tk_id_location: 9 },
+        { name: 'Šercerjeva 5', tk_id_location: 9 },
         { name: 'Šercerja 7', tk_id_location: 10 },
         { name: 'Partizanska  12', tk_id_location: 11 },
         { name: 'Titova 5', tk_id_location: 12 },
@@ -278,7 +280,7 @@ async function fillDatabase() {
         { name: 'Gosposvetska 57', tk_id_location: 17 },
         { name: 'Prežihova 9', tk_id_location: 18 },
         { name: 'Gregorčičeva 3', tk_id_location: 19 },
-        { name: 'Krekova 7', tk_id_location: 20 }
+        { name: 'Krekova 7', tk_id_location: 20 } 
     ]
 
 
@@ -322,7 +324,13 @@ async function fillDatabase() {
     const drivers_buses = [
         { tk_id_bus: 1, tk_id_driver: 1 },
         { tk_id_bus: 2, tk_id_driver: 2 },
-        { tk_id_bus: 3, tk_id_driver: 3 }
+        { tk_id_bus: 3, tk_id_driver: 3 },
+        { tk_id_bus: 4, tk_id_driver: 4 },
+        { tk_id_bus: 5, tk_id_driver: 5 },
+        { tk_id_bus: 1, tk_id_driver: 6 },
+        { tk_id_bus: 2, tk_id_driver: 7 },
+        { tk_id_bus: 3, tk_id_driver: 8 },
+        { tk_id_bus: 4, tk_id_driver: 9 },
     ]
 
     const drivers_Reviews = [
@@ -338,27 +346,88 @@ async function fillDatabase() {
 
 
     const lines_stations = [
-        { tk_id_line: 1, tk_id_station: 1, time: '07:00', day: 'Work days', tk_id_bus_driver: 1, order: 1 },
-        { tk_id_line: 1, tk_id_station: 2, time: '07:20', day: 'Work days', tk_id_bus_driver: 2, order: 2 },
-        { tk_id_line: 1, tk_id_station: 3, time: '07:35', day: 'Work days', tk_id_bus_driver: 3, order: 3 },
-        { tk_id_line: 1, tk_id_station: 4, time: '07:35', day: 'Work days', tk_id_bus_driver: 1, order: 4 },
-        { tk_id_line: 2, tk_id_station: 5, time: '07:35', day: 'Work days', tk_id_bus_driver: 2, order: 1 },
-        { tk_id_line: 2, tk_id_station: 6, time: '07:35', day: 'Work days', tk_id_bus_driver: 3, order: 2 },
-        { tk_id_line: 2, tk_id_station: 7, time: '07:35', day: 'Work days', tk_id_bus_driver: 1, order: 3 },
-        { tk_id_line: 2, tk_id_station: 8, time: '07:35', day: 'Work days', tk_id_bus_driver: 2, order: 4 },
-        { tk_id_line: 3, tk_id_station: 9, time: '07:35', day: 'Work days', tk_id_bus_driver: 3, order: 1 },
-        { tk_id_line: 3, tk_id_station: 10, time: '07:35', day: 'Work days', tk_id_bus_driver: 1, order: 2 },
-        { tk_id_line: 3, tk_id_station: 11, time: '07:00', day: 'Work days', tk_id_bus_driver: 2, order: 3 },
-        { tk_id_line: 3, tk_id_station: 12, time: '07:20', day: 'Work days', tk_id_bus_driver: 3, order: 4 },
-        { tk_id_line: 4, tk_id_station: 13, time: '07:35', day: 'Work days', tk_id_bus_driver: 1, order: 1 },
-        { tk_id_line: 4, tk_id_station: 14, time: '07:35', day: 'Work days', tk_id_bus_driver: 2, order: 2 },
-        { tk_id_line: 4, tk_id_station: 15, time: '07:35', day: 'Work days', tk_id_bus_driver: 3, order: 3 },
-        { tk_id_line: 4, tk_id_station: 16, time: '07:35', day: 'Work days', tk_id_bus_driver: 1, order: 4 },
-        { tk_id_line: 5, tk_id_station: 17, time: '07:35', day: 'Work days', tk_id_bus_driver: 2, order: 1 },
-        { tk_id_line: 5, tk_id_station: 18, time: '07:35', day: 'Work days', tk_id_bus_driver: 3, order: 2 },
-        { tk_id_line: 5, tk_id_station: 19, time: '07:35', day: 'Work days', tk_id_bus_driver: 1, order: 3 },
-        { tk_id_line: 5, tk_id_station: 20, time: '07:35', day: 'Work days', tk_id_bus_driver: 2, order: 4 },
-    ]
+        /// prvo ispisati prvu rutu prvi autobus posle toga drugi autobus drugu rutu 
+        { tk_id_line: 1, tk_id_station: 1, time: '07:10', day: '', tk_id_bus_driver: 1, order: 1 },
+        { tk_id_line: 1, tk_id_station: 2, time: '07:12', day: '', tk_id_bus_driver: 1, order: 2 },
+        { tk_id_line: 1, tk_id_station: 3, time: '07:15', day: '', tk_id_bus_driver: 1, order: 3 },
+        { tk_id_line: 1, tk_id_station: 4, time: '07:18', day: '', tk_id_bus_driver: 1, order: 4 },
+
+        { tk_id_line: 1, tk_id_station: 1, time: '07:20', day: 'Saturday ', tk_id_bus_driver: 2, order: 1 },
+        { tk_id_line: 1, tk_id_station: 2, time: '07:25', day: 'Saturday ', tk_id_bus_driver: 2, order: 2 },
+        { tk_id_line: 1, tk_id_station: 3, time: '07:27', day: 'Saturday ', tk_id_bus_driver: 2, order: 3 },
+        { tk_id_line: 1, tk_id_station: 4, time: '07:30', day: 'Saturday', tk_id_bus_driver: 2, order: 4 },
+
+        { tk_id_line: 1, tk_id_station: 1, time: '07:38', day: 'Sunday',  tk_id_bus_driver: 3, order: 1 },
+        { tk_id_line: 1, tk_id_station: 2, time: '07:42', day: 'Sunday',  tk_id_bus_driver: 3, order: 2 },
+        { tk_id_line: 1, tk_id_station: 3, time: '07:49', day: 'Sunday',  tk_id_bus_driver: 3, order: 3 },
+        { tk_id_line: 1, tk_id_station: 4, time: '07:53', day: 'Sunday', tk_id_bus_driver: 3, order: 4 },
+// 
+//
+        { tk_id_line: 2, tk_id_station: 5, time: '07:10', day: '', tk_id_bus_driver: 4, order: 1 },
+        { tk_id_line: 2, tk_id_station: 6, time: '07:12', day: '', tk_id_bus_driver: 4, order: 2 },
+        { tk_id_line: 2, tk_id_station: 7, time: '07:15', day: '', tk_id_bus_driver: 4, order: 3 },
+        { tk_id_line: 2, tk_id_station: 8, time: '07:18', day: '', tk_id_bus_driver: 4, order: 4 },
+
+        { tk_id_line: 2, tk_id_station: 5, time: '07:20', day: 'Saturday ', tk_id_bus_driver: 5, order: 1 },
+        { tk_id_line: 2, tk_id_station: 6, time: '07:25', day: 'Saturday ', tk_id_bus_driver: 5, order: 2 },
+        { tk_id_line: 2, tk_id_station: 7, time: '07:27', day: 'Saturday ', tk_id_bus_driver: 5, order: 3 },
+        { tk_id_line: 2, tk_id_station: 8, time: '07:30', day: 'Saturday', tk_id_bus_driver: 5, order: 4 },
+
+        { tk_id_line: 2, tk_id_station: 5, time: '07:38', day: 'Sunday',  tk_id_bus_driver: 6, order: 1 },
+        { tk_id_line: 2, tk_id_station: 6, time: '07:42', day: 'Sunday',  tk_id_bus_driver: 6, order: 2 },
+        { tk_id_line: 2, tk_id_station: 7, time: '07:49', day: 'Sunday',  tk_id_bus_driver: 6, order: 3 },
+        { tk_id_line: 2, tk_id_station: 8, time: '07:53', day: 'Sunday', tk_id_bus_driver: 6, order: 4 },
+// 
+//
+        { tk_id_line: 3, tk_id_station: 9, time: '07:10', day: '', tk_id_bus_driver: 7, order: 1 },
+        { tk_id_line: 3, tk_id_station: 10, time: '07:12', day: '', tk_id_bus_driver: 7, order: 2 },
+        { tk_id_line: 3, tk_id_station: 11, time: '07:15', day: '', tk_id_bus_driver: 7, order: 3 },
+        { tk_id_line: 3, tk_id_station: 12, time: '07:18', day: '', tk_id_bus_driver: 7, order: 4 },
+
+        { tk_id_line: 3, tk_id_station: 9, time: '07:20', day: '', tk_id_bus_driver: 8, order: 1 },
+        { tk_id_line: 3, tk_id_station: 10, time: '07:25', day: '', tk_id_bus_driver: 8, order: 2 },
+        { tk_id_line: 3, tk_id_station: 11, time: '07:27', day: '', tk_id_bus_driver: 8, order: 3 },
+        { tk_id_line: 3, tk_id_station: 12, time: '07:30', day: '', tk_id_bus_driver: 8, order: 4 },
+
+        { tk_id_line: 3, tk_id_station: 9, time: '07:38', day: '',  tk_id_bus_driver: 9, order: 1 },
+        { tk_id_line: 3, tk_id_station: 10, time: '07:42', day: '',  tk_id_bus_driver: 9, order: 2 },
+        { tk_id_line: 3, tk_id_station: 11, time: '07:49', day: '',  tk_id_bus_driver: 9, order: 3 },
+        { tk_id_line: 3, tk_id_station: 12, time: '07:53', day: '', tk_id_bus_driver: 9, order: 4 },
+// 
+//
+        { tk_id_line: 4, tk_id_station: 13, time: '07:10', day: '', tk_id_bus_driver: 3, order: 1 },
+        { tk_id_line: 4, tk_id_station: 14, time: '07:12', day: '', tk_id_bus_driver: 3, order: 2 },
+        { tk_id_line: 4, tk_id_station: 15, time: '07:15', day: '', tk_id_bus_driver: 3, order: 3 },
+        { tk_id_line: 4, tk_id_station: 16, time: '07:18', day: '', tk_id_bus_driver: 3, order: 4 },
+
+        { tk_id_line: 4, tk_id_station: 13, time: '07:20', day: '', tk_id_bus_driver: 1, order: 1 },
+        { tk_id_line: 4, tk_id_station: 14, time: '07:25', day: '', tk_id_bus_driver: 1, order: 2 },
+        { tk_id_line: 4, tk_id_station: 15, time: '07:27', day: '', tk_id_bus_driver: 1, order: 3 },
+        { tk_id_line: 4, tk_id_station: 16, time: '07:30', day: '', tk_id_bus_driver: 1, order: 4 },
+
+        { tk_id_line: 4, tk_id_station: 13, time: '07:38', day: '',  tk_id_bus_driver: 2, order: 1 },
+        { tk_id_line: 4, tk_id_station: 14, time: '07:42', day: '',  tk_id_bus_driver: 2, order: 2 },
+        { tk_id_line: 4, tk_id_station: 15, time: '07:49', day: '',  tk_id_bus_driver: 2, order: 3 },
+        { tk_id_line: 4, tk_id_station: 16, time: '07:53', day: '', tk_id_bus_driver: 2, order: 4 },
+// 
+//
+        { tk_id_line: 5, tk_id_station: 17, time: '07:10', day: '', tk_id_bus_driver: 8, order: 1 },
+        { tk_id_line: 5, tk_id_station: 18, time: '07:12', day: '', tk_id_bus_driver: 8, order: 2 },
+        { tk_id_line: 5, tk_id_station: 19, time: '07:15', day: '', tk_id_bus_driver: 8, order: 3 },
+        { tk_id_line: 5, tk_id_station: 20, time: '07:18', day: '', tk_id_bus_driver: 8, order: 4 },
+
+        { tk_id_line: 5, tk_id_station: 17, time: '07:20', day: '', tk_id_bus_driver: 9, order: 1 },
+        { tk_id_line: 5, tk_id_station: 18, time: '07:25', day: ' ', tk_id_bus_driver: 9, order: 2 },
+        { tk_id_line: 5, tk_id_station: 19, time: '07:27', day: ' ', tk_id_bus_driver: 9, order: 3 },
+        { tk_id_line: 5, tk_id_station: 20, time: '07:30', day: '', tk_id_bus_driver: 9, order: 4 },
+
+        { tk_id_line: 5, tk_id_station: 17, time: '07:38', day: '',  tk_id_bus_driver: 8, order: 1 },
+        { tk_id_line: 5, tk_id_station: 18, time: '07:42', day: '',  tk_id_bus_driver: 8, order: 2 },
+        { tk_id_line: 5, tk_id_station: 19, time: '07:49', day: '',  tk_id_bus_driver: 8, order: 3 },
+        { tk_id_line: 5, tk_id_station: 20, time: '07:53', day: '', tk_id_bus_driver: 8, order: 4 },
+// 
+//
+   ]
 
     const news = [{
             date: '2021-02-26',

@@ -45,7 +45,8 @@ router.get('/', async(req,res)=>{
 router.post('/',async(req,res)=>{
 
     let line = req.body;
-    const liness = await new lines().where('id',line.id).fetchAll(); // dodati listu svih linija 
+    console.log(line)
+    const liness = await new lines().where('id',line.tk_id_line).fetchAll(); // dodati listu svih linija 
     const ls = await new line_station().where('tk_id_line',line.tk_id_line)/*.andWhere('day',line.day).andWhere('tk_id_bus_driver',line.tk_id_bus_driver).andWhere('order',line.order).andWhere('tk_id_stations',line.tk_id_line)*/.fetchAll()
     const driver = await new driverB1().fetchAll();
     const st = await new station().fetchAll();

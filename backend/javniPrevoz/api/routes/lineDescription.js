@@ -35,6 +35,10 @@ const driverBusB1 = bookshelf.Model.extend({
     tableName: 'drivers_buses',
     idAttribute: 'id'
 })
+const buses = bookshelf.Model.extend({
+    tableName: 'buses',
+    idAttribute: 'id'
+})
 router.get('/', async(req,res)=>{
     const ls = await new line_station().fetchAll()
     res.json(ls.toJSON())
@@ -47,9 +51,19 @@ router.post('/',async(req,res)=>{
     const driver = await new driverB1().fetchAll();
     const st = await new station().fetchAll();
     const busDriver = await new driverBusB1().fetchAll();
-
-    return res.json({status:"dodna",lines:liness,lineStation:ls,driver:driver,station:st,busDriver:busDriver})
+    
+    return res.json({status:"dodna",line:liness,lineStation:ls,driver:driver,station:st,busDriver:busDriver})
 
 })
+router.get('/:id',async(req,res)=>{
+    let line = req.params.id;
+ //   const liness = await new lines().where('id',line.id).fetchAll(); // dodati listu svih linija 
+    const ls = await new line_station().where('tk_id_station',line).fetchAll()
+    const driver = await new driverB1().fetchAll();
+    const st = await new station().fetchAll();
+    const busDriver = await new driverBusB1().fetchAll();
+    const bus = await new buses().fetchAll();
+    return res.json({status:"dodna",bus:bus,lineStation:ls,driver:driver,station:st,busDriver:busDriver})
 
+})
 module.exports = router;

@@ -54,7 +54,7 @@ const edit=()=>{
         id : description.id,
         tk_id_line: description.tk_id_line,
         tk_id_station : document.forms[0].selectStation.value,
-        time: '8:00',
+        time: document.forms[0].selectTime.value,
         day:document.forms[0].selectDay.value,
         tk_id_bus_driver:1,
         order: document.forms[0].selectOrder.value
@@ -64,6 +64,7 @@ const edit=()=>{
        // tk_id_bus_driver: document.forms[0].select.value,
        //time : document.forms[0].select.value
     }
+    console.log(edited.tk_id_station,edited.time)
     fetch('http://localhost:3000/lineEdit/',{
         method: 'PUT',
         body: JSON.stringify(edited),
