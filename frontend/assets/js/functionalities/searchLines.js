@@ -1,4 +1,5 @@
 const PridobiLinije = () => {
+    event.preventDefault();
     fetch('http://localhost:3000/lines/', {
         method: "GET"
     }).then((odgovor) => {
@@ -11,19 +12,58 @@ const PridobiLinije = () => {
        <th >Add</th>
    </tr>
               </thead>`;
-   //     console.log(linije)
-        for (let i = 0; i < linije.length; i++) {
+        //     console.log(linije)
+
+
+
+        
+        for (let i = 0; i < linije.ln.length; i++) {
             let vrsta = tabela.insertRow();
             let celija = vrsta.insertCell(-1);
-            celija.innerHTML = `<button class="btn btn-primary btn-round" onclick='lineDescription(` + JSON.stringify(linije[i]) + `) '>` + linije[i].name + `</button> `;
-            console.log(linije[i])
-            let add = vrsta.insertCell();
-            add.innerHTML = `<button class="btn btn-primary btn-icon btn-round fav" id="fav${linije[i].id}" onclick='addFavourites(` + JSON.stringify(linije[i].id) + `)'><i class="now-ui-icons ui-2_favourite-28"></i></button>`;
+            celija.innerHTML = `<button class="btn btn-primary btn-round" onclick='lineDescription(` + JSON.stringify(linije.ln[i]) + `) '>` + linije.ln[i].name + `</button> `
+            console.log(JSON.stringify(linije.ln[i]) )
+            let add = vrsta.insertCell(-1);
+            add.innerHTML = `<button class="btn btn-primary btn-icon btn-round fav" id="fav${linije.ln[i].id}" onclick='addFavourites(` + JSON.stringify(linije.ln[i].id) + `)'><i class="now-ui-icons ui-2_favourite-28"></i></button>`;
         }
+        const div = document.querySelector("div.line select")
+       
+        
+        for (let i = 0; i < linije.ln.length; i++) {
+            const option = new Option(linije.ln[i].name);
+            option.value = linije.ln[i].id;
+            div.add(option, linije.ln[i].id)
+           
+
+            option.focus();
+
+        }
+        const st = document.querySelector("div.station select")
+        //const op = new Option("--")
+        
+        for (let i = 0; i < linije.st.length; i++) {
+            const option = new Option(linije.st[i].name);
+            option.value = linije.st[i].id;
+            st.add(option, linije.st[i].id)
+        
+            option.focus();
+
+        }
+        /*
+        const div2 = document.querySelector("select")
+
+        for(let i = 0;i<linije.length; i++){
+            const option = new Option(linije[i].name);
+            option.value = linije[i].id;
+            div2.add(option,linije[i].id) 
+            console.log(option)
+            
+            option.focus();
+            
+        }*/
 
     });
 }
-
+/*
 const PridobiStanice = () => {
     fetch('http://localhost:3000/stations/', {
         method: "GET"
@@ -50,16 +90,17 @@ const PridobiStanice = () => {
 
     });
 }
+*/
 
 
 const PretraziLinije = () => {
 
     event.preventDefault();
     let iskanje = {
-        Linija1: document.forms[0].Linija.value,
-        Postaja1: document.forms[0].Postaja.value,
+        Linija1: document.forms[0].selectLine.value,
+        Postaja1: document.forms[0].selectStation.value,
     }
-
+    
     fetch('http://localhost:3000/linije/', {
         method: 'POST',
         body: JSON.stringify(iskanje),
@@ -72,7 +113,7 @@ const PretraziLinije = () => {
 
         return odgovor.json();
     }).then((odgovorJSON) => {
-        
+        console.log(odgovorJSON)
         if (odgovorJSON.status === "linija") {
             document.forms[0].reset();
             let tabela = document.getElementById("tabelaLinije");
@@ -80,14 +121,12 @@ const PretraziLinije = () => {
         <thead >
         <tr >
         <th >Line</th>
-        <th >Station</th>
-        <th >Time</th> 
-        <th> Day</th>
-        <th> Driver</th>
+        
+        <th> ADD</th>
     </tr>
                </thead>`;
-            linija = odgovorJSON.lp
             
+
             /* for (let i = 0; i < linija.length; i++) {
                  let vrsta = tabela.insertRow();
                  for (const opis in linija[i]) {
@@ -96,84 +135,29 @@ const PretraziLinije = () => {
                      console.log(linija[i])
                  }
              }*/
-
-            for (let i = 0; i < linija.length; i++) {
-                for (let j = 0; j < linija[i].length; i++) {
-                    l = linija[i];
+            // lineDescription( JSON.stringify( odgovorJSON.linija ) )
+           
                     let vrsta = tabela.insertRow(-1);
                     let naz = vrsta.insertCell(-1);
-                    naz.innerHTML = `<button class="btn btn-primary btn-round" onclick="lineDescription(` + l[1] + `)">` + l[2].name + `</button> `;
-                    console.log(l)
-                    let pos = vrsta.insertCell(-1);
-                    pos.innerHTML = `<button class="btn btn-primary btn-round">` + l[1].name + `</button> `;
-
-                    let cas = vrsta.insertCell(-1);
-                    cas.innerHTML = `<button class="btn btn-primary btn-round">` + l[0].time + `</button> `;
-                    let dan = vrsta.insertCell(-1);
-                    dan.innerHTML = `<button class="btn btn-primary btn-round">` + l[0].day + `</button> `;
-
-                    let dri = vrsta.insertCell(-1);
-                    dri.innerHTML = `<button class="btn btn-primary btn-round">` + l[3].name + " " + l[3].surname + `</button> `;
-
+                    naz.innerHTML = `<button class="btn btn-primary btn-round" onclick='lineDescription(` + JSON.stringify( odgovorJSON.linija ) + `) '>` + odgovorJSON.linija.name + `</button> `
+                   console.log(odgovorJSON.linija)
+                    
                     let add = vrsta.insertCell();
-                    add.innerHTML = `<button onclick='dodajLiniju(` + JSON.stringify(l[i]) + `)' class="btn btn-primary btn-icon btn-round"'><i class="now-ui-icons ui-2_favourite-28"></i></button>`;
-                   
-                }
-            }
+                    add.innerHTML = `<button onclick='dodajLiniju(` + JSON.stringify(odgovorJSON.linija.id) + `)' class="btn btn-primary btn-icon btn-round"'><i class="now-ui-icons ui-2_favourite-28"></i></button>`;
+                 
+            
 
         } else if (odgovorJSON.status === "obstajata") {
-            document.forms[0].reset();
-            let tabela = document.getElementById("tabelaLinije");
-            tabela.innerHTML = `
-        <thead >
-        <tr >
-        <th >Line</th>
-        <th >Station</th>
-        <th >Time</th> 
-        <th> Day</th>
-        <th> Driver</th>
-    </tr>
-               </thead>`;
-            linija = odgovorJSON.obj
-            /*for (let i = 0; i < linija.length; i++) {
-                let vrsta = tabela.insertRow();
-                    let celija = vrsta.insertCell();
-                    celija.innerHTML = `<button class="btn btn-primary btn-round">` + linija[i].Naziv + `</button> `;
-                    console.log(linija[i])
-                }*/
-            for (let i = 0; i < linija.length; i++) {
-                for (let j = 0; j < linija[i].length; i++) {
-                    l = linija[i];
-                    let vrsta = tabela.insertRow(-1);
-                    let naz = vrsta.insertCell(-1);
-                    naz.innerHTML = `<button class="btn btn-primary btn-round" onclick="lineDescription(` + l[1] + `)">` + l[2].name + `</button> `;
-                    console.log(l[1])
-                    let pos = vrsta.insertCell(-1);
-                    pos.innerHTML = `<button class="btn btn-primary btn-round">` + l[1].name + `</button> `;
-
-                    let cas = vrsta.insertCell(-1);
-                    cas.innerHTML = `<button class="btn btn-primary btn-round">` + l[0].time + `</button> `;
-                    let dan = vrsta.insertCell(-1);
-                    dan.innerHTML = `<button class="btn btn-primary btn-round">` + l[0].day + `</button> `;
-
-                    let dri = vrsta.insertCell(-1);
-                    dri.innerHTML = `<button class="btn btn-primary btn-round">` + l[3].name + " " + l[3].surname + `</button> `;
-
-                    let add = vrsta.insertCell();
-                    add.innerHTML = `<button onclick='dodajLiniju(` + JSON.stringify(l[i]) + `)' class="btn btn-primary btn-icon btn-round"'><i class="now-ui-icons ui-2_favourite-28"></i></button>`;
-                    console.log(l[i])
-                }
+            
+            if(odgovorJSON.obj[0] === undefined){
+                alert("No matches")
+            }else{ 
+                let prvi = odgovorJSON.obj[1]
+                console.log(prvi[0].tk_id_line)
+                lineDesBig(prvi[0].tk_id_line)
             }
-            /*
-                        for (let i = 0; i < linije.length; i++) {
-                            let vrsta = tabela.insertRow();
-                            let celija = vrsta.insertCell(-1);
-                            celija.innerHTML = `<button class="btn btn-primary btn-round">` + linije[i].Naziv + `</button> `;
-                
-                            let add = vrsta.insertCell();
-                            add.innerHTML = `<button onclick='dodajLiniju(` + JSON.stringify(linije[i]) + `)' class="btn btn-primary btn-icon btn-round"'><i class="now-ui-icons ui-2_favourite-28"></i></button>`;
-                            console.log(linije[i])
-                        }*/
+            
+           
 
         } else {
             if (odgovorJSON.status === "postaja") {
@@ -182,11 +166,9 @@ const PretraziLinije = () => {
                 tabela.innerHTML = `
             <thead >
             <tr >
-        <th >Line</th>
-        <th >Station</th>
-        <th >Time</th> 
-        <th> Day</th>
-        <th> Driver</th>
+        
+        <th >Station name</th>
+        <th> Station street</th>
     </tr>
                    </thead>`;
                 /*let postaja = odgovorJSON.Linija_in_Postaja
@@ -199,8 +181,8 @@ const PretraziLinije = () => {
                     }
                 }
 */
-                linija = odgovorJSON.lp
-               
+              //  linija = odgovorJSON.lp
+
                 /* for (let i = 0; i < linija.length; i++) {
                     let vrsta = tabela.insertRow();
                     for (const opis in linija[i]) {
@@ -209,40 +191,36 @@ const PretraziLinije = () => {
                         console.log(linija[i])
                     }
                 }*/
-                for (let i = 0; i < linija.length; i++) {
+                console.log(odgovorJSON)
+                /*for (let i = 0; i < linija.length; i++) {
                     for (let j = 0; j < linija[i].length; i++) {
-                        l = linija[i];
+                        l = linija[i];*/
                         let vrsta = tabela.insertRow(-1);
                         let naz = vrsta.insertCell(-1);
-                        naz.innerHTML = `<button class="btn btn-primary btn-round" onclick='lineDescription(` + l[1] + `)'>` + l[2].name + `</button> `;
-                        console.log(l[1])
-                        let pos = vrsta.insertCell(-1);
-                        pos.innerHTML = `<button class="btn btn-primary btn-round">` + l[1].name + `</button> `;
-
-                        let cas = vrsta.insertCell(-1);
-                        cas.innerHTML = `<button class="btn btn-primary btn-round">` + l[0].time + `</button> `;
-                        let dan = vrsta.insertCell(-1);
-                        dan.innerHTML = `<button class="btn btn-primary btn-round">` + l[0].day + `</button> `;
-
-                        let dri = vrsta.insertCell(-1);
-                        dri.innerHTML = `<button class="btn btn-primary btn-round">` + l[3].name + " " + l[3].surname + `</button> `;
-
-                        let add = vrsta.insertCell();
-                        add.innerHTML = `<button onclick='dodajLiniju(` + JSON.stringify(l[i]) + `)' class="btn btn-primary btn-icon btn-round"'><i class="now-ui-icons ui-2_favourite-28"></i></button>`;
+                        naz.innerHTML = `<button class="btn btn-primary btn-round" >` + odgovorJSON.postaja.name + `</button> `;
                         
-                    }
-                }
+                        let pos = vrsta.insertCell(-1);
+                        pos.innerHTML = `<button class="btn btn-primary btn-round">` + odgovorJSON.street.street + `</button> `;
+
+                     /*   let add = vrsta.insertCell();
+                        add.innerHTML = `<button onclick='dodajLiniju(` + JSON.stringify(l[i]) + `)' class="btn btn-primary btn-icon btn-round"'><i class="now-ui-icons ui-2_favourite-28"></i></button>`;
+*/
+               
 
             } else {
-                alert('Linija ali postaja ne obstaja');
+                alert("No matches")
 
             }
         }
     })
 }
+
+
+
+
 const addFavourites = (id) => {
     if (document.getElementById("fav" + id).innerHTML === `<i class="now-ui-icons ui-2_favourite-28"></i>`) {
-        let favourite = {                                     ///create object with selected values
+        let favourite = { ///create object with selected values
             id: null,
             tk_id_lines: id,
             tk_id_users: 2
@@ -259,19 +237,17 @@ const addFavourites = (id) => {
             if (favouriteReplyJSON.status === "added") {
                 document.getElementById("fav" + id).innerHTML = `<i class="material-icons style="background-color:white">favorite</i>`;
 
-            }
-            else {                                                      //unsuccessfull output
+            } else { //unsuccessfull output
                 console.log('error');
             };
         })
-    } else
-    {
-        let user =2;
+    } else {
+        let user = 2;
         let mybody = {
-            tk_id_lines:id,
-            tk_id_users:user
+            tk_id_lines: id,
+            tk_id_users: user
         };
-        fetch('http://localhost:3000/favourites/'+id + '/' + user, {
+        fetch('http://localhost:3000/favourites/' + id + '/' + user, {
             method: 'DELETE',
             body: JSON.stringify(mybody), // !!!!
             headers: {
@@ -283,14 +259,28 @@ const addFavourites = (id) => {
             if (favouriteReplyJSON.status === "deleted") {
                 document.getElementById("fav" + id).innerHTML = `<i class="now-ui-icons ui-2_favourite-28"></i>`;
 
-            }
-            else {                                                      //unsuccessfull output
+            } else { //unsuccessfull output
                 console.log('error');
             };
         })
     }
 }
 
+const lineDesBig = (line) => {
+
+    fetch('http://localhost:3000/description/' + line, {
+        method: 'GET',
+
+    }).then((res) => {
+
+        return res.json()
+    }).then((resJSOn) => {
+
+        localStorage.setItem('desBig', JSON.stringify(resJSOn));
+        window.location.href = "linesDescriptionBig.html"
+
+    })
+}
 
 function loadFavourites(id) {
 
@@ -306,7 +296,32 @@ function loadFavourites(id) {
 }
 
 
+
+const lineDescription2 = (lineDes) => {
+    let line = {
+        id: lineDes.id,
+        name: lineDes.name
+    }
+
+
+    console.log(line)
+    fetch('http://localhost:3000/description/', {
+        method: 'POST',
+        body: JSON.stringify(line),
+        Headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+        }
+    }).then((descriptionLine) => {
+        console.log(descriptionLine)
+        return descriptionLine.json()
+    }).then((descriptionLineJSON) => {
+        localStorage.setItem("line", JSON.stringify(line))
+        window.location.href = "linesDescription.html"
+    })
+}
 const lineDescription = (lineDes) => {
+    console.log(lineDes)
     let line = {
         id: lineDes.id,
         name: lineDes.name

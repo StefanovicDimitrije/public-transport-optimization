@@ -20,10 +20,15 @@ const  lines = bookshelf.Model.extend({
     tableName: 'lines',
     idAttribute:'id'
 })
+const  stations = bookshelf.Model.extend({
+    tableName: 'stations',
+    idAttribute:'id'
+})
 
 router.get('/', async(req,res)=>{
     const ln = await new lines().fetchAll()
-    res.json(ln.toJSON())
+    const st = await new stations().fetchAll()
+    res.json({ln:ln,st:st})
 });
 
 module.exports = router;
