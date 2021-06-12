@@ -237,8 +237,8 @@ async function fillDatabase() {
 
     const locations = [
         { street: 'Ulica Pariške komune ', city: 'Maribor' },
-        { street: 'Koresova ulica 6', city: 'Maribor'  },
-        { street: 'Na poljah', city: 'Maribor'  }, // gps 46°33'07.0"N 15°37'41.8"E
+        { street: 'Koresova ulica 6', city: 'Maribor' },
+        { street: 'Borova Vas 4', city: 'Maribor' }, // gps 46°33'07.0"N 15°37'41.8"E
         { street: 'Ulica heroja Šercerja', city: 'Maribor' },
         { street: 'Ruška cesta', city: 'Maribor' },
         { street: 'Cesta proletarskih brigad', city: 'Maribor' }, // 46.541471, 15.639593
@@ -247,10 +247,10 @@ async function fillDatabase() {
         { street: 'Ulica heroja Šercerja', city: 'Maribor' }, //46.549582, 15.621599
         { street: 'Ulica heroja Šercerja', city: 'Maribor' }, //46.554024, 15.624081
         { street: 'Partizanska cesta 12', city: 'Maribor' }, //46.560394, 15.652069
-        { street: 'Titova cesta', city: 'Maribor'}, // 46.558505, 15.651080
+        { street: 'Titova cesta', city: 'Maribor' }, // 46.558505, 15.651080
         { street: 'Pobreška cesta 18', city: 'Maribor' },
         { street: 'Pobreška cesta', city: 'Maribor' }, //46.554646, 15.659039
-        { street: 'Zrkovska cesta', city: 'Maribor' },//46.555155, 15.665236
+        { street: 'Zrkovska cesta', city: 'Maribor' }, //46.555155, 15.665236
         { street: 'Turnerjeva ulica 29-23', city: 'Maribor' },
         { street: 'Gosposvetska cesta 57-49', city: 'Maribor' },
         { street: 'Prežihova ulica 12', city: 'Maribor' },
@@ -261,13 +261,13 @@ async function fillDatabase() {
     const stations = [
         { name: 'Pariške komune', tk_id_location: 1 },
         { name: 'Koresova 1', tk_id_location: 2 },
-        { name: 'Na poljah 2', tk_id_location: 3 },
+        { name: 'Borova Vas 4', tk_id_location: 3 },
         { name: 'Heroja Šercerja 3', tk_id_location: 4 },
         { name: 'Ruška 5', tk_id_location: 5 },
         { name: 'Cesta proletarskih brigad 54', tk_id_location: 6 },
         { name: 'Cesta proletarskih brigad 62', tk_id_location: 7 },
         { name: '1-Qlandia', tk_id_location: 8 },
-        { name: 'Šercerjeva 5', tk_id_location: 9 },
+        { name: 'Meljska cesta 44', tk_id_location: 9 },
         { name: 'Šercerja 7', tk_id_location: 10 },
         { name: 'Partizanska  12', tk_id_location: 11 },
         { name: 'Titova 5', tk_id_location: 12 },
@@ -278,7 +278,7 @@ async function fillDatabase() {
         { name: 'Gosposvetska 57', tk_id_location: 17 },
         { name: 'Prežihova 9', tk_id_location: 18 },
         { name: 'Gregorčičeva 3', tk_id_location: 19 },
-        { name: 'Krekova 7', tk_id_location: 20 } 
+        { name: 'Krekova 7', tk_id_location: 20 }
     ]
 
 
@@ -357,7 +357,7 @@ async function fillDatabase() {
         { tk_id_line: 5, tk_id_station: 17, time: '07:35', day: 'Work days', tk_id_bus_driver: 2, order: 1 },
         { tk_id_line: 5, tk_id_station: 18, time: '07:35', day: 'Work days', tk_id_bus_driver: 3, order: 2 },
         { tk_id_line: 5, tk_id_station: 19, time: '07:35', day: 'Work days', tk_id_bus_driver: 1, order: 3 },
-        { tk_id_line: 5, tk_id_station: 20, time: '07:35', day: 'Work days', tk_id_bus_driver: 2, order: 4 }, 
+        { tk_id_line: 5, tk_id_station: 20, time: '07:35', day: 'Work days', tk_id_bus_driver: 2, order: 4 },
     ]
 
     const news = [{
