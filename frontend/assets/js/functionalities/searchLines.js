@@ -166,9 +166,9 @@ const PretraziLinije = () => {
                 tabela.innerHTML = `
             <thead >
             <tr >
-        
+        <th> Line nuber</th>
         <th >Station name</th>
-        <th> Station street</th>
+        
     </tr>
                    </thead>`;
                 /*let postaja = odgovorJSON.Linija_in_Postaja
@@ -192,16 +192,18 @@ const PretraziLinije = () => {
                     }
                 }*/
                 console.log(odgovorJSON)
-                /*for (let i = 0; i < linija.length; i++) {
-                    for (let j = 0; j < linija[i].length; i++) {
-                        l = linija[i];*/
+                for (let i = 0; i < odgovorJSON.postaja.length; i++) {
+                    let obj = {
+                        id: odgovorJSON.postaja[i].id,
+                        name: odgovorJSON.postaja[i].line
+                    }
                         let vrsta = tabela.insertRow(-1);
                         let naz = vrsta.insertCell(-1);
-                        naz.innerHTML = `<button class="btn btn-primary btn-round" >` + odgovorJSON.postaja.name + `</button> `;
+                        naz.innerHTML = `<button class="btn btn-primary btn-round" onclick='lineDescription(`+ JSON.stringify(obj) +`)') >` + odgovorJSON.postaja[i].line + `</button> `;
                         
                         let pos = vrsta.insertCell(-1);
-                        pos.innerHTML = `<button class="btn btn-primary btn-round">` + odgovorJSON.street.street + `</button> `;
-
+                        pos.innerHTML = `<button class="btn btn-primary btn-round">` + odgovorJSON.postaja[i].station + `</button> `;
+                }
                      /*   let add = vrsta.insertCell();
                         add.innerHTML = `<button onclick='dodajLiniju(` + JSON.stringify(l[i]) + `)' class="btn btn-primary btn-icon btn-round"'><i class="now-ui-icons ui-2_favourite-28"></i></button>`;
 */
