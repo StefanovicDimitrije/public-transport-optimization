@@ -33,7 +33,7 @@
   
 </style>
 
-<body class="landing-page sidebar-collapse" onload="printInfo2();startLogin();">
+<body class="landing-page sidebar-collapse" onload="lineEidtName();startLogin();">
 
   <!-- Navbar -->
    <!-- Navbar -->
@@ -144,64 +144,64 @@
 
 
   <div class="row">
-    <div class="card">
-      <div class="card-body">
-        <blockquote class="blockquote blockquote-primary mb-0">
-         
-            <div class="col-md-12">
-              <form onsubmit="edit(event)">
-                <div class="row">
-                  <div class="col-md-2 text-center" style="display: flex;justify-content: center; align-items: center;">
-                    <div id="idLinijaPostaja">
-
-                    </div>
-                  </div>
-                  <div id="lineDescription" class="col-md-10">
-
-                    <div class="row">
-                      <div class="col-md-2" class="form-group">
-                        <div class="selectDriverBus">
-                          <label for="selectStation">Station</label>
-                          <select name="selectStation" id="selectStation" class="form-control ">
-
-                          </select></div>
-                      </div>
-                      <div class="col-md-2" class="form-group">
-                        <label for="time">Time</label></br>
-                        <input type="text" class="form-control" id="time" placeholder="Time">
-                      </div>
-                      <label for="Day"></label>
-                      <div class="col-md-2" class="form-group">
-                        <label for="selectDay">Does not work on </label>
-                        <select name="select" id="selectDay" class="form-control ">
-                          <option value="">--</option>
-                          <option value="Satrday">Satrday</option>
-                          <option value="Sunday">Sunday</option>
-                        </select></div>
-                      <div class="col-md-2" class="form-group">
-                        <label for="selectOrder">Order</label>
-                        <input type="number" min="1" max="30" name="selectOrder" id="selectOrder" class="form-control"
-                          placeholder="Order">
-                      </div>
-                      <div class="col-md-2" class="form-group">
-                        <div class="busD">
-                          <label for="select">Bus</label>
-                          <select type="select" id="select" class="form-control ">
-                          </select></div>
-                      </div>
-                      <div class="col-md-2" class="form-group">
-                        <input id="btn" class="btn btn-lg btn-primary btn-block" type="submit" value="Submit">
-                      </div>
-                    </div>
-                  </div>
-                
-              </form>
-            </div>
-          </div>
-        </blockquote>
-      </div>
     </div>
+  <div class="row" style="margin-top:7%;margin-bottom:7%;">
+      <div class="col-md-6">
+      <form name="line" onsubmit="editLineName(event)">
+        <div class="container" style="display: flex;justify-content: center;align-items: center;">
+  
+            <div class="col-md-10">
+              <div class="card text-center">
+
+                <div class="card-header mt-2">
+                  Edit Line name
+                </div>
+                <div class="card-body">
+                  <div class="line">
+                  <select name="selectLineEdit" id="selectLineEdit" class="form-control form-control-lg">
+
+                  </select></div>
+                  </br>
+                  <input type="text" id="line" class="form-control" placeholder="Line">
+                  <input id="btn" class="btn btn-lg btn-primary btn-block" type="submit" value="Submit">
+                </div>
+              </div>
+           </div>
+         </div>
+         </div>
+     
+          </form>
+          <div class="col-md-6">
+        <form name="station" onsubmit="editStationName(event)">
+            <div class="container" style="display: flex;justify-content: center;align-items: center;">
+  
+              <div class="col-md-10">
+              <div class="card text-center">
+                <div class="card-header mt-2">
+                  Edit Station name
+                </div>
+                <div class="card-body">
+                  <div class="station">
+                  <select name="select" id="selectStationEdit" class="form-control form-control-lg">
+                  </select></div>
+                  </br>
+                  <input type="text" id="station" class="form-control" placeholder="Station">
+                  <input id="btn" class="btn btn-lg btn-primary btn-block" type="submit" value="Submit">
+                </div>
+              </div>
+            
+          </div>
+        </div>
+      </div>
+        </form>
+       
+      
+
+
+
+
   </div>
+
   </div>
   </div>
 
