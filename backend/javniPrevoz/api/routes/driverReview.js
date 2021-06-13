@@ -37,12 +37,11 @@ router.post('/',async(req,res)=>{
     let dr = req.body.driver;
     let oc = req.body.mark;
     let com = req.body.comment;
-    let ad = req.body;
-    const add = await new driversReview().save({tk_id_driver:dr,mark:oc,comment:com});
-    add.toJSON;
-    console.log(add);
+    let user = req.body.user;
+    const add = await new driversReview().save({tk_id_driver:dr,mark:oc,comment:com,tk_id_user:user});
+   
  
-    res.json({status:"added",add:add});
+    res.json({status:"added"});
 
 
 
