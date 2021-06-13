@@ -14,11 +14,9 @@ const printInfo = () => {
     }).then((descriptionLineJSON) => {
         localStorage.setItem('lineDes', JSON.stringify(descriptionLineJSON))
         let tabela = document.getElementById("tableLineDes");
-        tabela.innerHTML = `
-      <thead class="thead-orange">
-      
-   </tr>
-             </thead>`;
+
+
+
 
 
         var br = 1;
@@ -41,15 +39,20 @@ const printInfo = () => {
 
                     let vrsta = tabela.insertRow();
                     let stationNames = vrsta.insertCell(-1);
+
                     stationNames.innerHTML = `<button class="btn btn-primary btn-round" onclick=(lineDesBig(${descriptionLineJSON.lineStation[i].tk_id_station})) '>` + stationName.name + `</button> `;
                     console.log(descriptionLineJSON.lineStation[i].tk_id_station)
                     for (let x = 0; x < descriptionLineJSON.lineStation.length; x++) {
                         if (descriptionLineJSON.lineStation[x].tk_id_station == descriptionLineJSON.lineStation[i].tk_id_station) {
                             let time = vrsta.insertCell(-1)
                             time.innerHTML = `<button class="btn btn-primary btn-round" '>` + descriptionLineJSON.lineStation[x].time + `</button> `;
+
                         }
 
                     }
+                    let order = vrsta.insertCell(-1);
+                    order.innerHTML = `<button class="btn btn-primary btn-round" >` + descriptionLineJSON.lineStation[i].order + `</button> `;
+                    console.log(descriptionLineJSON.lineStation[i].tk_id_station)
 
 
                 }
@@ -250,26 +253,25 @@ const printInfo2 = () => {
 
 
 
-
+const setValue = () => {
+    const selectedValue = document.forms[0].select.value
+}
 
 const printBigInfo = () => {
     let description = JSON.parse(localStorage.getItem('desBig'))
     console.log(description)
     let lineStorage = JSON.parse(localStorage.getItem('lineDes'))
     let tabela = document.getElementById("tableLineDesBig");
-    tabela.innerHTML = `
-   <thead class="thead-orange">
-   <th>Station</th>
-   <th>Time</th>
-   <th>Driver</th>
-   <th>Bus number</th>
-   <th>Does not work on</th>
-</tr>
-          </thead>`;
-    console.log(lineStorage)
+    
+   
+    
+  /*  tabela.innerHTML = `
+   `;
+   */
 
     for (let i = 0; i <= description.lineStation.length; i++) {
-        //  if(lineStorage.line.id == description.lineStation[i].tk_id_line){ 
+        //  if(lineStorage.line.id == description.lineStation[i].tk_id_line){
+
         for (const station of description.station) {
             if (station.id === description.lineStation[i].tk_id_station) {
                 for (const driverBus of description.busDriver) {
@@ -278,6 +280,7 @@ const printBigInfo = () => {
                             if (bus.id == driverBus.tk_id_bus) {
                                 for (const driver of description.driver) {
                                     if (driver.id == driverBus.tk_id_driver) {
+                                     //   if( this.selectedValue === description.lineStation[i].day ) {
                                         let vrsta = tabela.insertRow();
                                         let stationNames = vrsta.insertCell(-1);
                                         stationNames.innerHTML = `<button class="btn btn-primary btn-round" '>` + station.name + `</button> `;
@@ -288,12 +291,16 @@ const printBigInfo = () => {
                                         let busNo = vrsta.insertCell(-1);
                                         busNo.innerHTML = `<button class="btn btn-primary btn-round" '>` + bus.serialNo + `</button> `;
                                         let day = vrsta.insertCell(-1);
-                                        day.innerHTML = `<button class="btn btn-primary btn-round" '>` + description.lineStation[i].day + `</button> `;
+                                        
+                                            day.innerHTML = `<button class="btn btn-primary btn-round" '>` + description.lineStation[i].day + `</button> `;
+
+                                        
                                         let edit = vrsta.insertCell(-1);
                                         edit.innerHTML = `<button class="btn btn-primary btn-link"  onclick='lineEdit(` + JSON.stringify(description.lineStation[i]) + `)' >Edit</button>`;
-
-                                        //  }
-                                    }
+                                        console.log(description.lineStation[i].day)
+                                        // }
+                                  //  }
+                                }
                                 }
                             }
                         }

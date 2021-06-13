@@ -138,30 +138,32 @@
             
             <div class="row">
               <div class="col-md-2" class="form-group">
+                <div class="selectDriverBus">
                 <label for="selectStation">Station</label>
-              <select  name="selectStation" id="selectStation" class="form-control form-control-lg">
-                  
-              </select></div>
+              <select  name="selectStation" id="selectStation" class="form-control ">
+            
+              </select></div>  </div>
               <div class="col-md-2" class="form-group">
-                <label for="selectTime">Time</label></br>
-              <input type="time" id="selectTime" placeholder="Time">
+                <label for="time">Time</label></br>
+                <input type="text" class="form-control" id="time" placeholder="Time">
               </div>
               <label for="Day"></label>
               <div class="col-md-2" class="form-group">
-                <label for="selectDay">Day</label>
+                <label for="selectDay">Does not work on </label>
               <select  name="select" id="selectDay" class="form-control ">
-                  <option value="Work day">Work day</option>
-                  <option value="Weekend">Weekend</option>
+                <option value="">--</option>
+                  <option value="Satrday">Satrday</option>
+                  <option value="Sunday">Sunday</option>
               </select></div>
               <div class="col-md-2" class="form-group">
-                <label- for="selectOrder">Order</label>
+                <label for="selectOrder">Order</label>
                 <input type="number" min="1" max="30" name="selectOrder" id="selectOrder" class="form-control" placeholder="Order" >
               </div>
               <div class="col-md-2" class="form-group">
-                <label for="selectDriverBus">Driver</label>
-              <select  name="select" id="selectDriverBus" class="form-control ">
-                  
-              </select></div>
+                <div class="selectDriverBus">
+                <label for="selectDriverBus">Bus</label>
+              <input  type="text" id="selectDriverBus" class="form-control ">
+              </select></div></div>
               <div class="col-md-2" class="form-group">
               <input id="btn"  class="btn btn-lg btn-primary btn-block" type="submit" value="Submit"  >
             </div>

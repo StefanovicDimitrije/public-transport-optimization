@@ -138,7 +138,22 @@
             <table id="tableLineDesBig" class="table ">
            
               <tbody id="tableLineDesBig"></tbody>
-           
+              <thead class="thead-orange">
+                <th>Station</th>
+                <th>Time</th>
+                <th>Driver</th>
+                <th>Bus number</th>
+                <th>Does not work on</th>
+                <th><form onsubmit='setValue()'>
+                <select id='select' onchange='setValue()'>
+                <option  value=''>--</option>
+                 <option value='Saturday'>Saturday</option>
+                <option value='Sunday' >Sunday</option>
+                </select>
+                <th><input type='submit'></input></th>
+                </form></th>
+             </tr>
+                       </thead>
             </table>
           
           </div>

@@ -29,8 +29,8 @@ const  station = bookshelf.Model.extend({
     tableName: 'stations',
     idAttribute:'id'
 })
-const driverB1 = bookshelf.Model.extend({
-    tableName: 'drivers',
+const bus = bookshelf.Model.extend({
+    tableName: 'buses',
     idAttribute: 'id'
 })
 const driverBusB1 = bookshelf.Model.extend({
@@ -48,11 +48,11 @@ router.post('/',async(req,res)=>{
     console.log(line)
     const liness = await new lines().where('id',line.tk_id_line).fetchAll(); // dodati listu svih linija 
     const ls = await new line_station().where('tk_id_line',line.tk_id_line)/*.andWhere('day',line.day).andWhere('tk_id_bus_driver',line.tk_id_bus_driver).andWhere('order',line.order).andWhere('tk_id_stations',line.tk_id_line)*/.fetchAll()
-    const driver = await new driverB1().fetchAll();
+    const buss = await new bus().fetchAll();
     const st = await new station().fetchAll();
     const busDriver = await new driverBusB1().where('id',line.tk_id_bus_driver).fetchAll();
 
-    return res.json({status:"dodna",lines:liness,lineStation:ls,driver:driver,station:st,busDriver:busDriver})
+    return res.json({status:"dodna",lines:liness,lineStation:ls,bus:buss,station:st,busDriver:busDriver})
 
 })
 router.put('/',async(req,res)=>{
