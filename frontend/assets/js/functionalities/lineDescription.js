@@ -274,12 +274,12 @@ const printBigInfo = () => {
     console.log(description)
     let lineStorage = JSON.parse(localStorage.getItem('lineDes'))
     let tabela = document.getElementById("tableLineDesBig");
-    let stations = [];
+    var stations = [];
 
     /*  tabela.innerHTML = `
      `;
      */
-    for (let i = 0; i <= description.lineStation.length; i++) {
+    for (let i = 0; i < description.lineStation.length; i++) {
         //  if(lineStorage.line.id == description.lineStation[i].tk_id_line){
 
         for (const station of description.station) {
@@ -291,8 +291,7 @@ const printBigInfo = () => {
                                 for (const driver of description.driver) {
                                     if (driver.id == driverBus.tk_id_driver) {
                                         stations[0] = station.name
-                                        findBusStops(stations);
-                                        //   if( this.selectedValue === description.lineStation[i].day ) {
+                                            //   if( this.selectedValue === description.lineStation[i].day ) {
                                         let vrsta = tabela.insertRow();
                                         let stationNames = vrsta.insertCell(-1);
                                         stationNames.innerHTML = `<p>` + station.name + `</p> `;
@@ -314,14 +313,17 @@ const printBigInfo = () => {
                                             //  }
                                     }
                                 }
+
                             }
+
                         }
                     }
                 }
             }
 
         }
+
     }
 
-
+    findBusStops(stations);
 }

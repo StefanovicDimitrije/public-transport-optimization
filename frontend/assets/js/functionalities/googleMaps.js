@@ -11,17 +11,28 @@ L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_toke
 
 
 function findBusStops(stations) {
-    for (let i = 0; i < stations.length; i++) {
-        fetch('https://nominatim.openstreetmap.org/search?format=json&q=' + stations[i] + " Maribor", { method: "GET" }).then((response) => { return response.json(); }).then((location) => {
+    if (stations.length == 1) {
+        fetch('https://nominatim.openstreetmap.org/search?format=json&q=' + stations[0] + " Maribor", { method: "GET" }).then((response) => { return response.json(); }).then((location) => {
             if (location.length == 0) {
                 return
             }
 
             let busStop = location[0];
-            console.log(busStop);
             L.marker([busStop.lat, busStop.lon]).addTo(mymap);
             mymap.setView([busStop.lat, busStop.lon], 13);
         });
-    }
+    } else {
+        for (let i = 0; i < stations.length; i++) {
+            fetch('https://nominatim.openstreetmap.org/search?format=json&q=' + stations[i] + " Maribor", { method: "GET" }).then((response) => { return response.json(); }).then((location) => {
+                if (location.length == 0) {
+                    return
+                }
 
+                let busStop = location[0];
+                L.marker([busStop.lat, busStop.lon]).addTo(mymap);
+                mymap.setView([busStop.lat, busStop.lon], 13);
+            });
+        }
+
+    }
 }
