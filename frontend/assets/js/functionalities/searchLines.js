@@ -7,16 +7,13 @@ const PridobiLinije = () => {
     }).then((linije) => {
         let tabela = document.getElementById("tabelaLinije");
         tabela.innerHTML = `
-       <thead class="thead-orange">
-       <th >Line</th>
-       <th >Add</th>
-   </tr>
-              </thead>`;
+            <thead class="thead-orange">
+            <th >Line</th>
+            <th >Add</th>
+            </tr>
+            </thead>`;
         //     console.log(linije)
 
-
-
-        
         for (let i = 0; i < linije.ln.length; i++) {
             let vrsta = tabela.insertRow();
             let celija = vrsta.insertCell(-1);
@@ -48,6 +45,7 @@ const PridobiLinije = () => {
             option.focus();
 
         }
+        
         /*
         const div2 = document.querySelector("select")
 
@@ -61,8 +59,11 @@ const PridobiLinije = () => {
             
         }*/
 
-    });
+    }).then(()=>loadFavourites());
+  
 }
+
+
 /*
 const PridobiStanice = () => {
     fetch('http://localhost:3000/stations/', {
@@ -91,7 +92,6 @@ const PridobiStanice = () => {
     });
 }
 */
-
 
 const PretraziLinije = () => {
 
@@ -225,7 +225,7 @@ const addFavourites = (id) => {
         let favourite = { ///create object with selected values
             id: null,
             tk_id_lines: id,
-            tk_id_users: 2
+            tk_id_users: JSON.parse(sessionStorage.getItem('user')).id
         }
         fetch('http://localhost:3000/favourites/', {
             method: 'POST',
@@ -244,7 +244,7 @@ const addFavourites = (id) => {
             };
         })
     } else {
-        let user = 2;
+        let user = JSON.parse(sessionStorage.getItem('user')).id;
         let mybody = {
             tk_id_lines: id,
             tk_id_users: user
@@ -284,9 +284,11 @@ const lineDesBig = (line) => {
     })
 }
 
-function loadFavourites(id) {
+function loadFavourites() {
 
-    fetch('http://localhost:3000/favourites/' + id, {
+    let user = JSON.parse(sessionStorage.getItem('user')).id;
+
+    fetch('http://localhost:3000/favourites/' + user, {
         method: 'GET'
     }).then((myReply) => {
         return myReply.json();
@@ -296,8 +298,6 @@ function loadFavourites(id) {
         }
     });
 }
-
-
 
 const lineDescription2 = (lineDes) => {
     let line = {
@@ -345,4 +345,48 @@ const lineDescription = (lineDes) => {
         localStorage.setItem("line", JSON.stringify(line))
         window.location.href = "linesDescription.html"
     })
+}
+
+function viewFavourites(){
+
+    let user = JSON.parse(sessionStorage.getItem('user')).id;
+    fetch('http://localhost:3000/favourites/' + user, {
+        method: 'GET'
+    }).then((myReply) => {
+        return myReply.json();
+    }).then((favourites) => {
+        
+        fetch('http://localhost:3000/lines/', {
+        method: "GET"
+            }).then((odgovor) => {
+                return odgovor.json();
+            }).then((linije0) => {
+                return linije0.ln;
+            }).then((linije)=> {
+
+                let tabela = document.getElementById("tabelaLinije");
+                tabela.innerHTML = `
+                    <thead class="thead-orange">
+                        <th >Line</th>
+                        <th >Add</th>
+                    </tr>
+                    </thead>`;
+                console.log(linije)
+                for (let i = 0; i < favourites.length; i++) {
+
+                    let j = linije.findIndex(x => x.id === favourites[i].tk_id_lines);
+
+                    let vrsta = tabela.insertRow();
+                    let celija = vrsta.insertCell(-1);
+                    celija.innerHTML = `<button class="btn btn-primary btn-round" onclick='lineDescription(` + JSON.stringify(linije[j]) + `) '>` + linije[j].name + `</button> `;
+                    console.log(linije[i])
+                    let add = vrsta.insertCell();
+                    add.innerHTML = `<button class="btn btn-primary btn-icon btn-round fav" id="fav${linije[j].id}" onclick='addFavourites(` + JSON.stringify(linije[j].id) + `)'><i class="now-ui-icons ui-2_favourite-28"></i></button>`;
+                
+                }
+
+            }).then(()=>loadFavourites());
+
+    });
+
 }
