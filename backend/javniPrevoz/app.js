@@ -53,7 +53,7 @@ app.use('/changes', changesRouter); //Changes
 app.use('/questions', questionsRouter); //questions
 app.use('/lines', lineRouter);
 app.use('/stations', stationRouter);
-app.use('/linije', linesPostRouter);
+app.use('/linije', linesPostRouter); /// vmesna eniteta
 app.use('/account', accountRouter); //Accounts
 app.use('/review', reviewRouter);
 app.use('/questionsReply', questionsReplyRouter);

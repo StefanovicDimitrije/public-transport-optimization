@@ -85,7 +85,7 @@ router.put('/',async(req,res)=>{
         await editLineStation.save(edit);
         return res.json({status:"ok"})
     }catch (error) {
-        res.status(500).json({ status: "error", error: error });
+        return res.status(500).json({ status: "error", error: error });
     }
     
    

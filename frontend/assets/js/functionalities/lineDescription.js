@@ -304,12 +304,16 @@ const printBigInfo = () => {
                                         let day = vrsta.insertCell(-1);
 
                                         day.innerHTML = `<p>` + description.lineStation[i].day + `</p> `;
-
-
+                                        let user = JSON.parse(sessionStorage.getItem('user'))
+                                        if(user !== null){
+                                        if(user.admin === 1){
                                         let edit = vrsta.insertCell(-1);
                                         edit.innerHTML = `<button class="btn btn-primary btn-link"  onclick='lineEdit(` + JSON.stringify(description.lineStation[i]) + `)' >Edit</button>`;
                                         console.log(description.lineStation[i].day)
-                                            // }
+                                        }else
+                                        continue
+                                     }else
+                                     continue
                                             //  }
                                     }
                                 }

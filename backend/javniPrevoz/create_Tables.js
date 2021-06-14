@@ -107,7 +107,7 @@ async function fillDatabase() {
             table.increments('id').primary();
             table.integer('tk_id_line').unsigned().references('id').inTable('lines');
             table.integer('tk_id_station').unsigned().references('id').inTable('stations');
-            table.string('time');
+            table.time('time');
             table.string('day');
             table.integer('tk_id_bus_driver').unsigned().references('id').inTable('drivers_buses');
             table.integer('order');
@@ -137,8 +137,8 @@ async function fillDatabase() {
     //CHANGES TABLE
     await knex.schema.createTable('changes', (table) => {
             table.increments('id').primary();
-            table.string('site');
-            table.string('name');
+          //  table.string('site');
+          //  table.string('name');
             table.string('changeTitle');
             table.string('more');
             table.date('time');
@@ -299,36 +299,36 @@ async function fillDatabase() {
 
 
     const changes = [{
-            site: "#",
-            name: "Station name",
+            //site: "#",
+            //name: "Station name",
             changeTitle: "Station location was changed",
             more: "The station named 'Example name' was moved to another station, on a paralled street",
             time: '2021-02-26'
         },
         {
-            site: "#",
-            name: "Bus line number",
+            //site: "#",
+            //name: "Bus line number",
             changeTitle: "Takeoff time is later from Kamnica from the 22nd May",
             more: "Due to the COVID-19 measures and the fact that we have much less drivers, the start time of the line 'Example line' will be later in the day",
             time: '2021-02-26'
         },
         {
-            site: "#",
-            name: "Station name",
+           // site: "#",
+           //name: "Station name",
             changeTitle: "Station was removed",
             more: "Station on the 'Meljska cesta' was removed and will no longer be in use in the future routes of the buses that were passing it",
             time: '2021-02-26'
         },
         {
-            site: "#",
-            name: "Bus line number",
+          //  site: "#",
+         //   name: "Bus line number",
             changeTitle: "Route update",
             more: "The route of the bus line 'Bus line2' has changed its route around 'Titova cesta' due to the bussines of the street ",
             time: '2021-02-26'
         },
         {
-            site: "#",
-            name: "Bus line number",
+           // site: "#",
+          //  name: "Bus line number",
             changeTitle: "Route update",
             more: "The route of the bus line 'Bus line' has changed it route around the street 'Ljubljanska ulica' due to construction work",
             time: '2021-02-26'

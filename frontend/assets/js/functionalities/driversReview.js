@@ -100,6 +100,7 @@ const star = (ocena) => {
 const postReview = () => {
     event.preventDefault();
     let review = {
+        tk_id_user: JSON.parse(sessionStorage.getItem('user')).id,
         driver: document.forms[0].select.value,
         mark: document.forms[0].mark.value,
         comment: document.forms[0].comment.value
