@@ -41,6 +41,30 @@ router.get('/:id', async (req, res) => {
     res.status(500).json({ status: "error", error: error });
   }
 });
+/*GET specific line favourite from one user*/
+router.get('/:user/:id', async (req, res) => {
+
+  try {
+    let user = req.params.user;
+    let id = req.params.id;
+
+    let favourites = await new myFavourites().where('tk_id_users', user).where('tk_id_lines',id).fetch();
+    let favouritesJson = favourites.toJSON(); 
+
+    console.log(favouritesJson);
+    
+    if (favouritesJson)
+    {
+      res.json({status:"fetched", favourites:favouritesJson});
+    }
+    else {
+      console.log('evo me');
+      res.json({status:"not found"});
+    }
+  } catch (erorr) {
+    res.status(500).json({ status: "error", error: error });
+  }
+});
 /* Post new favourite. */
 router.post('/', async (req, res, next) => {
 

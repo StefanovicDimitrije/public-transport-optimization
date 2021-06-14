@@ -21,7 +21,8 @@ function displayProfile(data){
     document.getElementById("email").innerHTML = data.mail;
     document.getElementById("city").innerHTML = data.city;
 
-    document.getElementById("pfp").setAttribute("src",data.pfp);
+    let slika = document.getElementById("pfp");
+    slika.src = "data:image/jpg;base64," + data.pfp;
 }
 
 function startPage(){

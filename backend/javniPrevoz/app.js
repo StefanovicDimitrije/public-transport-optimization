@@ -3,6 +3,7 @@ const path = require('path');
 const logger = require('morgan');
 const cors = require('cors');
 var bodyParser = require('body-parser');
+const fileUpload = require('express-fileupload');
 
 const indexRouter = require('./api/routes/index');
 const newsRouter = require('./api/routes/newsDB'); //News
@@ -36,9 +37,14 @@ app.use(require("body-parser").json())
 
 app.use(express.urlencoded({ extended: false })); //KARAKATIC SAID WE HAVE TO ADD THIS DICTIONARY
 
+app.use(fileUpload());
+
 app.use(express.json({
     type: ['application/json', 'text/plain']
-}))
+}));
+
+
+
 
 app.use('/', indexRouter);
 app.use('/news', newsRouter); //News

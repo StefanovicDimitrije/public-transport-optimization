@@ -143,7 +143,7 @@ const PretraziLinije = () => {
                    console.log(odgovorJSON.linija)
                     
                     let add = vrsta.insertCell();
-                    add.innerHTML = `<button onclick='dodajLiniju(` + JSON.stringify(odgovorJSON.linija.id) + `)' class="btn btn-primary btn-icon btn-round"'><i class="now-ui-icons ui-2_favourite-28"></i></button>`;
+                    add.innerHTML = `<button onclick='addFavourites(` + JSON.stringify(odgovorJSON.linija.id) + `)' id="fav${JSON.stringify(odgovorJSON.linija.id)}" class="btn btn-primary btn-icon btn-round fav"'><i class="now-ui-icons ui-2_favourite-28"></i></button>`;
                  
             
 
@@ -345,6 +345,27 @@ const lineDescription = (lineDes) => {
         localStorage.setItem("line", JSON.stringify(line))
         window.location.href = "linesDescription.html"
     })
+}
+
+function loadSpecificFavourites(id) {
+    /*let user = JSON.parse(sessionStorage.getItem('user')).id;
+    fetch('http://localhost:3000/favourites/' + user + '/' + id, {
+        method: 'GET'
+    }).then((favouriteReply) => {
+        return favouriteReply.json();
+    }).then((favouriteReplyJSON) => {
+        if (favouriteReplyJSON.status === "fetched")
+        {
+            console.log(favouriteReplyJSON);
+        document.getElementById("fav" + favouriteReplyJSON.favourites.tk_id_lines).innerHTML = `<i class="material-icons style="background-color:white">favorite</i>`;
+        } else if (favouriteReplyJSON.status === "not found") {
+            console.log('not found');
+        } else  if (favouriteReplyJSON.status === "error") {
+            console.log('backend error');
+        } else {
+            console.log('nekaj nevem');
+        }
+    });*/
 }
 
 function viewFavourites(){

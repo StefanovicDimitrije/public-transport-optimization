@@ -1,21 +1,19 @@
 const register = () => {
     let date =document.getElementById("birthdate").value;
-    //console.log(date);
     let month = date.substring(0, 2);
     let day = date.substring(3, 5);
     let year = date.substring(6, 10); //10/28/2002
     let myDate = year + "-" + month + "-" + day;
-    //console.log(myDate);
-    let pfpPath = document.getElementById("pfp").value;
-    let pfpPicture = pfpPath.replace('C:\\fakepath\\', '');
-    let user = {                                     ///create object with selected values
+    let pic = document.getElementById("pfp").files[0];
+    console.log(pic);
+    let user = {                                    
         id: null,
         name: document.getElementById("name").value,
         surname: document.getElementById("surname").value,
         username: document.getElementById("username").value,
         mail: document.getElementById("mail").value,
         birthdate: myDate,
-        pfp: pfpPicture,
+        pfp: pic, //!!!!! I want to try to forward the file (or the data of the file) to the backend somehow
         password: document.getElementById("password").value,
         city: document.getElementById("city").value,
         admin: 0

@@ -4,8 +4,6 @@ var router = express.Router();
 
 const bcrypt = require('bcryptjs'); //for hashing passwords
 
-//const fileUpload=require('express-fileupload');
-//app.use(fileUpload);
 //DATABASE CONNECTIONS
 var knex = require('knex')({
     client: 'mysql',
@@ -24,7 +22,7 @@ const myAccounts = bookshelf.Model.extend({
     idAttribute: 'id'
 });
 
-router.get('/', async function(req, res, next) {
+router.get('/', async function (req, res, next) {
 
     try {
         const accounts = await new myAccounts().fetchAll();
@@ -35,22 +33,24 @@ router.get('/', async function(req, res, next) {
 
 });
 
-router.get('/:id', async function(req, res, next) {
+router.get('/:id', async function (req, res, next) {
 
     try {
 
         let id = req.params.id;
 
         const user = await new myAccounts().where('id', id).fetch();
+        const userJson = user.toJSON();
+        userJson.pfp = Buffer.from(userJson.pfp,'base64').toString('base64');
 
-        res.json({ status: "returned", user: user.toJSON() });
+        res.json({ status: "returned", user: userJson });
     } catch (error) {
         res.status(500).json({ status: "error", error: error });
     }
 
 });
 
-router.post('/login/', async function(req, res, next) {
+router.post('/login/', async function (req, res, next) {
 
     try {
 
@@ -76,53 +76,56 @@ router.post('/login/', async function(req, res, next) {
 
 });
 
-router.post('/register', async function(req, res, next) {
+router.post('/register', async function (req, res, next) {
 
     try {
-        //let profilePicture = Buffer.from(req.files.pfp.data);
+        let profilePicture = Buffer.from(req.files.pfp.data);
+        //let pic = Buffer.from(req.body.pfp);
         let email = req.body.mail;
         let profileUsername = req.body.username;
+        let date = req.body.birthdate;
+        let month = date.substring(0, 2);
+        let day = date.substring(3, 5);
+        let year = date.substring(6, 10); //10/28/2002
+        let myDate = year + "-" + month + "-" + day;
 
         let existingUsers = await new myAccounts().fetchAll();
         let checkUser = existingUsers.toJSON();
-        console.log(req.body);
 
-        for (let i=0; i < checkUser.length;i++)
-        {
-            if (checkUser[i]["mail"] === email)
-            {
+        for (let i = 0; i < checkUser.length; i++) {
+            if (checkUser[i]["mail"] === email) {
                 console.log("Existing email");
                 res.json({ status: "Existing email" });
                 return;
-            } else if (checkUser[i]["username"] === profileUsername)
-            {
+            } else if (checkUser[i]["username"] === profileUsername) {
                 console.log("Existing username");
                 res.json({ status: "Existing username" });
                 return;
             }
         }
-
+        console.log(req.body);
         let newUser = {
             name: req.body.name,
             surname: req.body.surname,
             username: profileUsername,
             mail: email,
-            birthdate: req.body.birthdate,
-            pfp: req.body.pfp, //profilePicture
+            birthdate: myDate,
+            pfp: profilePicture, //pic, //req.body.pfp,
             password: req.body.password,
             city: req.body.city,
-            admin:req.body.admin
+            admin: req.body.admin
         };
         newUser.password = bcrypt.hashSync(newUser.password, 12);
         let user = await new myAccounts().save(newUser);
         res.json({ status: "added" });
+        //res.redirect(200,"C:\Users\Asus\Desktop\Project\optimizacija-javnega-prevoza\frontend\pages\login.html");
     } catch (error) {
         res.status(500).json({ status: "error", error: error });
     }
 
 });
 
-router.put('/editProfile/', async function(req, res, next) {
+router.put('/editProfile/', async function (req, res, next) {
 
     try {
         var editedUser = req.body.editedUser;

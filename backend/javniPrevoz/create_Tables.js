@@ -15,22 +15,31 @@ const bcrypt = require('bcryptjs');
 async function fillDatabase() {
 
     //DROP ALL TABLES
-    await knex.schema.dropTableIfExists('users').catch((err) => { console.log(err); throw err });
-    await knex.schema.dropTableIfExists('buses').catch((err) => { console.log(err); throw err });
-    await knex.schema.dropTableIfExists('lines').catch((err) => { console.log(err); throw err });
-    await knex.schema.dropTableIfExists('locations').catch((err) => { console.log(err); throw err });
-    await knex.schema.dropTableIfExists('stations').catch((err) => { console.log(err); throw err });
-    await knex.schema.dropTableIfExists('drivers').catch((err) => { console.log(err); throw err });
-    await knex.schema.dropTableIfExists('drivers_buses').catch((err) => { console.log(err); throw err });
-    await knex.schema.dropTableIfExists('lines_stations').catch((err) => { console.log(err); throw err });
-    await knex.schema.dropTableIfExists('news').catch((err) => { console.log(err); throw err });
-    await knex.schema.dropTableIfExists('comments').catch((err) => { console.log(err); throw err });
-    await knex.schema.dropTableIfExists('changes').catch((err) => { console.log(err); throw err });
-    await knex.schema.dropTableIfExists('questions').catch((err) => { console.log(err); throw err });
-    await knex.schema.dropTableIfExists('driverReview').catch((err) => { console.log(err); throw err });
-    await knex.schema.dropTableIfExists('questionReply').catch((err) => { console.log(err); throw err });
     await knex.schema.dropTableIfExists('favourites').catch((err) => { console.log(err); throw err });
-
+    await knex.schema.dropTableIfExists('questionReply').catch((err) => { console.log(err); throw err });
+    await knex.schema.dropTableIfExists('driverReview').catch((err) => { console.log(err); throw err });
+    await knex.schema.dropTableIfExists('questions').catch((err) => { console.log(err); throw err });
+    await knex.schema.dropTableIfExists('changes').catch((err) => { console.log(err); throw err });
+    await knex.schema.dropTableIfExists('comments').catch((err) => { console.log(err); throw err });
+    await knex.schema.dropTableIfExists('news').catch((err) => { console.log(err); throw err });
+    await knex.schema.dropTableIfExists('lines_stations').catch((err) => { console.log(err); throw err });
+    await knex.schema.dropTableIfExists('drivers_buses').catch((err) => { console.log(err); throw err });
+    await knex.schema.dropTableIfExists('drivers').catch((err) => { console.log(err); throw err });
+    await knex.schema.dropTableIfExists('stations').catch((err) => { console.log(err); throw err });
+    await knex.schema.dropTableIfExists('locations').catch((err) => { console.log(err); throw err });
+    await knex.schema.dropTableIfExists('lines').catch((err) => { console.log(err); throw err });
+    await knex.schema.dropTableIfExists('buses').catch((err) => { console.log(err); throw err });  
+    await knex.schema.dropTableIfExists('users').catch((err) => { console.log(err); throw err });
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     //ACCOUNTTABLE TABLE
     await knex.schema.createTable('users', (table) => {
             table.increments('id').primary();
@@ -39,7 +48,7 @@ async function fillDatabase() {
             table.string('username');
             table.string('mail');
             table.date('birthdate');
-            table.string('pfp'); //table.binary('pfp');
+            table.binary('pfp'); //table.string('pfp');
             table.string('password');
             table.string('city');
             table.boolean('admin');
@@ -71,7 +80,7 @@ async function fillDatabase() {
     //STATIONS TABLE
     await knex.schema.createTable('stations', (table) => {
             table.increments('id').primary();
-            table.integer('tk_id_location').references('id').inTable('locations');
+            table.integer('tk_id_location').unsigned().references('id').inTable('locations');
             table.string('name');
         }).then(() => console.log("Stations database created"))
         .catch((err) => { console.log(err); throw err });
@@ -88,19 +97,19 @@ async function fillDatabase() {
     //DRIVER_BUS TABLE
     await knex.schema.createTable('drivers_buses', (table) => {
             table.increments('id').primary();
-            table.integer('tk_id_bus').references('id').inTable('buses');
-            table.integer('tk_id_driver').references('id').inTable('drivers');
+            table.integer('tk_id_bus').unsigned().references('id').inTable('buses');
+            table.integer('tk_id_driver').unsigned().references('id').inTable('drivers');
         }).then(() => console.log("Driver_Bus database created"))
         .catch((err) => { console.log(err); throw err });
 
     // LINES_STATIONS TABLE
     await knex.schema.createTable('lines_stations', (table) => {
             table.increments('id').primary();
-            table.integer('tk_id_line').references('id').inTable('lines');
-            table.integer('tk_id_station').references('id').inTable('stations');
+            table.integer('tk_id_line').unsigned().references('id').inTable('lines');
+            table.integer('tk_id_station').unsigned().references('id').inTable('stations');
             table.string('time');
             table.string('day');
-            table.integer('tk_id_bus_driver').references('id').inTable('drivers_buses');
+            table.integer('tk_id_bus_driver').unsigned().references('id').inTable('drivers_buses');
             table.integer('order');
         }).then(() => console.log("lines_stations database created"))
         .catch((err) => { console.log(err); throw err });
@@ -133,10 +142,10 @@ async function fillDatabase() {
             table.string('changeTitle');
             table.string('more');
             table.date('time');
-            table.integer('tk_id_linijaPostaja').references('id').inTable('lines_stations');
-            table.integer('tk_id_user').references('id').inTable('users');
-            table.integer('tk_id_line').references('id').inTable('lines');
-            table.integer('tk_id_station').references('id').inTable('stations');
+            table.integer('tk_id_linijaPostaja').unsigned().references('id').inTable('lines_stations');
+            table.integer('tk_id_user').unsigned().references('id').inTable('users');
+            table.integer('tk_id_line').unsigned().references('id').inTable('lines');
+            table.integer('tk_id_station').unsigned().references('id').inTable('stations');
             // idLinija_Postaja i idAdministrator NEEDS TO BE FOREIGN KEY
 
         }).then(() => console.log("ChangesTable database created"))
@@ -155,8 +164,8 @@ async function fillDatabase() {
     //DRIVER REVIEW TABLE
     await knex.schema.createTable('driverReview', (table) => {
             table.increments('id').primary();
-            table.integer('tk_id_driver').references('id').inTable('drivers');
-            table.integer('tk_id_user').references('id').inTable('users');
+            table.integer('tk_id_driver').unsigned().references('id').inTable('drivers');
+            table.integer('tk_id_user').unsigned().references('id').inTable('users');
             table.integer('mark');
             table.string('comment');
         }).then(() => console.log("driverReview database created"))
@@ -165,8 +174,8 @@ async function fillDatabase() {
     //REPLY TABLE
     await knex.schema.createTable('questionReply', (table) => {
             table.increments('id').primary();
-            table.integer('tk_id_question').references('id').inTable('question');
-            table.integer('tk_id_user').references('id').inTable('users');
+            table.integer('tk_id_question').unsigned().references('id').inTable('question');
+            table.integer('tk_id_user').unsigned().references('id').inTable('users');
             table.string('reply');
             table.date('date');
             table.integer('likes');
@@ -176,8 +185,8 @@ async function fillDatabase() {
     //FAVOURITES TABLE
     await knex.schema.createTable('favourites', (table) => {
             table.increments('id').primary();
-            table.integer('tk_id_lines').references('id').inTable('lines');
-            table.integer('tk_id_users').references('id').inTable('users');
+            table.integer('tk_id_lines').unsigned().references('id').inTable('lines');
+            table.integer('tk_id_users').unsigned().references('id').inTable('users');
         }).then(() => console.log("favourites database created"))
         .catch((err) => { console.log(err); throw err });
     //INITIAL VALUES FOR TABLES    
@@ -188,7 +197,7 @@ async function fillDatabase() {
             username: "@petarperic4",
             mail: "petar.peric@student.um.si",
             birthdate: '2021-02-26',
-            pfp: "../assets/img/default-avatar.png",
+            //pfp: Buffer.from("../assets/img/default-avatar.png"),
             password: bcrypt.hashSync('user', 12),
             city: "Ljubljana",
             admin: false
@@ -199,7 +208,7 @@ async function fillDatabase() {
             username: "@mirimir",
             mail: "admin@gmail.com",
             birthdate: '2021-02-26',
-            pfp: "../assets/img/default-avatar.png",
+            //pfp: Buffer.from("../assets/img/default-avatar.png"),
             password: bcrypt.hashSync('admin', 12),
             city: "Maribor",
             admin: true
@@ -210,7 +219,7 @@ async function fillDatabase() {
             username: "@Ivan",
             mail: "ivan@gmail.com",
             birthdate: '2021-02-26',
-            pfp: "../assets/img/default-avatar.png",
+            //pfp: Buffer.from("../assets/img/default-avatar.png"),
             password: bcrypt.hashSync('admin123', 12),
             city: "Maribor",
             admin: true
@@ -340,13 +349,13 @@ async function fillDatabase() {
 
     const drivers_Reviews = [
         { tk_id_driver: 1, tk_id_user: 1, mark: 5, comment: 'sdsad' },
-        { tk_id_driver: 1, tk_id_user: 2, mark: 6, comment: 'asda' },
-        { tk_id_driver: 1, tk_id_user: 3, mark: 8, comment: 'asd' },
-        { tk_id_driver: 2, tk_id_user: 4, mark: 10, comment: 'asd' },
-        { tk_id_driver: 2, tk_id_user: 6, mark: 6, comment: 'aawe' },
-        { tk_id_driver: 3, tk_id_user: 7, mark: 1, comment: 'asc' },
-        { tk_id_driver: 3, tk_id_user: 8, mark: 3, comment: 'asd' },
-        { tk_id_driver: 3, tk_id_user: 9, mark: 9, comment: 'qweqwe' }
+        { tk_id_driver: 2, tk_id_user: 2, mark: 6, comment: 'asda' },
+        { tk_id_driver: 3, tk_id_user: 3, mark: 8, comment: 'asd' },
+        { tk_id_driver: 4, tk_id_user: 1, mark: 10, comment: 'asd' },
+        { tk_id_driver: 5, tk_id_user: 2, mark: 6, comment: 'aawe' },
+        { tk_id_driver: 1, tk_id_user: 3, mark: 1, comment: 'asc' },
+        { tk_id_driver: 2, tk_id_user: 1, mark: 3, comment: 'asd' },
+        { tk_id_driver: 3, tk_id_user: 2, mark: 9, comment: 'qweqwe' }
     ]
 
 
