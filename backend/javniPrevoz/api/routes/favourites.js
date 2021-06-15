@@ -45,24 +45,28 @@ router.get('/:id', async (req, res) => {
 router.get('/:user/:id', async (req, res) => {
 
   try {
-    let user = req.params.user;
     let id = req.params.id;
-
-    let favourites = await new myFavourites().where('tk_id_users', user).where('tk_id_lines',id).fetch();
-    let favouritesJson = favourites.toJSON(); 
-
-    console.log(favouritesJson);
-    
-    if (favouritesJson)
+    let user = req.params.user;
+    let found0 = await new myFavourites().where('tk_id_users', user).fetchAll();
+    let found=found0.toJSON();
+    var linija =0;
+    var temp;
+    for (let i=0; i<found.length;i++)
     {
-      res.json({status:"fetched", favourites:favouritesJson});
+      if (found[i].tk_id_lines == id)
+      {
+        linija = found[i].tk_id_lines;
+        temp=found[i];
+      }
     }
-    else {
-      console.log('evo me');
-      res.json({status:"not found"});
+    if (linija !=0)
+    {
+      res.json({ status: "found", favourites: temp});
+    } else {
+      res.json({ status: "not found"});
     }
-  } catch (erorr) {
-    res.status(500).json({ status: "error", error: error });
+  } catch (error) {
+    res.status(500).json(error);
   }
 });
 /* Post new favourite. */
@@ -81,7 +85,7 @@ router.delete('/:id/:user', async (req, res, next) => {
   try {
     let id = req.params.id;
     let user = req.params.user;
-    await new myFavourites().where('tk_id_users', user).where('tk_id_lines',id).destroy();
+    await new myFavourites().where('tk_id_users', user).where('tk_id_lines', id).destroy();
     res.json({ status: "deleted" });
   } catch (error) {
     res.status(500).json(error);

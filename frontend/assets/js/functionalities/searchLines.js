@@ -12,13 +12,12 @@ const PridobiLinije = () => {
             <th >Add</th>
             </tr>
             </thead>`;
-        //     console.log(linije)
 
         for (let i = 0; i < linije.ln.length; i++) {
             let vrsta = tabela.insertRow();
             let celija = vrsta.insertCell(-1);
             celija.innerHTML = `<button class="btn btn-primary btn-round" onclick='lineDescription(` + JSON.stringify(linije.ln[i]) + `) '>` + linije.ln[i].name + `</button> `
-            console.log(JSON.stringify(linije.ln[i]) )
+            //console.log(JSON.stringify(linije.ln[i]) )
             let add = vrsta.insertCell(-1);
             add.innerHTML = `<button class="btn btn-primary btn-icon btn-round fav" id="fav${linije.ln[i].id}" onclick='addFavourites(` + JSON.stringify(linije.ln[i].id) + `)'><i class="now-ui-icons ui-2_favourite-28"></i></button>`;
         }
@@ -113,7 +112,7 @@ const PretraziLinije = () => {
 
         return odgovor.json();
     }).then((odgovorJSON) => {
-        console.log(odgovorJSON)
+        //console.log(odgovorJSON)
         if (odgovorJSON.status === "linija") {
             document.forms[0].reset();
             let tabela = document.getElementById("tabelaLinije");
@@ -140,7 +139,7 @@ const PretraziLinije = () => {
                     let vrsta = tabela.insertRow(-1);
                     let naz = vrsta.insertCell(-1);
                     naz.innerHTML = `<button class="btn btn-primary btn-round" onclick='lineDescription(` + JSON.stringify( odgovorJSON.linija ) + `) '>` + odgovorJSON.linija.name + `</button> `
-                   console.log(odgovorJSON.linija)
+                   //console.log(odgovorJSON.linija)
                     
                     let add = vrsta.insertCell();
                     add.innerHTML = `<button onclick='addFavourites(` + JSON.stringify(odgovorJSON.linija.id) + `)' id="fav${JSON.stringify(odgovorJSON.linija.id)}" class="btn btn-primary btn-icon btn-round fav"'><i class="now-ui-icons ui-2_favourite-28"></i></button>`;
@@ -153,7 +152,7 @@ const PretraziLinije = () => {
                 alert("No matches")
             }else{ 
                 let prvi = odgovorJSON.obj[1]
-                console.log(prvi[0].tk_id_line)
+                //console.log(prvi[0].tk_id_line)
                 lineDesBig(prvi[0].tk_id_line)
             }
             
@@ -191,7 +190,7 @@ const PretraziLinije = () => {
                         console.log(linija[i])
                     }
                 }*/
-                console.log(odgovorJSON)
+                //console.log(odgovorJSON)
                 for (let i = 0; i < odgovorJSON.postaja.length; i++) {
                     let obj = {
                         id: odgovorJSON.postaja[i].id,
@@ -214,7 +213,7 @@ const PretraziLinije = () => {
 
             }
         }
-    })
+    }).then(()=>{loadSpecificFavourites(iskanje.Linija1)});
 }
 
 
@@ -240,7 +239,7 @@ const addFavourites = (id) => {
                 document.getElementById("fav" + id).innerHTML = `<i class="material-icons style="background-color:white">favorite</i>`;
 
             } else { //unsuccessfull output
-                console.log('error');
+                //console.log('error');
             };
         })
     } else {
@@ -262,7 +261,7 @@ const addFavourites = (id) => {
                 document.getElementById("fav" + id).innerHTML = `<i class="now-ui-icons ui-2_favourite-28"></i>`;
 
             } else { //unsuccessfull output
-                console.log('error');
+                //console.log('error');
             };
         })
     }
@@ -306,7 +305,7 @@ const lineDescription2 = (lineDes) => {
     }
 
 
-    console.log(line)
+    //console.log(line)
     fetch('http://localhost:3000/description/', {
         method: 'POST',
         body: JSON.stringify(line),
@@ -315,7 +314,7 @@ const lineDescription2 = (lineDes) => {
             'Content-Type': 'application/json'
         }
     }).then((descriptionLine) => {
-        console.log(descriptionLine)
+        //console.log(descriptionLine)
         return descriptionLine.json()
     }).then((descriptionLineJSON) => {
         localStorage.setItem("line", JSON.stringify(line))
@@ -323,14 +322,14 @@ const lineDescription2 = (lineDes) => {
     })
 }
 const lineDescription = (lineDes) => {
-    console.log(lineDes)
+    //console.log(lineDes)
     let line = {
         id: lineDes.id,
         name: lineDes.name
     }
 
 
-    console.log(line)
+    //console.log(line)
     fetch('http://localhost:3000/description/', {
         method: 'POST',
         body: JSON.stringify(line),
@@ -339,7 +338,7 @@ const lineDescription = (lineDes) => {
             'Content-Type': 'application/json'
         }
     }).then((descriptionLine) => {
-        console.log(descriptionLine)
+        //console.log(descriptionLine)
         return descriptionLine.json()
     }).then((descriptionLineJSON) => {
         localStorage.setItem("line", JSON.stringify(line))
@@ -348,24 +347,21 @@ const lineDescription = (lineDes) => {
 }
 
 function loadSpecificFavourites(id) {
-    /*let user = JSON.parse(sessionStorage.getItem('user')).id;
+    let user = JSON.parse(sessionStorage.getItem('user')).id;
     fetch('http://localhost:3000/favourites/' + user + '/' + id, {
         method: 'GET'
     }).then((favouriteReply) => {
         return favouriteReply.json();
     }).then((favouriteReplyJSON) => {
-        if (favouriteReplyJSON.status === "fetched")
+        if (favouriteReplyJSON.status === "found")
         {
-            console.log(favouriteReplyJSON);
         document.getElementById("fav" + favouriteReplyJSON.favourites.tk_id_lines).innerHTML = `<i class="material-icons style="background-color:white">favorite</i>`;
         } else if (favouriteReplyJSON.status === "not found") {
-            console.log('not found');
         } else  if (favouriteReplyJSON.status === "error") {
-            console.log('backend error');
         } else {
-            console.log('nekaj nevem');
+            //console.log('nekaj nevem');
         }
-    });*/
+    });
 }
 
 function viewFavourites(){
@@ -392,7 +388,7 @@ function viewFavourites(){
                         <th >Add</th>
                     </tr>
                     </thead>`;
-                console.log(linije)
+                //console.log(linije)
                 for (let i = 0; i < favourites.length; i++) {
 
                     let j = linije.findIndex(x => x.id === favourites[i].tk_id_lines);
@@ -400,7 +396,7 @@ function viewFavourites(){
                     let vrsta = tabela.insertRow();
                     let celija = vrsta.insertCell(-1);
                     celija.innerHTML = `<button class="btn btn-primary btn-round" onclick='lineDescription(` + JSON.stringify(linije[j]) + `) '>` + linije[j].name + `</button> `;
-                    console.log(linije[i])
+                    
                     let add = vrsta.insertCell();
                     add.innerHTML = `<button class="btn btn-primary btn-icon btn-round fav" id="fav${linije[j].id}" onclick='addFavourites(` + JSON.stringify(linije[j].id) + `)'><i class="now-ui-icons ui-2_favourite-28"></i></button>`;
                 
