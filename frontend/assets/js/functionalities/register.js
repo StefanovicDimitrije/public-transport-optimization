@@ -1,29 +1,27 @@
 const register = () => {
-    let date =document.getElementById("birthdate").value;
-    let month = date.substring(0, 2);
-    let day = date.substring(3, 5);
-    let year = date.substring(6, 10); //10/28/2002
-    let myDate = year + "-" + month + "-" + day;
-    let pic = document.getElementById("pfp").files[0];
-    console.log(pic);
-    let user = {                                    
-        id: null,
-        name: document.getElementById("name").value,
-        surname: document.getElementById("surname").value,
-        username: document.getElementById("username").value,
-        mail: document.getElementById("mail").value,
-        birthdate: myDate,
-        pfp: pic, //!!!!! I want to try to forward the file (or the data of the file) to the backend somehow
-        password: document.getElementById("password").value,
-        city: document.getElementById("city").value,
-        admin: 0
-    }
-    console.log(user);
-    validation = validateForm();
-    if (validation == false)
-    {
-        document.getElementById("notification").innerHTML =
-            `<div class="alert alert-danger" role="alert">
+  let date = document.getElementById("birthdate").value;
+  let month = date.substring(0, 2);
+  let day = date.substring(3, 5);
+  let year = date.substring(6, 10); //10/28/2002
+  let myDate = year + "-" + month + "-" + day;
+  let pic = document.getElementById("pfp").files[0];
+
+  let fd = new FormData();
+  fd.append("pfp", pic);
+  fd.set("id", null);
+  fd.set("name", document.getElementById("name").value);
+  fd.set("surname", document.getElementById("surname").value,);
+  fd.set("username", document.getElementById("username").value);
+  fd.set("mail", document.getElementById("mail").value);
+  fd.set("birthdate", myDate);
+  fd.set("password", document.getElementById("password").value);
+  fd.set("city", document.getElementById("city").value);
+  fd.set("admin", 0);
+
+  validation = validateForm();
+  if (validation == false) {
+    document.getElementById("notification").innerHTML =
+      `<div class="alert alert-danger" role="alert">
             <div class="container">
               <div class="alert-icon">
                 <i class="now-ui-icons objects_support-17"></i>
@@ -37,19 +35,16 @@ const register = () => {
             </div>
           </div>
             `;
-            return -1;
-    }
-    fetch('http://localhost:3000/account//register/', {
-        method: 'POST',
-        body: JSON.stringify(user), // !!!!
-        headers: {
-            'Content-Type': 'application/json'
-        }
-    }).then((userReply) => {
-        return userReply.json();
-    }).then((userReplyJSON) => {
-        if (userReplyJSON.status === "added") {                     //successfull output
-            document.getElementById("notification").innerHTML = `
+    return -1;
+  }
+  fetch('http://localhost:3000/account//register/', {
+    method: 'POST',
+    body: fd // !!!!
+  }).then((userReply) => {
+    return userReply.json();
+  }).then((userReplyJSON) => {
+    if (userReplyJSON.status === "added") {                     //successfull output
+      document.getElementById("notification").innerHTML = `
             <div class="alert alert-success" role="alert">
                         <div class="container">
                             <div class="alert-icon">
@@ -65,14 +60,14 @@ const register = () => {
                     </div>
             `;
 
-          setTimeout(function () {  //After a half of a second return the user to the index page
-              window.location.href="../pages/login.html"
-          },500);
+      setTimeout(function () {  //After a half of a second return the user to the index page
+        window.location.href = "../pages/login.html"
+      }, 500);
 
-        }
-        else if (userReplyJSON.status === "existing email") {                                                      //unsuccessfull output
-            document.getElementById("notification").innerHTML =
-            `<div class="alert alert-danger" role="alert">
+    }
+    else if (userReplyJSON.status === "existing email") {                                                      //unsuccessfull output
+      document.getElementById("notification").innerHTML =
+        `<div class="alert alert-danger" role="alert">
             <div class="container">
               <div class="alert-icon">
                 <i class="now-ui-icons objects_support-17"></i>
@@ -86,9 +81,9 @@ const register = () => {
             </div>
           </div>
             `;
-        }else if (userReplyJSON.status === "existing username") {                                                      //unsuccessfull output
-            document.getElementById("notification").innerHTML =
-            `<div class="alert alert-danger" role="alert">
+    } else if (userReplyJSON.status === "existing username") {                                                      //unsuccessfull output
+      document.getElementById("notification").innerHTML =
+        `<div class="alert alert-danger" role="alert">
             <div class="container">
               <div class="alert-icon">
                 <i class="now-ui-icons objects_support-17"></i>
@@ -102,9 +97,9 @@ const register = () => {
             </div>
           </div>
             `;
-        }else {                                                      //unsuccessfull output
-            document.getElementById("notification").innerHTML =
-            `<div class="alert alert-danger" role="alert">
+    } else {                                                      //unsuccessfull output
+      document.getElementById("notification").innerHTML =
+        `<div class="alert alert-danger" role="alert">
             <div class="container">
               <div class="alert-icon">
                 <i class="now-ui-icons objects_support-17"></i>
@@ -118,143 +113,142 @@ const register = () => {
             </div>
           </div>
             `;
-        };
-    })
+    };
+  })
 }
 
-function emailIsValid (email) {
-    return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)
-  }
+function emailIsValid(email) {
+  return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)
+}
 
 function validateForm() {                               //simple form validation
-    const name = document.getElementById("name").value;
-    const surname = document.getElementById("surname").value;
-    const username = document.getElementById("username").value;
-    const mail = document.getElementById("mail").value;
-    const city = document.getElementById("city").value;
-    const password = document.getElementById("password").value;
-    if (name == "") {
-        alert("Name field must not be empty!");
-        return false;
-    } else if (surname == "") {
-        alert("Surname field must not be empty!");
-        return false;
-    } else if (username == "") {
-        alert("Username field must not be empty!");
-        return false;
-    }else if (mail == "") {
-        alert("mail field must not be empty!");
-        return false;
-    }else if (city == "") {
-        alert("City field must not be empty!");
-        return false;
-    }else if (password == "") {
-        alert("Password field must not be empty!");
-        return false;
-    } else if(!emailIsValid(mail))
-    {
-        alert("Invlid email address!");
-        return false;
-    }
-     else {
-        return true;
-    }
+  const name = document.getElementById("name").value;
+  const surname = document.getElementById("surname").value;
+  const username = document.getElementById("username").value;
+  const mail = document.getElementById("mail").value;
+  const city = document.getElementById("city").value;
+  const password = document.getElementById("password").value;
+  if (name == "") {
+    alert("Name field must not be empty!");
+    return false;
+  } else if (surname == "") {
+    alert("Surname field must not be empty!");
+    return false;
+  } else if (username == "") {
+    alert("Username field must not be empty!");
+    return false;
+  } else if (mail == "") {
+    alert("mail field must not be empty!");
+    return false;
+  } else if (city == "") {
+    alert("City field must not be empty!");
+    return false;
+  } else if (password == "") {
+    alert("Password field must not be empty!");
+    return false;
+  } else if (!emailIsValid(mail)) {
+    alert("Invlid email address!");
+    return false;
+  }
+  else {
+    return true;
+  }
 }
 
-function editProfile(){
+function editProfile() {
 
-    const alert = document.getElementById("alert");
+  const alert = document.getElementById("alert");
 
-    alert.innerHTML = "";
+  alert.innerHTML = "";
 
-    let date =document.getElementById("birthdate").value;
+  let date = document.getElementById("birthdate").value;
 
-    let month = date.substring(0, 2);
-    let day = date.substring(3, 5);
-    let year = date.substring(6, 10); //10/28/2002
-    let myDate = year + "-" + month + "-" + day;
+  let month = date.substring(0, 2);
+  let day = date.substring(3, 5);
+  let year = date.substring(6, 10); //10/28/2002
+  let myDate = year + "-" + month + "-" + day;
 
-    let pfpPath = document.getElementById("pfp").value;
-    let pfpPicture = pfpPath.replace('C:\\fakepath\\', '');
+  let pfpPath = document.getElementById("pfp").value;
+  let pfpPicture = pfpPath.replace('C:\\fakepath\\', '');
 
-    let user = {                                     ///create object with selected values
-        id: JSON.parse(sessionStorage.getItem('user')).id,
-        name: document.getElementById("name").value,
-        surname: document.getElementById("surname").value,
-        username: document.getElementById("username").value,
-        mail: document.getElementById("mail").value,
-        birthdate: myDate,
-        pfp: pfpPicture,
-        password: document.getElementById("newPassword").value,
-        city: document.getElementById("city").value,
-        admin: JSON.parse(sessionStorage.getItem('user')).admin
-    }
-    
-    let data = {
-      editedUser : user,
-      oldPassword: document.getElementById("oldPassword").value
-    }
+  let user = {                                     ///create object with selected values
+    id: JSON.parse(sessionStorage.getItem('user')).id,
+    name: document.getElementById("name").value,
+    surname: document.getElementById("surname").value,
+    username: document.getElementById("username").value,
+    mail: document.getElementById("mail").value,
+    birthdate: myDate,
+    pfp: pfpPicture,
+    password: document.getElementById("newPassword").value,
+    city: document.getElementById("city").value,
+    admin: JSON.parse(sessionStorage.getItem('user')).admin
+  }
 
-    if (validateEditForm()){
+  let data = {
+    editedUser: user,
+    oldPassword: document.getElementById("oldPassword").value
+  }
 
-        fetch('http://localhost:3000/account/editProfile/', {
-            method: 'PUT',
-            body: JSON.stringify(data), // !!!!
-            headers: {
-                'Content-Type': 'application/json'
-                }
-        }).then((response) => {
-            return response.json();
-        }).then((responseJSON) => {
+  if (validateEditForm()) {
 
-          switch(responseJSON.status) {
-            case "edited":
-                
-                alert.setAttribute("class","alert alert-success"); //Display 'correct!'
-                alert.innerHTML = "Profile edited successfuly!"
-              
-                setTimeout(function () {  //After a half of a second return the user to the index page
-                  window.location.href="../pages/index.html"
-                },500);
+    fetch('http://localhost:3000/account/editProfile/', {
+      method: 'PUT',
+      body: JSON.stringify(data), // !!!!
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    }).then((response) => {
+      return response.json();
+    }).then((responseJSON) => {
 
-              break;
-            case "Wrong password":
+      switch (responseJSON.status) {
+        case "edited":
 
-                alert.setAttribute("class","alert alert-danger");
-                alert.innerHTML = responseJSON.message;
+          alert.setAttribute("class", "alert alert-success"); //Display 'correct!'
+          alert.innerHTML = "Profile edited successfuly!"
 
-              break;
-            case "Existing username":
+          setTimeout(function () {  //After a half of a second return the user to the index page
+            window.location.href = "../pages/index.html"
+          }, 500);
 
-              alert.setAttribute("class","alert alert-danger");
-              alert.innerHTML = responseJSON.message;
+          break;
+        case "Wrong password":
 
-              break;
-            case "Existing email":
+          alert.setAttribute("class", "alert alert-danger");
+          alert.innerHTML = responseJSON.message;
 
-                alert.setAttribute("class","alert alert-danger");
-                alert.innerHTML = responseJSON.message;
-  
-              break;
-            case "error":
+          break;
+        case "Existing username":
 
-              alert.setAttribute("class","alert alert-danger");
-              alert.innerHTML = "Server error, please try again!"
-              console.log(responseJSON.error);
-  
-              break;
-          } 
+          alert.setAttribute("class", "alert alert-danger");
+          alert.innerHTML = responseJSON.message;
 
-        })
+          break;
+        case "Existing email":
 
-    }
+          alert.setAttribute("class", "alert alert-danger");
+          alert.innerHTML = responseJSON.message;
 
-    else{
+          break;
+        case "error":
 
-        alert.setAttribute("class","alert alert-danger");
-        alert.innerHTML = "Please review your data input"
+          alert.setAttribute("class", "alert alert-danger");
+          alert.innerHTML = "Server error, please try again!"
+          console.log(responseJSON.error);
 
-    }
+          break;
+      }
+
+    })
+
+  }
+
+  else {
+
+    alert.setAttribute("class", "alert alert-danger");
+    alert.innerHTML = "Please review your data input"
+
+  }
 
 }
 
@@ -266,29 +260,28 @@ function validateEditForm() {                               //simple form valida
   const city = document.getElementById("city").value;
   const password = document.getElementById("oldPassword").value;
   if (name == "") {
-      alert("Name field must not be empty!");
-      return false;
+    alert("Name field must not be empty!");
+    return false;
   } else if (surname == "") {
-      alert("Surname field must not be empty!");
-      return false;
+    alert("Surname field must not be empty!");
+    return false;
   } else if (username == "") {
-      alert("Username field must not be empty!");
-      return false;
-  }else if (mail == "") {
-      alert("mail field must not be empty!");
-      return false;
-  }else if (city == "") {
-      alert("City field must not be empty!");
-      return false;
-  }else if (password == "") {
-      alert("Please enter your old password!");
-      return false;
-  } else if(!emailIsValid(mail))
-  {
-      alert("Email adress is not in the profer format!");
-      return false;
+    alert("Username field must not be empty!");
+    return false;
+  } else if (mail == "") {
+    alert("mail field must not be empty!");
+    return false;
+  } else if (city == "") {
+    alert("City field must not be empty!");
+    return false;
+  } else if (password == "") {
+    alert("Please enter your old password!");
+    return false;
+  } else if (!emailIsValid(mail)) {
+    alert("Email adress is not in the profer format!");
+    return false;
   }
-   else {
-      return true;
+  else {
+    return true;
   }
 }
