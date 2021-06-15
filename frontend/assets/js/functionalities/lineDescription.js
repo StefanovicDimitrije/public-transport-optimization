@@ -17,7 +17,7 @@ const printInfo = () => {
 
 
         var stations = [];
-        console.log(descriptionLineJSON.station);
+       
 
 
         var br = 1;
@@ -50,7 +50,7 @@ const printInfo = () => {
 
                     stations[i] = stationName.name;
                     stationNames.innerHTML = `<div class = "clickable"><p onclick=(lineDesBig(${descriptionLineJSON.lineStation[i].tk_id_station})) '>` + stationName.name + `</p> </div>`;
-                    console.log(descriptionLineJSON.lineStation[i].tk_id_station)
+              
                     for (let x = 0; x < descriptionLineJSON.lineStation.length; x++) {
                         if (descriptionLineJSON.lineStation[x].tk_id_station == descriptionLineJSON.lineStation[i].tk_id_station) {
                             let time = vrsta.insertCell(-1)
@@ -60,7 +60,7 @@ const printInfo = () => {
                     }
                     let order = vrsta.insertCell(-1);
                     order.innerHTML = `<p>` + descriptionLineJSON.lineStation[i].order + `</p> `;
-                    console.log(descriptionLineJSON.lineStation[i].tk_id_station)
+                    
 
 
                 }
@@ -101,7 +101,7 @@ const lineEdit = (lineStation) => {
         order: lineStation.order,
         time: lineStation.time
     }
-    console.log(lineStationEdit)
+    
     fetch('http://localhost:3000/lineEdit/', {
         method: 'POST',
         body: JSON.stringify(lineStationEdit),
@@ -110,10 +110,10 @@ const lineEdit = (lineStation) => {
             'Content-Type': 'application/json'
         }
     }).then((lineEdit) => {
-        console.log(lineEdit)
+     
         return lineEdit.json()
     }).then((lineEditJSON) => {
-        console.log(lineEditJSON)
+       
         localStorage.setItem('lineEdit', JSON.stringify(lineStationEdit));
         window.location.href = "lineEdit.html"
     })
@@ -134,7 +134,7 @@ const PridobiLinije = () => {
      
    </tr>
               </thead>`;*/
-        console.log(linije)
+       
         for (let i = 0; i < linije.length; i++) {
 
             document.getElementById("tableLine").innerHTML += `<div class="text-center"><button class="btn btn-primary btn-round" onclick='lineDescription(` + JSON.stringify(linije[i]) + `) '>` + linije[i].name + `</button> </div>`;
@@ -151,7 +151,6 @@ const lineDescription = (lineDes) => {
     }
 
 
-    console.log(line)
     fetch('http://localhost:3000/description/', {
         method: 'POST',
         body: JSON.stringify(line),
@@ -160,10 +159,10 @@ const lineDescription = (lineDes) => {
             'Content-Type': 'application/json'
         }
     }).then((descriptionLine) => {
-        console.log(descriptionLine)
+   
         return descriptionLine.json()
     }).then((descriptionLineJSON) => {
-        console.log(descriptionLineJSON)
+   
         localStorage.setItem('des', JSON.stringify(descriptionLineJSON));
         window.location.href = "linesDescription.html"
     })
@@ -184,9 +183,9 @@ const lineDescription = (lineDes) => {
 
 const printInfo2 = () => {
     let description = JSON.parse(localStorage.getItem("lineEdit"))
-    console.log(description)
+
     window.localStorage.clear()
-    console.log('')
+
     fetch('http://localhost:3000/lineEdit/', {
         method: 'POST',
         body: JSON.stringify(description),
@@ -213,7 +212,6 @@ const printInfo2 = () => {
             </thead>`;
 
 
-        console.log(descriptionLineJSON)
 
         for (let i = 0; i < descriptionLineJSON.lineStation.length; i++) {
             if (descriptionLineJSON.lineStation[i].day == "Work days") {
@@ -230,7 +228,7 @@ const printInfo2 = () => {
                                                 let vrsta = tabela.insertRow();
                                                 let lineName = vrsta.insertCell(-1);
                                                 lineName.innerHTML = `<button class="btn btn-primary btn-round" '>` + line.name + `</button> `;
-                                                console.log(descriptionLineJSON.lineStation[i])
+                                                
                                                 let stationNames = vrsta.insertCell(-1);
                                                 stationNames.innerHTML = `<button class="btn btn-primary btn-round" '>` + stationName.name + `</button> `;
                                                 let day = vrsta.insertCell(-1);
@@ -271,17 +269,17 @@ const setValue = () => {
 
 const printBigInfo = () => {
     let description = JSON.parse(localStorage.getItem('desBig'))
-    console.log(description)
-    let lineStorage = JSON.parse(localStorage.getItem('lineDes'))
+    let lineStorage = JSON.parse(localStorage.getItem('line'))
     let tabela = document.getElementById("tableLineDesBig");
     var stations = [];
-
+    console.log(lineStorage)
     /*  tabela.innerHTML = `
      `;
      */
+    console.log(description.lineStation)
     for (let i = 0; i < description.lineStation.length; i++) {
         //  if(lineStorage.line.id == description.lineStation[i].tk_id_line){
-
+            if(lineStorage.id == description.lineStation[i].tk_id_line){ 
         for (const station of description.station) {
             if (station.id === description.lineStation[i].tk_id_station) {
                 for (const driverBus of description.busDriver) {
@@ -309,7 +307,7 @@ const printBigInfo = () => {
                                         if(user.admin === 1){
                                         let edit = vrsta.insertCell(-1);
                                         edit.innerHTML = `<button class="btn btn-primary btn-link"  onclick='lineEdit(` + JSON.stringify(description.lineStation[i]) + `)' >Edit</button>`;
-                                        console.log(description.lineStation[i].day)
+                                      
                                         }else
                                         continue
                                      }else
@@ -317,7 +315,7 @@ const printBigInfo = () => {
                                             //  }
                                     }
                                 }
-
+                            }
                             }
 
                         }

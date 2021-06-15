@@ -1,7 +1,6 @@
 const printInfo2 = () => {
     let description = JSON.parse(localStorage.getItem("lineEdit"))
-    console.log(description)
-    console.log('')
+   
     fetch('http://localhost:3000/lineEdit/', {
         method: 'POST',
         body: JSON.stringify(description),
@@ -13,7 +12,7 @@ const printInfo2 = () => {
 
         return descriptionLine.json()
     }).then((descriptionLineJSON) => {
-        console.log(descriptionLineJSON)
+      
         lineName = descriptionLineJSON.lines[0]
         let proba = document.getElementById("idLinijaPostaja");
         proba.innerHTML = `<span  class="btn btn-primary btn-round" '>  ${lineName.name}  </span > `
@@ -57,20 +56,20 @@ const printInfo2 = () => {
                 }
             }
         }
-        console.log(busdriversObject)
+ 
         const bsd = document.querySelector("div.busD select")
         for (let i = 0; i < busdriversObject.length; i++) {
 
             const option = new Option(busdriversObject[i].DriverName + "-" + busdriversObject[i].busName);
             option.value = busdriversObject[i].id;
-            console.log(option)
+      
             bsd.add(option, busdriversObject[i].id)
             option.focus();
 
         }
 
         lineE = descriptionLineJSON.allLines
-        console.log(lineE)
+   
         const lineEdit = document.querySelector("div.line select")
         for (let i = 0; i < lineE.length; i++) {
             const option = new Option(lineE[i].name);
@@ -98,7 +97,7 @@ const printInfo2 = () => {
             driver = document.createElement("option");
             driver.innerHTML = `<option value="${descriptionLineJSON.driver[i].id}">` + descriptionLineJSON.driver[i].name + `</option>`
             selectDriver.appendChild(driver);
-            console.log(option)
+       
             option.focus();
 
         }
@@ -113,7 +112,7 @@ const editLineName = () => {
         id: parseInt(document.forms['line'].selectLineEdit.value),
         name: document.forms['line'].line.value
     }
-    console.log(lineEdit)
+    
     fetch('http://localhost:3000/lineEdit/line/' + lineEdit.id, {
         method: 'PUT',
         body: JSON.stringify(lineEdit),
@@ -138,7 +137,7 @@ const editLineName = () => {
         return allLines.json()
     }).then((allLinesJSON) => {
 
-        console.log(allLinesJSON)
+     
         let date = new Date();
         let dd = String(date.getDate()).padStart(2, '0');
         let mm = String(date.getMonth() + 1).padStart(2, '0'); //January is 0!
@@ -171,9 +170,9 @@ const editLineName = () => {
             return changes.json()
         }).then((changeJSON) => {
             if (changeJSON.status == 'ok') {
-                console.log('working')
+            
             } else {
-                console.log(changeJSON.error)
+               
             }
         })
     })
@@ -186,7 +185,7 @@ const editStationName = () => {
         id: parseInt(document.forms['station'].selectStationEdit.value),
         name: document.forms['station'].station.value
     }
-    console.log(stationEdit)
+  
     fetch('http://localhost:3000/lineEdit/station/' + stationEdit.id, {
         method: 'PUT',
         body: JSON.stringify(stationEdit),
@@ -211,7 +210,7 @@ const editStationName = () => {
         return allLines.json()
     }).then((allLinesJSON) => {
 
-        console.log(allLinesJSON)
+       
         let date = new Date();
         let dd = String(date.getDate()).padStart(2, '0');
         let mm = String(date.getMonth() + 1).padStart(2, '0'); //January is 0!
@@ -243,9 +242,9 @@ const editStationName = () => {
             return change.json()
         }).then((changeJSON) => {
             if (changeJSON.status == 'ok') {
-                console.log('working')
+               
             } else {
-                console.log('error')
+               
             }
         })
 
@@ -253,7 +252,7 @@ const editStationName = () => {
 
 }
 
-const edit = () => {
+const edit = (event) => {
     let description = JSON.parse(localStorage.getItem("lineEdit"))
     let userId = sessionStorage.getItem('user')
     event.preventDefault();
@@ -268,9 +267,10 @@ const edit = () => {
         tk_id_bus_driver: parseInt(document.forms[0].selectDriver.value)
         //time : document.forms[0].select.value
     }
-
+   
     console.log(edited)
-    fetch('http://localhost:3000/lineEdit/', {
+
+    fetch('http://localhost:3000/lineEdit/'+description.tk_id_station, {
         method: 'PUT',
         body: JSON.stringify(edited),
         Headers: {
@@ -281,8 +281,10 @@ const edit = () => {
         return descriptionLine.json()
     }).then((descriptionLineJSON) => {
         if (descriptionLineJSON.status == "ok")
-            alert("Done")
-
+        console.log(descriptionLineJSON.pokusaj)
+        else{
+            console.log(descriptionLineJSON.error)
+        }
     })
     sessionStorage.getItem('user').id
     let date = new Date();
@@ -311,9 +313,9 @@ const edit = () => {
         return change.json()
     }).then((changeJSON) => {
         if (changeJSON.status == 'ok') {
-            console.log('working')
+          
         } else {
-            console.log(changeJSON.error)
+            
         }
     })
 
@@ -325,10 +327,10 @@ const lineEidtName = () => {
         method: 'get',
 
     }).then((response) => {
-        console.log(response)
+       
         return response.json()
     }).then((responeJSON) => {
-        console.log(responeJSON)
+   
         const lineEdit = document.querySelector("div.line select")
         for (let i = 0; i < responeJSON.lines.length; i++) {
             const option = new Option(responeJSON.lines[i].name);
