@@ -85,7 +85,7 @@ function loadComments(id) {
                         `
                         <div class="card p-3 mt-2">
                     <div class="d-flex justify-content-between align-items-center">
-                        <div class="user d-flex flex-row align-items-center"> <img src="${comments2.pfp}" width="30" class="user-img rounded-circle mr-2">
+                        <div class="user d-flex flex-row align-items-center"> <img src="data:image/jpg;base64,${comments2.pfp}" width="30" class="user-img rounded-circle mr-2">
                         <small class="font-weight-bold text-primary" style = "font-size: 120%">${comments2.username}:</small> <small class="font-weight-bold " style = "font-size: 100%">
                         ${reply[i].comment} </small></span> </div> <small>${fixDate(reply[i].date)}</small>
                     </div>
