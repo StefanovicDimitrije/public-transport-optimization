@@ -190,14 +190,14 @@ async function fillDatabase() {
         }).then(() => console.log("favourites database created"))
         .catch((err) => { console.log(err); throw err });
     //INITIAL VALUES FOR TABLES    
-
+        
     const users = [{
             name: "Pera",
             surname: "Peric",
             username: "@petarperic4",
             mail: "petar.peric@student.um.si",
             birthdate: '2021-02-26',
-            //pfp: Buffer.from("../assets/img/default-avatar.png"),
+            pfp: '',
             password: bcrypt.hashSync('user', 12),
             city: "Ljubljana",
             admin: false
@@ -208,7 +208,7 @@ async function fillDatabase() {
             username: "@mirimir",
             mail: "admin@gmail.com",
             birthdate: '2021-02-26',
-            //pfp: Buffer.from("../assets/img/default-avatar.png"),
+            pfp: '',
             password: bcrypt.hashSync('admin', 12),
             city: "Maribor",
             admin: true
@@ -219,12 +219,17 @@ async function fillDatabase() {
             username: "@Ivan",
             mail: "ivan@gmail.com",
             birthdate: '2021-02-26',
-            //pfp: Buffer.from("../assets/img/default-avatar.png"),
+            pfp: '',
             password: bcrypt.hashSync('admin123', 12),
             city: "Maribor",
             admin: true
         }
     ]
+    const fs = require('fs');
+    var data = fs.readFileSync('../../frontend/assets/img/default-avatar.png');
+    users[1].pfp = Buffer.from(data);
+    users[0].pfp = Buffer.from(data);
+    users[2].pfp = Buffer.from(data);
     const buses = [
         { brand: 'Man', registration_no: 'MB-786-515', serialNo: 30 },
         { brand: 'Iveco', registration_no: 'MB-587-221', serialNo: 50 },
@@ -283,7 +288,7 @@ async function fillDatabase() {
         { name: 'Cesta proletarskih brigad 54', tk_id_location: 6 },
         { name: 'Cesta proletarskih brigad 62', tk_id_location: 7 },
         { name: '1-Qlandia', tk_id_location: 8 },
-        { name: 'Šercerjeva 5', tk_id_location: 9 },
+        { name: 'Jocova Ulica 7', tk_id_location: 9 },
         { name: 'Šercerja 7', tk_id_location: 10 },
         { name: 'Partizanska  12', tk_id_location: 11 },
         { name: 'Titova 5', tk_id_location: 12 },

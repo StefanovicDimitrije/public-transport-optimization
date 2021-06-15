@@ -52,7 +52,9 @@ router.get('/getUser/:tk_user_id', async function(req, res, next) {
     try {
         let tk_user_id = req.params.tk_user_id;
         const user = await new myUsers().where('id', tk_user_id).where('admin', 1).fetch();
-        res.json(user.toJSON());
+        userJson = user.toJSON();
+        userJson.pfp = Buffer.from(userJson.pfp, 'base64').toString('base64');
+        res.json(userJson);
     } catch (error) {
         res.status(500).json({ status: "error", error: error });
     }
