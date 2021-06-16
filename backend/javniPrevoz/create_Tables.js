@@ -30,7 +30,7 @@ async function fillDatabase() {
     await knex.schema.dropTableIfExists('lines').catch((err) => { console.log(err); throw err });
     await knex.schema.dropTableIfExists('buses').catch((err) => { console.log(err); throw err });  
     await knex.schema.dropTableIfExists('users').catch((err) => { console.log(err); throw err });
-    
+    await knex.schema.dropTableIfExists('tickets').catch((err) => { console.log(err); throw err });
     
     
     
@@ -52,6 +52,7 @@ async function fillDatabase() {
             table.string('password');
             table.string('city');
             table.boolean('admin');
+            table.boolean('confirmTicket')
         }).then(() => console.log("users database created"))
         .catch((err) => { console.log(err); throw err });
 
@@ -189,6 +190,15 @@ async function fillDatabase() {
             table.integer('tk_id_users').unsigned().references('id').inTable('users');
         }).then(() => console.log("favourites database created"))
         .catch((err) => { console.log(err); throw err });
+    
+    //TICKETS TABLE
+    await knex.schema.createTable('tickets', (table) => {
+            table.increments('id').primary();
+            table.integer('tk_id_users').unsigned().references('id').inTable('users');
+            table.binary('ticket');
+        }).then(() => console.log("tickets database created"))
+        .catch((err) => { console.log(err); throw err });
+
     //INITIAL VALUES FOR TABLES    
         
     const users = [{
@@ -200,7 +210,8 @@ async function fillDatabase() {
             pfp: '',
             password: bcrypt.hashSync('user', 12),
             city: "Ljubljana",
-            admin: false
+            admin: false,
+            confirmTicket: false
         },
         {
             name: "Mika",
@@ -211,7 +222,8 @@ async function fillDatabase() {
             pfp: '',
             password: bcrypt.hashSync('admin', 12),
             city: "Maribor",
-            admin: true
+            admin: true,
+            confirmTicket: false
         },
         {
             name: "Ivan",
@@ -222,14 +234,18 @@ async function fillDatabase() {
             pfp: '',
             password: bcrypt.hashSync('admin123', 12),
             city: "Maribor",
-            admin: true
+            admin: true,
+            confirmTicket: false
         }
     ]
+
     const fs = require('fs');
     var data = fs.readFileSync('../../frontend/assets/img/default-avatar.png');
-    users[1].pfp = Buffer.from(data);
+    
     users[0].pfp = Buffer.from(data);
+    users[1].pfp = Buffer.from(data);
     users[2].pfp = Buffer.from(data);
+    
     const buses = [
         { brand: 'Man', registration_no: 'MB-786-515', serialNo: 30 },
         { brand: 'Iveco', registration_no: 'MB-587-221', serialNo: 50 },

@@ -17,6 +17,7 @@ const register = () => {
   fd.set("password", document.getElementById("password").value);
   fd.set("city", document.getElementById("city").value);
   fd.set("admin", 0);
+  fd.set('confirmTicket',0);
 
   validation = validateForm();
   if (validation == false) {
@@ -157,46 +158,47 @@ function validateForm() {                               //simple form validation
 
 function editProfile() {
 
-  const alert = document.getElementById("alert");
+  const alert = document.getElementById("alert"); //Getting the div for alerts
 
   alert.innerHTML = "";
 
-  let date = document.getElementById("birthdate").value;
+  var fd = new FormData(); //Declaring fd
+  fd.set("id", JSON.parse(sessionStorage.getItem('user')).id);
+
+  let date = document.getElementById("birthdate").value; // Setting the date part
 
   let month = date.substring(0, 2);
   let day = date.substring(3, 5);
   let year = date.substring(6, 10); //10/28/2002
   let myDate = year + "-" + month + "-" + day;
-
-  let pfpPath = document.getElementById("pfp").value;
-  let pfpPicture = pfpPath.replace('C:\\fakepath\\', '');
-
-  let user = {                                     ///create object with selected values
-    id: JSON.parse(sessionStorage.getItem('user')).id,
-    name: document.getElementById("name").value,
-    surname: document.getElementById("surname").value,
-    username: document.getElementById("username").value,
-    mail: document.getElementById("mail").value,
-    birthdate: myDate,
-    pfp: pfpPicture,
-    password: document.getElementById("newPassword").value,
-    city: document.getElementById("city").value,
-    admin: JSON.parse(sessionStorage.getItem('user')).admin
+  
+  if (document.getElementById("pfp").files.length != 0){ //If there is a picture uploaded then add it
+  let pic = document.getElementById("pfp").files[0];
+  fd.append("pfp", pic);
+  } else{
+    console.log('There is no picture')
   }
 
-  let data = {
-    editedUser: user,
-    oldPassword: document.getElementById("oldPassword").value
+  fd.set("name", document.getElementById("name").value);
+  fd.set("surname", document.getElementById("surname").value,);
+  fd.set("username", document.getElementById("username").value);
+  fd.set("mail", document.getElementById("mail").value);
+  fd.set("birthdate", myDate);
+  fd.set("newPassword", document.getElementById("newPassword").value);
+  fd.set("city", document.getElementById("city").value);
+  fd.set("admin", JSON.parse(sessionStorage.getItem('user')).admin);
+
+  fd.set("oldPassword", document.getElementById("oldPassword").value);
+
+  for(var pair of fd.entries()) {
+    console.log(pair[0]+', '+pair[1]);
   }
 
-  if (validateEditForm()) {
+  if (validateEditForm() && (document.getElementById("pfp").files.length != 0)) {
 
     fetch('http://localhost:3000/account/editProfile/', {
       method: 'PUT',
-      body: JSON.stringify(data), // !!!!
-      headers: {
-        'Content-Type': 'application/json'
-      }
+      body: fd, // !!!!
     }).then((response) => {
       return response.json();
     }).then((responseJSON) => {

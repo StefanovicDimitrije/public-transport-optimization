@@ -91,8 +91,11 @@
         <div class="content">
             <div class="container">
                 <div class="col-md-4 ml-auto mr-auto">
+                    
                     <div class="card card-login card-plain">
-                        <form class="form">
+
+                        <form id="registerForm" class="form" action="http://localhost:3000/account/editProfile/" method="PUT" enctype="multipart/form-data">
+                        
                             <div class="card-body">
 
                                 <h3 class="title" id="nameTitle">@petarperic</h3>
@@ -200,15 +203,22 @@
                                     <a href="#" class="link">Need Help?</a>
                                   </h6>
                                 </div>
+                                <div class="pull-right">
+                                <div class="alert" role="alert" id="alert"></div>
+                                </div>   
+                            </div>
                             </form>
                             </div>
+                            
                           </div>
-                          <div class="alert" role="alert" id="alert"></div>
+                          
                         </div>
                       </div>
-                    </div>
+                      
+                      
     <footer class="footer">
         <div class=" container ">
+            
             <nav>
                 <ul>
                     <li>

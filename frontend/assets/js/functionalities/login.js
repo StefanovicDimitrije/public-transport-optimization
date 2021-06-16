@@ -164,7 +164,7 @@ function logged(){
 
         let ticket1 = document.createElement("a");
         ticket1.setAttribute("class","dropdown-item");
-        ticket1.setAttribute("href","#");
+        ticket1.setAttribute("href","reviewTickets.html");
         ticket1.innerHTML ="Review tickets";
 
         dropdownMenu.appendChild(divider1);

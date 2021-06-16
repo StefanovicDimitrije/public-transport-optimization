@@ -112,7 +112,8 @@ router.post('/register', async function (req, res, next) {
         pfp: profilePicture,
         password: req.body.password,
         city: req.body.city,
-        admin: req.body.admin
+        admin: req.body.admin,
+        confirmTicket: req.body.confirmTicket
     };
     newUser.password = bcrypt.hashSync(newUser.password, 12);
     let user = await new myAccounts().save(newUser);
@@ -125,16 +126,29 @@ router.post('/register', async function (req, res, next) {
 router.put('/editProfile/', async function (req, res, next) {
 
     try {
-        var editedUser = req.body.editedUser;
 
-        editedUser.birthdate = new Date(editedUser.birthdate + "T22:00:00.000Z");
+        let profilePicture = Buffer.from(req.files.pfp.data); //Get the picture buffered
 
-        let id = editedUser.id;
+        let id = req.body.id; //Get the id to find the place to update
 
-        let oldPassword = req.body.oldPassword;
+        let oldPassword = req.body.oldPassword; //Get the password entered for verification
 
+        let editedUser = {
+            id: id,
+            name: req.body.name,
+            surname: req.body.surname,
+            username: req.body.username,
+            mail: req.body.mail,
+            birthdate: new Date(req.body.birthdate + "T22:00:00.000Z"),
+            pfp: profilePicture,
+            password: req.body.newPassword,
+            city: req.body.city,
+            admin: req.body.admin
+        };
+
+        //Find the user needed to update
         const oldUser0 = await new myAccounts().where('id', id).fetch();
-
+        //Make a json version to check if ok
         const oldUser = oldUser0.toJSON();
 
         if ((editedUser.mail != oldUser.mail) || (editedUser.username != oldUser.username)) {
@@ -171,7 +185,11 @@ router.put('/editProfile/', async function (req, res, next) {
             return;
 
         }
+
+        editedUser.confirmTicket = oldUser.confirmTicket;
+
         console.log(editedUser.password);
+        
         if (editedUser.password == '') {
             editedUser.password = oldUser.password;
         } else {

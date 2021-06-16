@@ -18,7 +18,8 @@ const reviewRouter = require('./api/routes/driverReview')
 const questionsReplyRouter = require('./api/routes/questionReply');
 const favouritesRouter = require('./api/routes/favourites');
 const lineDescriptionRouter = require('./api/routes/lineDescription');
-const lineEditRouter = require('./api/routes/lineEdit.js')
+const lineEditRouter = require('./api/routes/lineEdit.js');
+const ticketRouter = require('./api/routes/ticketDB');
 const app = express();
 
 
@@ -60,6 +61,6 @@ app.use('/questionsReply', questionsReplyRouter);
 app.use('/favourites',favouritesRouter);
 app.use('/description',lineDescriptionRouter);
 app.use('/lineEdit',lineEditRouter);
-
+app.use('/tickets',ticketRouter);
 
 module.exports = app;

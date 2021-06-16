@@ -22,6 +22,7 @@ function displayProfile(data){
     document.getElementById("city").innerHTML = data.city;
 
     let slika = document.getElementById("pfp");
+    console.log(data.pfp);
     slika.src = "data:image/jpg;base64," + data.pfp;
 }
 
