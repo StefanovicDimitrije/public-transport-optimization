@@ -118,8 +118,7 @@ router.post('/', async (req, res) => {
           return res.json({ status:"postaja",postaja: lpObj, });*/
 
          let lineStation0 = await new line_station().where('tk_id_station',postaja).fetchAll();
-         let lineStation = lineStation0.toJSON()
-         //console.log(lineStation)
+         let lineStation = lineStation0.toJSON();
          lpObj.push(lineStation[0])
          for(let i = 1; i<lineStation.length;i++){
           
@@ -127,11 +126,9 @@ router.post('/', async (req, res) => {
             lpObj.push(lineStation[i])
          }
          }
-         console.log(lpObj)
        
        //
        /*  let br =0;
-        console.log(1)
         for (let i = 0; i < LS_JOSN.length; i++) {
             for (let j = 1; j < LS_JOSN.length; j++) {
                 if (LS_JOSN[i].tk_id_station !== LS_JOSN[j].tk_id_station) {
@@ -177,7 +174,6 @@ router.post('/', async (req, res) => {
                      if (lp.tk_id_station == postajaId) {
                          for (const LinijaNaziv of linijaJSON) {
                              if (lp.tk_id_line == LinijaNaziv.id) {
-                                       console.log(PostajaNaziv)
                                  for (const driverBus1 of driverBus) {
                                      if (driverBus1.id == lp.tk_id_bus_driver) {
                                          for (const driverNaziv of driver) {
@@ -227,10 +223,8 @@ router.post('/', async (req, res) => {
             }
         }
         /* for (const lp of LS_JOSN) {
-            //console.log(LS_JOSN)
             for (const LinijaNaziv of linijaJSON) {
                 if (linija == LinijaNaziv.id) {
-                    //    console.log(LinijaNaziv.name)
                     let linijaId = LinijaNaziv.id;
                     linijaNaziv = LinijaNaziv.name;
                     if (lp.tk_id_line == linijaId) {
@@ -242,7 +236,6 @@ router.post('/', async (req, res) => {
                                         for (const driverNaziv of driver) {
 
                                             if (driverNaziv.id == driverBus1.tk_id_driver) {
-                                                console.log(lp, PostajaNaziv, LinijaNaziv, driverNaziv)
                                                 lpObj1.push(lp, PostajaNaziv, LinijaNaziv, driverNaziv);
                                                 lpObj.push(lpObj1);
                                                 // return res.json({status:"obstajata",Linija_in_Postaja:lp,PostajaNaziv:PostajaNaziv,LinijaNaziv:LinijaNaziv,DriverNaziv:driverNaziv})
@@ -277,24 +270,16 @@ router.post('/', async (req, res) => {
     } else if (linija !== "0" && postaja !== "0") {
         for (const lp of LS_JOSN) {
             for (const LinijaNaziv of linijaJSON) {
-                // console.log(1)
                 if (linija == LinijaNaziv.id) {
                     let linijaId = LinijaNaziv.id;
                     let linijaNaziv = LinijaNaziv.name;
-                    //console.log(2)
                     if (lp.tk_id_line == linijaId) {
-                        //console.log(3)
                         for (const PostajaNaziv of postajaJSON) {
-                            //  console.log(4)
                             if (postaja == PostajaNaziv.id) {
-                                //   console.log(5)
                                 let postajaID = PostajaNaziv.id;
                                 for (const driverBus1 of driverBus) {
-                                    //    console.log(6)
                                     if (driverBus1.id == lp.tk_id_bus_driver) {
-                                        console.log(7)
                                         for (const driverNaziv of driver) {
-                                            console.log(8)
                                             if (driverNaziv.id == driverBus1.tk_id_driver) {
 
                                                 if (lp.tk_id_station == postajaID) {

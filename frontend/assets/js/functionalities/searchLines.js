@@ -274,7 +274,7 @@ const lineDesBig = (line) => {
 
     }).then((res) => {
 
-        return res.json()
+        return res.json();
     }).then((resJSOn) => {
 
         localStorage.setItem('desBig', JSON.stringify(resJSOn));
@@ -285,7 +285,11 @@ const lineDesBig = (line) => {
 
 function loadFavourites() {
 
-    let user = JSON.parse(sessionStorage.getItem('user')).id;
+    if (JSON.parse(sessionStorage.getItem('user')) == null)
+    {
+        return;
+    } else {
+        let user = JSON.parse(sessionStorage.getItem('user')).id;
 
     fetch('http://localhost:3000/favourites/' + user, {
         method: 'GET'
@@ -296,6 +300,7 @@ function loadFavourites() {
             document.getElementById("fav" + favourites[i].tk_id_lines).innerHTML = `<i class="material-icons style="background-color:white">favorite</i>`
         }
     });
+    }
 }
 
 const lineDescription2 = (lineDes) => {
@@ -347,7 +352,11 @@ const lineDescription = (lineDes) => {
 }
 
 function loadSpecificFavourites(id) {
-    let user = JSON.parse(sessionStorage.getItem('user')).id;
+    if (JSON.parse(sessionStorage.getItem('user')) == null)
+    {
+        return
+    } else {
+        let user = JSON.parse(sessionStorage.getItem('user')).id;
     fetch('http://localhost:3000/favourites/' + user + '/' + id, {
         method: 'GET'
     }).then((favouriteReply) => {
@@ -362,6 +371,7 @@ function loadSpecificFavourites(id) {
             //console.log('nekaj nevem');
         }
     });
+    }
 }
 
 function viewFavourites(){

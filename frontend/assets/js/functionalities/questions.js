@@ -258,7 +258,7 @@ function loadReplies(id) {
                     `
                     <div class="card p-3 mt-2">
                     <div class="d-flex justify-content-between align-items-center">
-                        <div class="user d-flex flex-row align-items-center"> <img src="../assets/img/default-avatar.png" width="30" class="user-img rounded-circle mr-2">
+                        <div class="user d-flex flex-row align-items-center"> <img src="data:image/jpg;base64,${user.pfp}" width="30" class="user-img rounded-circle mr-2">
                         <small class="font-weight-bold text-primary" style = "font-size: 100%">${user.username}:</small> <small class="font-weight-bold " style = "font-size: 80%">${rep.reply} </small></span> </div> <small>${fixDate(rep.date)}</small>
                     </div>
                     <div class="action d-flex justify-content-between mt-2 align-items-center" style = "font-size: 90%">

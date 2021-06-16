@@ -272,11 +272,11 @@ const printBigInfo = () => {
     let lineStorage = JSON.parse(localStorage.getItem('line'))
     let tabela = document.getElementById("tableLineDesBig");
     var stations = [];
-    console.log(lineStorage)
+    //console.log(lineStorage)
     /*  tabela.innerHTML = `
      `;
      */
-    console.log(description.lineStation)
+    //console.log(description.lineStation)
     for (let i = 0; i < description.lineStation.length; i++) {
         //  if(lineStorage.line.id == description.lineStation[i].tk_id_line){
             if(lineStorage.id == description.lineStation[i].tk_id_line){ 

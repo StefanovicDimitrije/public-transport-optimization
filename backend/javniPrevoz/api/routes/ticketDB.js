@@ -30,12 +30,15 @@ router.get('/', async function (req, res, next) {
     try {
         const ticketz = await new myTickets().fetchAll();
         const tickets = ticketz.toJSON();
-        
-        for(var i = 0; i < tickets.length; i++){
-            tickets[i].ticket = Buffer.from(tickets[i].ticket,'base64').toString('base64');
+        if (tickets.length == 0)
+        {
+            res.send({status:"empty"});
+        } else {
+            for(var i = 0; i < tickets.length; i++){
+                tickets[i].ticket = Buffer.from(tickets[i].ticket,'base64').toString('base64');
+            }
+            res.send({status:"not empty", tickets:tickets});
         }
-
-        res.json(tickets);
     } catch (error) {
         res.status(500).json({ status: "error", error: error });
     }

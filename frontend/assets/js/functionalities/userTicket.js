@@ -1,54 +1,72 @@
 
-function showUserTickets(){ //Get Ticket info and info on the user that submitted
-    
+function showUserTickets() { //Get Ticket info and info on the user that submitted
+
     fetch('http://localhost:3000/tickets', {
-        method:'GET'
-    }).then((response) =>{
+        method: 'GET'
+    }).then((response) => {
         return response.json();
     }).then((tickets) => {
-        
-        for(var i = 0; i < tickets.length;i++){
-            let ticket = tickets[i];
-            
-            fetch('http://localhost:3000/account/'+ tickets[i].tk_id_users, {
-                method:'GET'
-            }).then((response) => {
-                return response.json();
-            }).then((responseJSON) => {
-                let user = responseJSON.user;
-                
-                displayUserTicket(ticket,user);
-            })
+        let cardSection = document.getElementById('mysection');
+        if (tickets.status == "empty")
+        {
+            let myCard2 = document.createElement("div");
+                myCard2.innerHTML =
+                `
+                    <div class="col-7 mr-auto ml-auto text-center">
+                        <div class="card">
+                            <div class="card-body">
+                                <h4 class="card-title">Currently there are no tickets to be approved  :(</h4>
+                                
+                            </div>
+                        </div>
+                    </div>
+                `;
+            cardSection.appendChild(myCard2);
+        } else if (tickets.status == "not empty")
+        {
+            for (var i = 0; i < tickets.tickets.length; i++) {
+                let ticket = tickets.tickets[i];
+    
+                fetch('http://localhost:3000/account/' + tickets.tickets[i].tk_id_users, {
+                    method: 'GET'
+                }).then((response) => {
+                    return response.json();
+                }).then((responseJSON) => {
+                    let user = responseJSON.user;
+    
+                    displayUserTicket(ticket, user);
+                })
+            }
         }
 
     })
 
 }
 
-function displayUserTicket(ticket,user){ //Make a card of the ticket submitted
+function displayUserTicket(ticket, user) { //Make a card of the ticket submitted
     let myCard = document.createElement("div");
-    myCard.innerHTML=
-   `<div class="card" style="width: 20rem;">
+    myCard.innerHTML =
+        `<div class="card" style="width: 20rem;">
         <img class="card-img-top" src="data:image/jpg;base64,${ticket.ticket}" alt="Ticket" id>
         <div class="card-body">
             <h4 class="card-title">${user.name} ${user.surname}</h4>
             <a class="btn btn-primary" onclick="approve(${ticket.id},${user.id})">Approve</a>
         </div>
     </div>`;
-    myCard.setAttribute('class','col-4 ml-auto mr-auto');
+    myCard.setAttribute('class', 'col-4 ml-auto mr-auto');
     document.getElementById('container').appendChild(myCard);
 
 }
 
-function approve(ticketId,userId){
+function approve(ticketId, userId) {
 
-    data={
-        ticketId : ticketId,
-        userId : userId
+    data = {
+        ticketId: ticketId,
+        userId: userId
     };
 
     fetch('http://localhost:3000/tickets/approve', {
-        method:'DELETE',
+        method: 'DELETE',
         body: JSON.stringify(data),
         headers: {
             'Content-Type': 'application/json'
@@ -57,28 +75,28 @@ function approve(ticketId,userId){
         return respond.json();
     }).then((respondJSON) => {
         if (respondJSON.status == "approved") {
-           document.getElementById("container").innerHTML = '';
-           showUserTickets();
+            document.getElementById("container").innerHTML = '';
+            showUserTickets();
 
         };
     })
 
 }
 
-function uploadTicket(){ //Function for the user to upload tickets
+function uploadTicket() { //Function for the user to upload tickets
     console.log('1');
     let pic = document.getElementById("ticketPhoto").files[0];
 
     let fd = new FormData();
-    fd.append('ticket',pic);
+    fd.append('ticket', pic);
     fd.set('tk_id_users', JSON.parse(sessionStorage.getItem('user')).id);
-    fd.set('id',null);
+    fd.set('id', null);
 
     console.log(pic);
     console.log(JSON.parse(sessionStorage.getItem('user')).id);
 
     fetch('http://localhost:3000/tickets/userPost', {
-        method:'POST',
+        method: 'POST',
         body: fd
     }).then((response) => {
         return response.json();
@@ -86,16 +104,16 @@ function uploadTicket(){ //Function for the user to upload tickets
 
         const alert = document.getElementById("alert"); //Getting the div for alerts
 
-        if(responseJSON.status == 'uploaded'){
-            
+        if (responseJSON.status == 'uploaded') {
+
             alert.setAttribute("class", "alert alert-success"); //Display 'correct!'
             alert.innerHTML = "Ticket submitted successfuly!"
 
-          setTimeout(function () {  //After a half of a second return the user to the index page
-            window.location.href = "../pages/index.html"
-          }, 500);
+            setTimeout(function () {  //After a half of a second return the user to the index page
+                window.location.href = "../pages/index.html"
+            }, 500);
 
-        } else{
+        } else {
             alert.setAttribute("class", "alert alert-danger");
             alert.innerHTML = "Server error, please try again!"
             console.log(responseJSON.error);
@@ -103,24 +121,24 @@ function uploadTicket(){ //Function for the user to upload tickets
 
     });
 
-    
+
 }
 
-function isExtended(){ //What to display to the user when he opens extend ticket (confirmTicket is currently boolean)
+function isExtended() { //What to display to the user when he opens extend ticket (confirmTicket is currently boolean)
 
     var userId = JSON.parse(sessionStorage.getItem('user')) || {};
 
-    fetch('http://localhost:3000/account/'+ userId.id, {
-            method:'GET'
-        }).then((response) => {
-            return response.json();
-        }).then((responseJSON) => {
-            
+    fetch('http://localhost:3000/account/' + userId.id, {
+        method: 'GET'
+    }).then((response) => {
+        return response.json();
+    }).then((responseJSON) => {
+
         let confirmTicket = responseJSON.user.confirmTicket;
 
-        if (confirmTicket == 0){
+        if (confirmTicket == 0) {
 
-            document.getElementById('container').innerHTML=`
+            document.getElementById('container').innerHTML = `
                 <form id="uploadTicketForm" class="form" action="http://localhost:3000/tickets/userPost" method="POST" enctype="multipart/form-data"></form>
         <div class="col-md-8 ml-auto mr-auto">
             <div class="card card-login card-plain">
@@ -137,9 +155,9 @@ function isExtended(){ //What to display to the user when he opens extend ticket
         </div>
         `;
 
-        } else{
+        } else {
 
-            document.getElementById('container').innerHTML=`
+            document.getElementById('container').innerHTML = `
             <div class="card card-plain">
                     <div class="card-body">
                     <div class="row">
@@ -203,7 +221,7 @@ function isExtended(){ //What to display to the user when he opens extend ticket
             `;
 
         }
-            
-        })
+
+    })
 
 }
