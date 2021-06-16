@@ -63,7 +63,6 @@ router.get('/getUser/:tk_user_id', async function(req, res, next) {
 router.post('/', async(req, res, next) => {
     try {
         let questionReply = req.body;
-        console.log(questionReply);
         await new myQuestionReply().save(questionReply);
         res.json({ status: "added" });
     } catch (error) {

@@ -36,11 +36,11 @@ function makeCard(data) {
     link.setAttribute("href", data.site);
 
     //Text for the link
-    let cardHeader = document.createElement("div");
-    cardHeader.setAttribute("class", "card-header mt-2");
-    cardHeader.innerHTML = data.name;
+    //let cardHeader = document.createElement("div");
+    //cardHeader.setAttribute("class", "card-header mt-2");
+    //cardHeader.innerHTML = data.name;
 
-    link.appendChild(cardHeader);
+    //link.appendChild(cardHeader);
 
     //Card body (Holding: title, more, time0)
     let cardBody = document.createElement("div");

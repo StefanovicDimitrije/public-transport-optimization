@@ -107,38 +107,42 @@ function loadComments(id) {
 }
 
 const addComments = (news_id, inputfieldId) => {
-    var today = new Date();
-    var dd = today.getDate() + 1;
-    var mm = today.getMonth() + 1;
-    var yyyy = today.getFullYear();
-    if (dd < 10) {
-        dd = '0' + dd;
-    }
-
-    if (mm < 10) {
-        mm = '0' + mm;
-    }
-    today = yyyy + '-' + mm + '-' + dd;
-
-    let comment = {
-
-        "id": null,
-        "user_id": JSON.parse(sessionStorage.getItem('user')).id,
-        "news_id": news_id,
-        "comment": document.getElementById("commentTxt" + inputfieldId).value,
-        "date": today
-    }
-    fetch('http://localhost:3000/comments/', {
-        method: 'POST',
-        body: JSON.stringify(comment),
-        headers: {
-            'Content-Type': 'application/json'
+    if (sessionStorage.getItem('user') == null) {
+        return;
+    } else {
+        var today = new Date();
+        var dd = today.getDate() + 1;
+        var mm = today.getMonth() + 1;
+        var yyyy = today.getFullYear();
+        if (dd < 10) {
+            dd = '0' + dd;
         }
-    }).then((respond) => {
-        return respond.json();
-    }).then((respondJSON) => {
-        loadAll();
-    })
+
+        if (mm < 10) {
+            mm = '0' + mm;
+        }
+        today = yyyy + '-' + mm + '-' + dd;
+
+        let comment = {
+
+            "id": null,
+            "user_id": JSON.parse(sessionStorage.getItem('user')).id,
+            "news_id": news_id,
+            "comment": document.getElementById("commentTxt" + inputfieldId).value,
+            "date": today
+        }
+        fetch('http://localhost:3000/comments/', {
+            method: 'POST',
+            body: JSON.stringify(comment),
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        }).then((respond) => {
+            return respond.json();
+        }).then((respondJSON) => {
+            loadAll();
+        })
+    }
 }
 const removeComment = (index) => {
     fetch('http://localhost:3000/comments/' + index, {

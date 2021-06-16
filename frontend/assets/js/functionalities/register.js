@@ -66,7 +66,7 @@ const register = () => {
       }, 500);
 
     }
-    else if (userReplyJSON.status === "existing email") {                                                      //unsuccessfull output
+    else if (userReplyJSON.status === "Existing email") {                                                      //unsuccessfull output
       document.getElementById("notification").innerHTML =
         `<div class="alert alert-danger" role="alert">
             <div class="container">
@@ -82,7 +82,7 @@ const register = () => {
             </div>
           </div>
             `;
-    } else if (userReplyJSON.status === "existing username") {                                                      //unsuccessfull output
+    } else if (userReplyJSON.status === "Existing username") {                                                      //unsuccessfull output
       document.getElementById("notification").innerHTML =
         `<div class="alert alert-danger" role="alert">
             <div class="container">
@@ -176,7 +176,7 @@ function editProfile() {
   let pic = document.getElementById("pfp").files[0];
   fd.append("pfp", pic);
   } else{
-    console.log('There is no picture')
+    //console.log('There is no picture');
   }
 
   fd.set("name", document.getElementById("name").value);
@@ -191,7 +191,7 @@ function editProfile() {
   fd.set("oldPassword", document.getElementById("oldPassword").value);
 
   for(var pair of fd.entries()) {
-    console.log(pair[0]+', '+pair[1]);
+    //console.log(pair[0]+', '+pair[1]);
   }
 
   if (validateEditForm() && (document.getElementById("pfp").files.length != 0)) {

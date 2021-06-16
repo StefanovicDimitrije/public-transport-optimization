@@ -31,7 +31,7 @@ const getDrivers = () => {
             const option = new Option(allDrivers[i].name);
             option.value = allDrivers[i].id;
             div.add(option, allDrivers[i].id)
-            console.log(option)
+            //console.log(option)
 
             option.focus();
 
@@ -85,7 +85,7 @@ const getDrivers = () => {
 }
 
 const star = (ocena) => {
-    console.log(ocena)
+    //console.log(ocena)
     let tagR = document.getElementById("stars")
     tag = document.createElement("div")
     for (let i = 0; i < ocena; i++) {
@@ -98,14 +98,18 @@ const star = (ocena) => {
 
 
 const postReview = () => {
-    event.preventDefault();
+    if (sessionStorage.getItem('user') == null)
+    {
+        return;
+    } else {
+        event.preventDefault();
     let review = {
         tk_id_user: JSON.parse(sessionStorage.getItem('user')).id,
         driver: document.forms[0].select.value,
         mark: document.forms[0].mark.value,
         comment: document.forms[0].comment.value
     }
-    console.log(review)
+    //console.log(review)
     fetch('http://localhost:3000/review/', {
         method: 'POST',
         body: JSON.stringify(review),
@@ -115,7 +119,7 @@ const postReview = () => {
         }
 
     }).then((review) => {
-        console.log(review)
+        //console.log(review)
         return review.json();
     }).then((reviewPost) => {
 
@@ -126,4 +130,5 @@ const postReview = () => {
             alert("Error")
         }
     })
+    }
 }

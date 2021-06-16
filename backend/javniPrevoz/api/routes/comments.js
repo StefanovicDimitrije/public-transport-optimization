@@ -50,7 +50,7 @@ router.get('/getUser/:tk_user_id', async function(req, res, next) {
 router.post('/', async(req, res, next) => {
     try {
         let comments = req.body;
-        console.log(comments);
+        //console.log(comments);
         const add = await new myComments().save(comments);
         res.json({ status: "added" });
     } catch (error) {

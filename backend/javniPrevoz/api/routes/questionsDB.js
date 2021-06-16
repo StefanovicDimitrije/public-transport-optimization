@@ -41,7 +41,6 @@ router.get('/', async function(req, res, next) {
 router.post('/', async(req, res, next) => {
     try {
         let question = req.body;
-        console.log(question);
         const add = await new myQuestion().save(question);
         res.json({ status: "added" });
     } catch (error) {

@@ -93,16 +93,13 @@ router.post('/register', async function (req, res, next) {
 
     for (let i = 0; i < checkUser.length; i++) {
         if (checkUser[i]["mail"] === email) {
-            console.log("Existing email");
             res.json({ status: "Existing email" });
             return;
         } else if (checkUser[i]["username"] === profileUsername) {
-            console.log("Existing username");
             res.json({ status: "Existing username" });
             return;
         }
     }
-    console.log(req.body);
     let newUser = {
         name: req.body.name,
         surname: req.body.surname,
@@ -168,19 +165,19 @@ router.put('/editProfile/', async function (req, res, next) {
 
         if (!(bcrypt.compareSync(oldPassword, oldUser.password))) {
 
-            console.log("Wrong password");
+            //console.log("Wrong password");
             res.json({ status: "Wrong password", message: "Wrong password" });
             return;
 
         } else if (checkMailUserExists == 'mail') {
 
-            console.log("Existing email");
+            //console.log("Existing email");
             res.json({ status: "Existing email", message: "There is already an account made with that email" });
             return;
 
         } else if (checkMailUserExists == 'username') {
 
-            console.log("Existing username");
+            //console.log("Existing username");
             res.json({ status: "Existing username", message: "That username is already in use!" });
             return;
 
@@ -188,7 +185,7 @@ router.put('/editProfile/', async function (req, res, next) {
 
         editedUser.confirmTicket = oldUser.confirmTicket;
 
-        console.log(editedUser.password);
+        //console.log(editedUser.password);
         
         if (editedUser.password == '') {
             editedUser.password = oldUser.password;
@@ -196,7 +193,7 @@ router.put('/editProfile/', async function (req, res, next) {
             editedUser.password = bcrypt.hashSync(editedUser.password, 12);
         }
 
-        console.log(editedUser.password);
+        //console.log(editedUser.password);
 
         await oldUser0.save(editedUser); //Jer je oldUser0 knex objekat, oldUser se koristi samo sto se tice informacija
 
@@ -208,23 +205,5 @@ router.put('/editProfile/', async function (req, res, next) {
 
 });
 
-
-/*async function checkMailUserExists(email,username){
-
-    let existingUsers = await new myAccounts().fetchAll();
-    let checkUser = existingUsers.toJSON();
-        
-        for (let i=0; i < checkUser.length;i++)
-        {
-            if (checkUser[i]["mail"] === email)
-            {
-                return Promise.resolve('mail');
-            } else if (checkUser[i]["username"] === username)
-            {
-                return Promise.resolve('username');
-            }
-        }
-
-}*/
 
 module.exports = router;
