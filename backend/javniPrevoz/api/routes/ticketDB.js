@@ -45,7 +45,7 @@ router.get('/', async function (req, res, next) {
 router.post('/userPost', async function (req, res, next) {
 
     try {
-        console.log('start');
+        
         let ticket = Buffer.from(req.files.ticket.data);
         let tk_id_users = req.body.tk_id_users;
 
@@ -57,7 +57,6 @@ router.post('/userPost', async function (req, res, next) {
         console.log(newTicket);
 
         const tickets = await new myTickets().save(newTicket);
-        console.log('here');
         
         res.json({ status: "uploaded" });
 
@@ -66,5 +65,34 @@ router.post('/userPost', async function (req, res, next) {
     }
 
 });
+
+router.delete('/approve', async function (req , res, next){
+
+    try {
+        
+        let ticketId = req.body.ticketId;
+        let userId = req.body.userId;
+
+        await new myTickets({id:ticketId}).destroy(); // Delete the ticket from the database
+
+        let user0 = await new myAccounts().where('id',userId).fetch(); // Get the user that submitted the ticket
+
+        let user1 = user0.toJSON(); // Convert it into JSON so we can change the attribute
+
+        console.log(user1);
+
+        user1.confirmTicket = 1; // Change the info, the ticket is now confirmed
+
+        console.log(user1);
+
+        await user0.save(user1); // Save it into the database
+
+        res.json({ status: "approved" });
+
+    } catch (error) {
+        res.status(500).json({ status: "error", error: error });
+    }
+
+})
 
 module.exports = router;

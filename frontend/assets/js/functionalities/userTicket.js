@@ -32,10 +32,36 @@ function displayUserTicket(ticket,user){ //Make a card of the ticket submitted
         <img class="card-img-top" src="data:image/jpg;base64,${ticket.ticket}" alt="Ticket" id>
         <div class="card-body">
             <h4 class="card-title">${user.name} ${user.surname}</h4>
-            <a class="btn btn-primary" onclick="approve()">Approve</a>
+            <a class="btn btn-primary" onclick="approve(${ticket.id},${user.id})">Approve</a>
         </div>
     </div>`;
+    myCard.setAttribute('class','col-4 ml-auto mr-auto');
     document.getElementById('container').appendChild(myCard);
+
+}
+
+function approve(ticketId,userId){
+
+    data={
+        ticketId : ticketId,
+        userId : userId
+    };
+
+    fetch('http://localhost:3000/tickets/approve', {
+        method:'DELETE',
+        body: JSON.stringify(data),
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    }).then((respond) => {
+        return respond.json();
+    }).then((respondJSON) => {
+        if (respondJSON.status == "approved") {
+           document.getElementById("container").innerHTML = '';
+           showUserTickets();
+
+        };
+    })
 
 }
 
@@ -58,10 +84,21 @@ function uploadTicket(){ //Function for the user to upload tickets
         return response.json();
     }).then((responseJSON) => {
 
+        const alert = document.getElementById("alert"); //Getting the div for alerts
+
         if(responseJSON.status == 'uploaded'){
-            console.log('ok');
+            
+            alert.setAttribute("class", "alert alert-success"); //Display 'correct!'
+            alert.innerHTML = "Ticket submitted successfuly!"
+
+          setTimeout(function () {  //After a half of a second return the user to the index page
+            window.location.href = "../pages/index.html"
+          }, 500);
+
         } else{
-            console.log('not ok');
+            alert.setAttribute("class", "alert alert-danger");
+            alert.innerHTML = "Server error, please try again!"
+            console.log(responseJSON.error);
         }
 
     });
@@ -94,9 +131,7 @@ function isExtended(){ //What to display to the user when he opens extend ticket
                 
                     <button class="btn btn-primary btn-lg" onclick="uploadTicket()">Upload</button>
                 </form>
-                    <div id="notification">
-                        
-                    </div>
+                <div class="alert" role="alert" id="alert"></div>
                 </div>    
             </div>
         </div>
