@@ -3,265 +3,261 @@
 
 <head>
 
-  <meta charset="utf-8" />
+    <meta charset="utf-8" />
 
-  <link rel="icon" type="image/png" href="../assets/img/icontrans.png">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <link rel="icon" type="image/png" href="../assets/img/icontrans.png">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
 
-  <title>
-    Public Transport
-  </title>
+    <title>
+        Public Transport
+    </title>
 
-  <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, shrink-to-fit=no'
-    name='viewport' />
+    <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, shrink-to-fit=no' name='viewport' />
 
-  <!--     Fonts and icons     -->
-  <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700,200" rel="stylesheet" />
-  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css"
-    integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+    <!--     Fonts and icons     -->
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700,200" rel="stylesheet" />
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
 
-  <!-- CSS Files -->
-  <link href="../assets/css/bootstrap.min.css" rel="stylesheet" />
-  <link href="../assets/css/now-ui-kit.css?v=1.3.0" rel="stylesheet" />
-  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-  <script src="../assets/js/functionalities/lineEdit.js"></script>
+    <!-- CSS Files -->
+    <link href="../assets/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="../assets/css/now-ui-kit.css?v=1.3.0" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <script src="../assets/js/functionalities/lineEdit.js"></script>
 
 </head>
 
 <style>
-  
-  
+
 </style>
 
 <body class="landing-page sidebar-collapse" onload="printInfo2();startLogin();">
 
-  <!-- Navbar -->
-   <!-- Navbar -->
-   <nav class="navbar navbar-expand-lg bg-primary fixed-top navbar-transparent " color-on-scroll="400">
-    <div class="container">
+    <!-- Navbar -->
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg bg-primary fixed-top navbar-transparent " color-on-scroll="400">
+        <div class="container">
 
-        <div class="dropdown button-dropdown" data-toggle="collapse">
+            <div class="dropdown button-dropdown" data-toggle="collapse">
 
-            <a href="#pablo" class="dropdown-toggle" id="navbarDropdown" data-toggle="dropdown">
-                <span class="button-bar"></span>
-                <span class="button-bar"></span>
-                <span class="button-bar"></span>
-            </a>
+                <a href="#pablo" class="dropdown-toggle" id="navbarDropdown" data-toggle="dropdown">
+                    <span class="button-bar"></span>
+                    <span class="button-bar"></span>
+                    <span class="button-bar"></span>
+                </a>
 
-            <div class="dropdown-menu" aria-labelledby="navbarDropdown" id="mainNavDrop">
-                <a class="dropdown-header">Menu</a>
-                <a class="dropdown-item" href="lines.html">Bus Lines</a>
-                <a class="dropdown-item" href="changes.html">Important changes</a>
-                <a class="dropdown-item" href="newsFeed.html">News Feed</a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown" id="mainNavDrop">
+                    <a class="dropdown-header">Menu</a>
+                    <a class="dropdown-item" href="lines.html">Bus Lines</a>
+                    <a class="dropdown-item" href="changes.html">Important changes</a>
+                    <a class="dropdown-item" href="newsFeed.html">News Feed</a>
+                </div>
+
             </div>
 
-        </div>
+            <div class="navbar-translate">
 
-        <div class="navbar-translate">
-
-            <a class="navbar-brand" rel="tooltip" data-placement="bottom" href="index.html">
+                <a class="navbar-brand" rel="tooltip" data-placement="bottom" href="index.html">
                 Public transport optimization
             </a>
 
-            <button class="navbar-toggler navbar-toggler" type="button" data-toggle="collapse" data-target="#navigation" aria-controls="navigation-index" aria-expanded="false" aria-label="Toggle navigation">
+                <button class="navbar-toggler navbar-toggler" type="button" data-toggle="collapse" data-target="#navigation" aria-controls="navigation-index" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-bar top-bar"></span>
                 <span class="navbar-toggler-bar middle-bar"></span>
                 <span class="navbar-toggler-bar bottom-bar"></span>
             </button>
 
-        </div>
+            </div>
 
-        <div class="collapse navbar-collapse justify-content-end" id="navigation" data-nav-image="../assets/img/blurred-image-1.jpg">
-            <ul class="navbar-nav" id="visibleNavList">
-                <li class="nav-item">
-                    <a class="nav-link" href="login.html" id="loginNav">Login</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="register.html" id="registerNav">Register</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#" onclick="logout()" id="logoutNavLink">Logout</a>
-                </li>
-                <ul class="navbar-nav d-lg-none">
+            <div class="collapse navbar-collapse justify-content-end" id="navigation" data-nav-image="../assets/img/blurred-image-1.jpg">
+                <ul class="navbar-nav" id="visibleNavList">
                     <li class="nav-item">
-                        <a class="dropdown-header">Menu</a>
+                        <a class="nav-link" href="login.html" id="loginNav">Login</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="lines.html">Bus Lines</a>
+                        <a class="nav-link" href="register.html" id="registerNav">Register</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="changes.html">Important changes</a>
+                        <a class="nav-link" href="#" onclick="logout()" id="logoutNavLink">Logout</a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="newsFeed.html">News Feed</a>
-                    </li>
+                    <ul class="navbar-nav d-lg-none">
+                        <li class="nav-item">
+                            <a class="dropdown-header">Menu</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="lines.html">Bus Lines</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="changes.html">Important changes</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="newsFeed.html">News Feed</a>
+                        </li>
+                    </ul>
+                    <ul class="navbar-nav d-lg-none" id="invisibleNavList1">
+                        <li class="nav-item">
+                            <a class="dropdown-header">Profile</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="profilePage.html">View And Edit Profile</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="viewFav.html">View Favorites</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="extendTicket.html">Extend Ticket</a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link" href="addNews.html" id="adminNews">Add news (Admin)</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#" id="adminTicket">Review tickets (Admin)</a>
+                        </li>
+
+                    </ul>
                 </ul>
-                <ul class="navbar-nav d-lg-none" id="invisibleNavList1">
-                    <li class="nav-item">
-                        <a class="dropdown-header">Profile</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="profilePage.html">View And Edit Profile</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="viewFav.html">View Favorites</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="extendTicket.html">Extend Ticket</a>
-                    </li>
-                   
-                    <li class="nav-item">
-                        <a class="nav-link" href="addNews.html" id="adminNews">Add news (Admin)</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#" id="adminTicket">Review tickets (Admin)</a>
-                    </li>
-                    
-                </ul>
-            </ul>
+            </div>
         </div>
-    </div>
-</nav>
-<!-- End Navbar -->
-  <!-- End Navbar -->
+    </nav>
+    <!-- End Navbar -->
+    <!-- End Navbar -->
 
-  <div class="wrapper">
+    <div class="wrapper">
 
-    <div class="page-header page-header-small">
+        <div class="page-header page-header-small">
 
-      <div class="page-header-image" data-parallax="true" style="background-image: url('../assets/img/edit.jpg');">
-      </div>
+            <div class="page-header-image" data-parallax="true" style="background-image: url('../assets/img/edit.jpg');">
+            </div>
 
-      <div class="content-center">
-        <div class="container">
+            <div class="content-center">
+                <div class="container">
 
-          <h2 class="title">Edit lines</h2>
-          <i class="now-ui-icons ui-2_settings-90" style="font-size: 4.0em;"></i>
+                    <h2 class="title">Edit lines</h2>
+                    <i class="now-ui-icons ui-2_settings-90" style="font-size: 4.0em;"></i>
+                </div>
+            </div>
         </div>
-      </div>
+
     </div>
 
-  </div>
 
 
+    <div class="row">
+        <div class="card">
+            <div class="card-body">
+                <blockquote class="blockquote blockquote-primary mb-0">
 
-  <div class="row">
-    <div class="card">
-      <div class="card-body">
-        <blockquote class="blockquote blockquote-primary mb-0">
-         
-            <div class="col-md-12">
-              <form onsubmit="edit(event)">
-                <div class="row">
-                  <div class="col-md-2 text-center" style="display: flex;justify-content: center; align-items: center;">
-                    <div id="idLinijaPostaja">
+                    <div class="col-md-12">
+                        <form onsubmit="edit(event)">
+                            <div class="row">
+                                <div class="col-md-2 text-center" style="display: flex;justify-content: center; align-items: center;">
+                                    <div id="idLinijaPostaja">
 
-                    </div>
-                  </div>
-                  <div id="lineDescription" class="col-md-10">
+                                    </div>
+                                </div>
+                                <div id="lineDescription" class="col-md-10">
 
-                    <div class="row">
-                      <div class="col-md-2" class="form-group">
-                        <div class="selectDriverBus">
-                          <label for="selectStation">Station</label>
-                          <select name="selectStation" id="selectStation" class="form-control ">
+                                    <div class="row">
+                                        <div class="col-md-2" class="form-group">
+                                            <div class="selectDriverBus">
+                                                <label for="selectStation">Station</label>
+                                                <select name="selectStation" id="selectStation" class="form-control ">
 
                           </select></div>
-                      </div>
-                      <div class="col-md-2" class="form-group">
-                        <label for="time">Time</label></br>
-                        <input type="text" class="form-control" id="time" placeholder="Time" step="2">
-                      </div>
-                      <label for="Day"></label>
-                      <div class="col-md-2" class="form-group">
-                        <label for="selectDay">Does not work on </label>
-                        <select name="select" id="selectDay" class="form-control ">
+                                        </div>
+                                        <div class="col-md-2" class="form-group">
+                                            <label for="time">Time</label></br>
+                                            <input type="time" class="form-control" id="time" placeholder="Time" step="2">
+                                        </div>
+                                        <label for="Day"></label>
+                                        <div class="col-md-2" class="form-group">
+                                            <label for="selectDay">Does not work on </label>
+                                            <select name="select" id="selectDay" class="form-control ">
                           <option value="">--</option>
                           <option value="Satrday">Satrday</option>
                           <option value="Sunday">Sunday</option>
                         </select></div>
-                      <div class="col-md-2" class="form-group">
-                        <label for="selectOrder">Order</label>
-                        <input type="number" min="1" max="30" name="time" id="selectOrder" class="form-control"
-                          placeholder="Order">
-                      </div>
-                      <div class="col-md-2" class="form-group">
-                        <div class="busD">
-                          <label for="selectDriver">Bus</label>
-                          <select type="select" id="selectDriver" class="form-control ">
+                                        <div class="col-md-2" class="form-group">
+                                            <label for="selectOrder">Order</label>
+                                            <input type="number" min="1" max="30" name="time" id="selectOrder" class="form-control" placeholder="Order">
+                                        </div>
+                                        <div class="col-md-2" class="form-group">
+                                            <div class="busD">
+                                                <label for="selectDriver">Bus</label>
+                                                <select type="select" id="selectDriver" class="form-control ">
                           </select></div>
-                      </div>
-                      <div class="col-md-2" class="form-group">
-                        <input id="btn" class="btn btn-lg btn-primary btn-block" type="submit" value="Submit">
-                      </div>
+                                        </div>
+                                        <div class="col-md-2" class="form-group">
+                                            <input id="btn" class="btn btn-lg btn-primary btn-block" type="submit" value="Submit">
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6" class="form-group">
+                                    <label for="Title">Title</label></br>
+                                    <textarea class="form-control" id="Title" rows="3"></textarea>
+                                </div>
+                                <div class="col-md-6" class="form-group">
+                                    <label for="Description">Description</label></br>
+                                    <textarea class="form-control" id="Description" rows="10"></textarea>
+                                </div>
+                            </div>
+                        </form>
                     </div>
-                    
-                  </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-6" class="form-group">
-                      <label for="Title">Title</label></br>
-                      <textarea class="form-control" id="Title" rows="3"></textarea>
-                  </div>
-                    <div class="col-md-6" class="form-group">
-                      <label for="Description">Description</label></br>
-                      <textarea class="form-control" id="Description" rows="10"></textarea>
-                  </div>
-                </div>
-              </form>
             </div>
-          </div>
-        </blockquote>
-      </div>
+            </blockquote>
+        </div>
     </div>
-  </div>
-  </div>
-  </div>
+    </div>
+    </div>
+    </div>
 
-  </div>
+    </div>
 
-  <footer class="footer footer-default">
-    <div class=" container ">
+    <footer class="footer footer-default">
+        <div class=" container ">
 
-      <nav>
-        <ul>
-          <li>
-            <a href="#">
+            <nav>
+                <ul>
+                    <li>
+                        <a href="#">
               About Us
             </a>
-          </li>
-          <li>
-            <a href="#">
+                    </li>
+                    <li>
+                        <a href="#">
               How to contact us
             </a>
-          </li>
-        </ul>
-      </nav>
+                    </li>
+                </ul>
+            </nav>
 
-      <div class="copyright" id="copyright">
-        &copy;2021
-      </div>
+            <div class="copyright" id="copyright">
+                &copy;2021
+            </div>
 
+        </div>
+    </footer>
     </div>
-  </footer>
-  </div>
 
-  <!--   Core JS Files   -->
-  <script src="../assets/js/core/jquery.min.js" type="text/javascript"></script>
-  <script src="../assets/js/core/popper.min.js" type="text/javascript"></script>
-  <script src="../assets/js/core/bootstrap.min.js" type="text/javascript"></script>
-  <!--  Plugin for Switches, full documentation here: http://www.jque.re/plugins/version3/bootstrap.switch/ -->
-  <script src="../assets/js/plugins/bootstrap-switch.js"></script>
-  <!--  Plugin for the Sliders, full documentation here: http://refreshless.com/nouislider/ -->
-  <script src="../assets/js/plugins/nouislider.min.js" type="text/javascript"></script>
-  <!--  Plugin for the DatePicker, full documentation here: https://github.com/uxsolutions/bootstrap-datepicker -->
-  <script src="../assets/js/plugins/bootstrap-datepicker.js" type="text/javascript"></script>
-  <!--  Google Maps Plugin    -->
-  <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_KEY_HERE"></script>
-  <!-- Control Center for Now Ui Kit: parallax effects, scripts for the example pages etc -->
-  <script src="../assets/js/now-ui-kit.js?v=1.3.0" type="text/javascript"></script>
+    <!--   Core JS Files   -->
+    <script src="../assets/js/core/jquery.min.js" type="text/javascript"></script>
+    <script src="../assets/js/core/popper.min.js" type="text/javascript"></script>
+    <script src="../assets/js/core/bootstrap.min.js" type="text/javascript"></script>
+    <!--  Plugin for Switches, full documentation here: http://www.jque.re/plugins/version3/bootstrap.switch/ -->
+    <script src="../assets/js/plugins/bootstrap-switch.js"></script>
+    <!--  Plugin for the Sliders, full documentation here: http://refreshless.com/nouislider/ -->
+    <script src="../assets/js/plugins/nouislider.min.js" type="text/javascript"></script>
+    <!--  Plugin for the DatePicker, full documentation here: https://github.com/uxsolutions/bootstrap-datepicker -->
+    <script src="../assets/js/plugins/bootstrap-datepicker.js" type="text/javascript"></script>
+    <!--  Google Maps Plugin    -->
+    <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_KEY_HERE"></script>
+    <!-- Control Center for Now Ui Kit: parallax effects, scripts for the example pages etc -->
+    <script src="../assets/js/now-ui-kit.js?v=1.3.0" type="text/javascript"></script>
 
-  <script src="../assets/js/functionalities/login.js" type="text/javascript"></script>
+    <script src="../assets/js/functionalities/login.js" type="text/javascript"></script>
 
 </body>
 

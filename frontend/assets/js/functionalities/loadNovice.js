@@ -1,6 +1,6 @@
 function loadAll() {
 
-    startLogin();
+
 
     //generates product table
     fetch('http://localhost:3000/news', {
@@ -140,8 +140,8 @@ const addComments = (news_id, inputfieldId) => {
         }).then((respond) => {
             return respond.json();
         }).then((respondJSON) => {
-            loadAll();
-        })
+
+        }).then(() => { loadAll() })
     }
 }
 const removeComment = (index) => {
