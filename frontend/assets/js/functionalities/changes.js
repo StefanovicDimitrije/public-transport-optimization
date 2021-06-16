@@ -2,14 +2,14 @@ function writeChanges(data) {
 
     container = document.getElementById("containerChanges");
 
-    for (var i = 0; i < data.length; i++) {
+    for (var i = data.length-1; i >= 0; i--) {
 
         let row = document.createElement("div");
         row.setAttribute("class", "row");
 
         for (var j = 0; j < 2; j++) {
 
-            if (i + j < data.length) i = i + j;
+            if (i - j >= 0) i = i - j;
             else break;
 
             let card = makeCard(data[i]);

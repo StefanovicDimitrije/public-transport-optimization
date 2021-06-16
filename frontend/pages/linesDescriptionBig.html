@@ -30,93 +30,98 @@
 <body class="landing-page sidebar-collapse" onload="printBigInfo();startLogin();">
 
     <!-- Navbar -->
-    <!-- Navbar -->
-   <nav class="navbar navbar-expand-lg bg-primary fixed-top navbar-transparent " color-on-scroll="400">
-    <div class="container">
+    <nav class="navbar navbar-expand-lg bg-primary fixed-top navbar-transparent " color-on-scroll="400">
+        <div class="container">
 
-        <div class="dropdown button-dropdown" data-toggle="collapse">
+            <div class="dropdown button-dropdown" data-toggle="collapse">
 
-            <a href="#pablo" class="dropdown-toggle" id="navbarDropdown" data-toggle="dropdown">
-                <span class="button-bar"></span>
-                <span class="button-bar"></span>
-                <span class="button-bar"></span>
-            </a>
+                <a href="#pablo" class="dropdown-toggle" id="navbarDropdown" data-toggle="dropdown">
+                    <span class="button-bar"></span>
+                    <span class="button-bar"></span>
+                    <span class="button-bar"></span>
+                </a>
 
-            <div class="dropdown-menu" aria-labelledby="navbarDropdown" id="mainNavDrop">
-                <a class="dropdown-header">Menu</a>
-                <a class="dropdown-item" href="lines.html">Bus Lines</a>
-                <a class="dropdown-item" href="changes.html">Important changes</a>
-                <a class="dropdown-item" href="newsFeed.html">News Feed</a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown" id="mainNavDrop">
+                    <a class="dropdown-header">Menu</a>
+                    <a class="dropdown-item" href="lines.html">Bus Lines</a>
+                    <a class="dropdown-item" href="changes.html">Important changes</a>
+                    <a class="dropdown-item" href="newsFeed.html">News Feed</a>
+                </div>
+
             </div>
 
-        </div>
+            <div class="navbar-translate">
 
-        <div class="navbar-translate">
+                <a class="navbar-brand" rel="tooltip" data-placement="bottom" href="index.html">
+                    Public transport optimization
+                </a>
 
-            <a class="navbar-brand" rel="tooltip" data-placement="bottom" href="index.html">
-                Public transport optimization
-            </a>
+                <button class="navbar-toggler navbar-toggler" type="button" data-toggle="collapse" data-target="#navigation" aria-controls="navigation-index" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-bar top-bar"></span>
+                    <span class="navbar-toggler-bar middle-bar"></span>
+                    <span class="navbar-toggler-bar bottom-bar"></span>
+                </button>
 
-            <button class="navbar-toggler navbar-toggler" type="button" data-toggle="collapse" data-target="#navigation" aria-controls="navigation-index" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-bar top-bar"></span>
-                <span class="navbar-toggler-bar middle-bar"></span>
-                <span class="navbar-toggler-bar bottom-bar"></span>
-            </button>
+            </div>
 
-        </div>
-
-        <div class="collapse navbar-collapse justify-content-end" id="navigation" data-nav-image="../assets/img/blurred-image-1.jpg">
-            <ul class="navbar-nav" id="visibleNavList">
-                <li class="nav-item">
-                    <a class="nav-link" href="login.html" id="loginNav">Login</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="register.html" id="registerNav">Register</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#" onclick="logout()" id="logoutNavLink">Logout</a>
-                </li>
-                <ul class="navbar-nav d-lg-none">
+            <div class="collapse navbar-collapse justify-content-end" id="navigation" data-nav-image="../assets/img/blurred-image-1.jpg">
+                <ul class="navbar-nav" id="visibleNavList">
                     <li class="nav-item">
-                        <a class="dropdown-header">Menu</a>
+                        <a class="nav-link" href="login.html" id="loginNav">Login</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="lines.html">Bus Lines</a>
+                        <a class="nav-link" href="register.html" id="registerNav">Register</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="changes.html">Important changes</a>
+                        <a class="nav-link" href="#" onclick="logout()" id="logoutNavLink">Logout</a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="newsFeed.html">News Feed</a>
-                    </li>
+                    <ul class="navbar-nav d-lg-none">
+                        <li class="nav-item">
+                            <a class="dropdown-header">Menu</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="lines.html">Bus Lines</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="changes.html">Important changes</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="newsFeed.html">News Feed</a>
+                        </li>
+                    </ul>
+                    <ul class="navbar-nav d-lg-none" id="invisibleNavList1">
+                        <li class="nav-item">
+                            <a class="dropdown-header">Profile</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="profilePage.html">View And Edit Profile</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="viewFav.html">View Favorites</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="extendTicket.html" id="extendTicketNav1">Extend Ticket</a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link" href="driversReview.html">Rate drivers</a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link" href="addNews.html" id="adminNews">Add news (Admin)</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="reviewTickets.html" id="adminTicket">Review tickets (Admin)</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="lineEditName.html" id="adminLineNames">Edit lines/stations' names (Admin)</a>
+                        </li>
+                        
+                    </ul>
                 </ul>
-                <ul class="navbar-nav d-lg-none" id="invisibleNavList1">
-                    <li class="nav-item">
-                        <a class="dropdown-header">Profile</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="profilePage.html">View And Edit Profile</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="viewFav.html">View Favorites</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="extendTicket.html">Extend Ticket</a>
-                    </li>
-                   
-                    <li class="nav-item">
-                        <a class="nav-link" href="addNews.html" id="adminNews">Add news (Admin)</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#" id="adminTicket">Review tickets (Admin)</a>
-                    </li>
-                    
-                </ul>
-            </ul>
+            </div>
         </div>
-    </div>
-</nav>
-<!-- End Navbar -->
+    </nav>
     <!-- End Navbar -->
 
     <div class="wrapper">

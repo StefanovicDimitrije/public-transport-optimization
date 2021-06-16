@@ -29,8 +29,6 @@ function login(){
 
                 alert.setAttribute("class","alert alert-success"); //Display 'correct!'
                 alert.innerHTML = "Succesful log-in!"
-
-                console.log(responseJSON);
                 
                 let userId = {
                     id:responseJSON.user.id,
@@ -76,6 +74,8 @@ function startLogin(){
     
     document.getElementById("adminNews").setAttribute("class","nav-link d-none");
     document.getElementById("adminTicket").setAttribute("class","nav-link d-none");
+    document.getElementById("adminLineNames").setAttribute("class","nav-link d-none");
+    
 
     if ((user= JSON.parse(sessionStorage.getItem('user')) || {}).id == 0 || !(Object.keys(user).length)){
         notLogged()
@@ -121,13 +121,20 @@ function logged(){
     let ticket = document.createElement("a");
     ticket.setAttribute("class","dropdown-item");
     ticket.setAttribute("href","extendTicket.html");
+    ticket.setAttribute('id','extendTicketNav');
     ticket.innerHTML ="Extend Ticket";
+
+    let drivers = document.createElement("a");
+    drivers.setAttribute("class","dropdown-item");
+    drivers.setAttribute("href","driversReview.html");
+    drivers.innerHTML ="Rate drivers";
 
     dropdownMenu.appendChild(divider);
     dropdownMenu.appendChild(header);
     dropdownMenu.appendChild(view);
     dropdownMenu.appendChild(favorites);
     dropdownMenu.appendChild(ticket);
+    dropdownMenu.appendChild(drivers);
 
     document.getElementById("loginNav").setAttribute("class","nav-link d-none disabled")
     document.getElementById("registerNav").setAttribute("class","nav-link d-none disabled")
@@ -167,13 +174,23 @@ function logged(){
         ticket1.setAttribute("href","reviewTickets.html");
         ticket1.innerHTML ="Review tickets";
 
+        let linesStations = document.createElement("a");
+        linesStations.setAttribute("class","dropdown-item");
+        linesStations.setAttribute("href","lineEditName.html");
+        linesStations.innerHTML ="Edit lines' or stations' names (Admin)";
+
         dropdownMenu.appendChild(divider1);
         dropdownMenu.appendChild(header1);
         dropdownMenu.appendChild(addNews);
         dropdownMenu.appendChild(ticket1);
+        dropdownMenu.appendChild(linesStations);
 
         document.getElementById("adminNews").setAttribute("class","nav-link d-lg-none");
         document.getElementById("adminTicket").setAttribute("class","nav-link d-lg-none");
+        document.getElementById("adminLineNames").setAttribute("class","nav-link d-lg-none");
+
+        document.getElementById('extendTicketNav').setAttribute('class','dropdown-item d-none disabled');
+        document.getElementById('extendTicketNav1').setAttribute('class','dropdown-item d-none disabled')
         
     }
 
