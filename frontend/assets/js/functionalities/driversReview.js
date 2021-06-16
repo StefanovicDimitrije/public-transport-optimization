@@ -129,6 +129,6 @@ const postReview = () => {
         } else {
             alert("Error")
         }
-    })
+    }).then(location.reload());
     }
 }

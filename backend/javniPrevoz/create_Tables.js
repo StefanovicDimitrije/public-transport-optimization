@@ -323,14 +323,14 @@ async function fillDatabase() {
             //site: "#",
             //name: "Station name",
             changeTitle: "Station location was changed",
-            more: "The station named 'Example name' was moved to another station, on a paralled street",
+            more: "The station named 'Koresova 1' was moved to another station, on a paralled street",
             time: '2021-02-26'
         },
         {
             //site: "#",
             //name: "Bus line number",
             changeTitle: "Takeoff time is later from Kamnica from the 22nd May",
-            more: "Due to the COVID-19 measures and the fact that we have much less drivers, the start time of the line 'Example line' will be later in the day",
+            more: "Due to the COVID-19 measures and the fact that we have much less drivers, the start time of the line 07 will be later in the day",
             time: '2021-02-26'
         },
         {
@@ -344,14 +344,14 @@ async function fillDatabase() {
           //  site: "#",
          //   name: "Bus line number",
             changeTitle: "Route update",
-            more: "The route of the bus line 'Bus line2' has changed its route around 'Titova cesta' due to the bussines of the street ",
+            more: "The route of the bus line 12 has changed its route around 'Titova cesta' due to the bussines of the street ",
             time: '2021-02-26'
         },
         {
            // site: "#",
           //  name: "Bus line number",
             changeTitle: "Route update",
-            more: "The route of the bus line 'Bus line' has changed it route around the street 'Ljubljanska ulica' due to construction work",
+            more: "The route of the bus line 04 has changed it route around the street 'Ljubljanska ulica' due to construction work",
             time: '2021-02-26'
         }
     ]
@@ -473,8 +473,8 @@ async function fillDatabase() {
         },
         {
             date: '2020-11-18',
-            title: 'Night lines (N) in Belgrade are temporarily canceled',
-            text: 'Temporary suspension of lines in night (N) passenger transport from tomorrow evening, ie from the night between November 18 and 19. <br> The decision was made in accordance with the order of the City Headquarters for Emergency Situations (due to the worsened epidemiological situation caused by the Covid-19 virus) in the territory of the City of Belgrade. and classic games of chance and other facilities are prohibited from 9 pm to 5 am. <br> The temporary suspension of work will be performed on 24 night lines, which operated from 00 to 4 hours, and these are the following lines: <br> 15N Republic Square - Zemun / Novi grad / <br> 26N Dorcol - Brace Jerkovic <br> 27N Trg Republike - Mirijevo 3 <br> 29N Studentski trg - Medaković 3 <br> 31N Studentski trg - Konjarnik <br> 32N Republic Square - Višnjica <br> 33N Studentski trg - Kumodraž <br> 37N Republic Square - Kneževac <br> 47N Trg Republike - Resnik ŽS <br> After the abolition of the adopted measures, transportation on night lines will be re-established.',
+            title: 'Night lines (N) in Maribor are temporarily canceled',
+            text: 'Temporary suspension of lines in night (N) passenger transport from tomorrow evening, ie from the night between November 18 and 19. <br> The decision was made in accordance with the order of the City Headquarters for Emergency Situations (due to the worsened epidemiological situation caused by the Covid-19 virus) in the territory of the City of Maribor. and classic games of chance and other facilities are prohibited from 9 pm to 5 am. <br> The temporary suspension of work will be performed on 24 night lines, which operated from 00 to 4 hours, and these are the following lines: <br> 15N Republic Square - Zemun / Novi grad / <br> 26N Dorcol - Brace Jerkovic <br> 27N Trg Republike - Mirijevo 3 <br> 29N Studentski trg - Medaković 3 <br> 31N Studentski trg - Konjarnik <br> 32N Republic Square - Višnjica <br> 33N Studentski trg - Kumodraž <br> 37N Republic Square - Kneževac <br> 47N Trg Republike - Resnik ŽS <br> After the abolition of the adopted measures, transportation on night lines will be re-established.',
             author: 1,
             cover: 'nightBus.jpg'
         },
@@ -494,8 +494,8 @@ async function fillDatabase() {
         },
         {
             date: '2021-05-15',
-            title: 'Traffic accident on Zeleni venac',
-            text: 'The city traffic company "Belgrade" announced that there was a traffic accident at the Zeleni venac station, which was caused by a bus on line 75. Minor material damage was done and no passengers were injured. As it is stated, there was a "self-starting of the bus" which was standing at the stop without passengers. On that occasion, a street lighting pole was attached, when the vehicle stopped in the middle of residential building number 12. The accident reportedly occurred. because the driver did not adequately provide the vehicle and disciplinary proceedings will be initiated against him for failure to work. Minor material damage was caused to the bus, it is stated in the announcement of GSP.',
+            title: 'Traffic accident on Meljska Cesta',
+            text: 'The city traffic company "Marprom" announced that there was a traffic accident at the Zeleni venac station, which was caused by a bus on line 75. Minor material damage was done and no passengers were injured. As it is stated, there was a "self-starting of the bus" which was standing at the stop without passengers. On that occasion, a street lighting pole was attached, when the vehicle stopped in the middle of residential building number 12. The accident reportedly occurred. because the driver did not adequately provide the vehicle and disciplinary proceedings will be initiated against him for failure to work. Minor material damage was caused to the bus, it is stated in the announcement of GSP.',
             author: 1,
             cover: 'bus2.jpg'
         },

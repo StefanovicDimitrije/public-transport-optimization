@@ -9,7 +9,7 @@ const addNewArticle = () => {
     let article = {                                     ///create object with selected values
         id: null,
         date: MyDateString,
-        author: 1, //CHANGE LATER
+        author: JSON.parse(sessionStorage.getItem('user')), //CHANGE LATER
         title: document.getElementById("articleTitle").value,
         text: document.getElementById("articleText").value,
         cover: coverImg

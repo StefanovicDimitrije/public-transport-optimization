@@ -34,11 +34,19 @@ router.get('/', async function (req, res, next) {
 router.post('/', async (req, res, next) => {
 
   try {
-    let article = req.body;
+    
+    console.log(req.body);
+    let article = {
+      date:req.body.date,
+      title:req.body.title,
+      text:req.body.text,
+      author:req.body.author.id,
+      cover:req.body.cover
+    }
     const newNews = await new myNews().save(article);
     res.json({ status: "added" });
-  } catch (erorr) {
-    res.status(500).json({ status: "error", error: error });
+  } catch (err) {
+    res.status(500).json({ status: "error"});
   }
 });
 

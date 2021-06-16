@@ -64,7 +64,7 @@ function makeCard(data) {
     //Time content
     let time1 = document.createElement("small");
     time1.setAttribute("class", "text-muted");
-    time1.innerHTML = data.time;
+    time1.innerHTML = fixDate(data.time);
 
     time0.appendChild(time1);
 
